@@ -238,3 +238,4 @@
 - [x] Add role assignment controls for admin and editor staff users inside the CMS workspace.
 - [x] Verify the new staff-account management workflow with tests and preview before the next checkpoint.
 - [x] Fix dark-mode contrast in the expandable Our Services menu so its labels, panel surface, and interactive states remain readable.
+- [x] Fix the production deployment startup failure caused by the missing dist/client asset directory.

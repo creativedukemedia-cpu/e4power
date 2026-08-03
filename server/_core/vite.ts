@@ -5,7 +5,6 @@ import { type Server } from "http";
 import { nanoid } from "nanoid";
 import path from "path";
 import { createServer as createViteServer } from "vite";
-import viteConfig from "../../vite.config";
 
 const CLIENT_ROOT = path.resolve(import.meta.dirname, "../..", "client");
 const DIST_ROOT = path.resolve(import.meta.dirname, "../..", "dist", "public");
@@ -39,6 +38,10 @@ export function bustKnownEntryScripts(template: string) {
 }
 
 export async function setupVite(app: Express, server: Server) {
+  // The Vite config scans the source client directory to find multi-page entries.
+  // Load it only in development because production containers contain dist/public,
+  // not the source client directory.
+  const { default: viteConfig } = await import("../../vite.config");
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },

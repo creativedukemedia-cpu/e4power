@@ -65,4 +65,11 @@ describe("vite multi-page html resolution", () => {
     expect(transformed).toContain('/src/main.tsx?v=');
     expect(transformed).toContain('/src/admin/main.tsx?v=');
   });
+
+  it("loads source-scanning Vite configuration only when development setup runs", () => {
+    const viteModule = fs.readFileSync(path.resolve(process.cwd(), "server", "_core", "vite.ts"), "utf8");
+
+    expect(viteModule).not.toContain('import viteConfig from "../../vite.config"');
+    expect(viteModule).toContain('await import("../../vite.config")');
+  });
 });
