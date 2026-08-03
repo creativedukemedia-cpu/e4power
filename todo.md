@@ -237,3 +237,4 @@
 - [x] Add admin-managed staff account creation so the CMS can support multiple users beyond the initial bootstrap account.
 - [x] Add role assignment controls for admin and editor staff users inside the CMS workspace.
 - [x] Verify the new staff-account management workflow with tests and preview before the next checkpoint.
+- [x] Fix dark-mode contrast in the expandable Our Services menu so its labels, panel surface, and interactive states remain readable.

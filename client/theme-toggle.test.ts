@@ -1,12 +1,14 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
 
-const homepagePath = path.resolve(import.meta.dirname, "..", "index.html");
+const clientRoot = path.dirname(fileURLToPath(import.meta.url));
+const homepagePath = path.join(clientRoot, "index.html");
 const homepage = fs.readFileSync(homepagePath, "utf8");
-const educatePath = path.resolve(import.meta.dirname, "..", "educate", "index.html");
+const educatePath = path.join(clientRoot, "educate", "index.html");
 const educatePage = fs.readFileSync(educatePath, "utf8");
-const teamMemberPath = path.resolve(import.meta.dirname, "..", "team-members", "kandy-rose", "index.html");
+const teamMemberPath = path.join(clientRoot, "team-members", "kandy-rose", "index.html");
 const teamMemberPage = fs.readFileSync(teamMemberPath, "utf8");
 
 describe("theme toggle markup", () => {
@@ -26,6 +28,13 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain("document.getElementById('theme-toggle-button')");
     expect(homepage).toContain("document.getElementById('mobile-theme-toggle-button')");
     expect(homepage).toContain("buttons.forEach(function(button){button.addEventListener('click'");
+  });
+
+  it("keeps the mobile Our Services disclosure readable in dark mode", () => {
+    expect(homepage).toContain('body.home-service-menu:not(.theme-light) .hero-services-panel');
+    expect(homepage).toContain('background:rgba(8,7,6,.94)');
+    expect(homepage).toContain('body.home-service-menu:not(.theme-light) .hero-services-list{color:#fff8ef');
+    expect(homepage).toContain('body.home-service-menu:not(.theme-light) .hero-services-panel summary:focus-visible');
   });
 
   it("adds the shared cross-page theme system to representative interior pages", () => {
