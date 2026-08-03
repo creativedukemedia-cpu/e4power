@@ -115,4 +115,11 @@ describe('cms content workflow source coverage', () => {
     expect(adminAppSource).toContain('Create staff user');
     expect(adminAppSource).toContain('Reactivate access');
   });
+
+  it('uses an explicit dark CMS surface so light administrative text remains readable', () => {
+    expect(adminAppSource).toContain("backgroundColor: '#090806'");
+    expect(adminAppSource).toContain("backgroundImage: 'radial-gradient(circle at top, rgba(231, 190, 103, 0.2), transparent 34%)'");
+    expect(adminAppSource).toContain("bg-[#17120f]");
+    expect(adminAppSource).toContain('text-stone-100');
+  });
 });

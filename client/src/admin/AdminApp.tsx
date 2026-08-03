@@ -39,7 +39,7 @@ type StaffFormState = {
   role: 'admin' | 'editor';
 };
 
-const cardClass = 'rounded-3xl border border-white/10 bg-black/30 p-6 shadow-2xl backdrop-blur';
+const cardClass = 'rounded-3xl border border-amber-100/20 bg-[#17120f] p-6 text-stone-100 shadow-2xl shadow-black/40 backdrop-blur';
 const emptyForm: CmsFormState = {
   title: '',
   slug: '',
@@ -430,7 +430,13 @@ export default function AdminApp() {
   }
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(231,190,103,0.18),_transparent_30%),_#090806] px-4 py-10 text-stone-100">
+    <div
+      className="min-h-screen px-4 py-10 text-stone-100"
+      style={{
+        backgroundColor: '#090806',
+        backgroundImage: 'radial-gradient(circle at top, rgba(231, 190, 103, 0.2), transparent 34%)',
+      }}
+    >
       <div className="mx-auto max-w-6xl">
         <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>

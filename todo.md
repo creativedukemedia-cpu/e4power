@@ -239,3 +239,4 @@
 - [x] Verify the new staff-account management workflow with tests and preview before the next checkpoint.
 - [x] Fix dark-mode contrast in the expandable Our Services menu so its labels, panel surface, and interactive states remain readable.
 - [x] Fix the production deployment startup failure caused by the missing dist/client asset directory.
+- [x] Fix unreadable contrast across the CMS login and administrative interface.
