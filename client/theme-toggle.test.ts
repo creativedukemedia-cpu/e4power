@@ -24,6 +24,13 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('body.home-service-menu.theme-light .section.dark-gray');
   });
 
+  it("keeps homepage Team cards and the Competitive Edge banner readable in light mode", () => {
+    expect(homepage).toContain('body.home-service-menu.theme-light .team-members-div .member-title');
+    expect(homepage).toContain('body.home-service-menu.theme-light .team-members-div .member-bio p');
+    expect(homepage).toContain('body.home-service-menu.theme-light #educate .smaller-container.centered .h3');
+    expect(homepage).toContain('color:#fff8ef!important');
+  });
+
   it("syncs both homepage theme toggle buttons through the shared theme script", () => {
     expect(homepage).toContain("document.getElementById('theme-toggle-button')");
     expect(homepage).toContain("document.getElementById('mobile-theme-toggle-button')");
@@ -54,6 +61,14 @@ describe("theme toggle markup", () => {
   it("uses body-level ref-page-shell selectors so pillar pages can inherit light mode", () => {
     expect(educatePage).toContain('body.theme-light.ref-page-shell h1');
     expect(educatePage).toContain('body.theme-light.ref-page-shell p');
+  });
+
+  it("uses the coherent light navigation treatment on interior pages", () => {
+    expect(educatePage).toContain('Final interior navigation treatment');
+    expect(educatePage).toContain('body.theme-light .navbar-wrapper{min-height:5rem!important;}');
+    expect(educatePage).toContain('body.theme-light .social-link-block{background:#1e1a16!important;');
+    expect(educatePage).toContain('body.theme-light .nav-menu-two .nav-link:hover');
+    expect(educatePage).toContain('body.theme-light .w-nav-button .w-icon-nav-menu::before{color:#fffaf2!important;}');
   });
 
   it("converts team-member biography panels to light surfaces in light mode", () => {

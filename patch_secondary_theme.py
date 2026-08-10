@@ -1,7 +1,7 @@
 from pathlib import Path
 import re
 
-ROOT = Path('/home/ubuntu/e4powerinc-clone/client')
+ROOT = Path('/home/ubuntu/staging-e4power/client')
 TARGETS = [
     ROOT / 'contact-us' / 'index.html',
     ROOT / 'educate' / 'index.html',
@@ -318,6 +318,27 @@ body.theme-light .theme-toggle-button{background:rgba(255,255,255,.88)!important
 body.theme-light .theme-toggle-track{background:rgba(29,26,23,.08)!important;box-shadow:inset 0 0 0 1px rgba(29,26,23,.08)!important;}
 body.theme-light .theme-toggle-thumb{background:#1d1a17!important;transform:translateX(1.2rem)!important;}
 body.theme-dark .theme-toggle-thumb{transform:none!important;}
+/* Final interior navigation treatment: keep every control readable against the light shell. */
+body.theme-light .navbar-logo-left,
+body.theme-light .navbar-logo-left-container,
+body.theme-light .navbar-container,
+body.theme-light .navbar-wrapper{background:#fffaf2!important;border-color:rgba(30,26,22,.12)!important;}
+body.theme-light .navbar-wrapper{min-height:5rem!important;}
+body.theme-light .navbar-right-div{background:transparent!important;}
+body.theme-light .navbar-right-div>.text-link{color:#1e1a16!important;border-bottom:1px solid rgba(30,26,22,.28)!important;}
+body.theme-light .social-link-block{background:#1e1a16!important;border-color:#1e1a16!important;}
+body.theme-light .social-link-block img{filter:brightness(0) invert(1)!important;}
+body.theme-light .menu-button,
+body.theme-light .w-nav-button{background:#1e1a16!important;border-color:#1e1a16!important;}
+body.theme-light .hamburger-icon,
+body.theme-light .w-icon-nav-menu{color:#fffaf2!important;background:transparent!important;}
+body.theme-light .w-nav-button .w-icon-nav-menu::before{color:#fffaf2!important;}
+body.theme-light .nav-menu-wrapper,
+body.theme-light .w-nav-overlay,
+body.theme-light .w-nav-menu{background:#fffaf2!important;border-color:rgba(30,26,22,.12)!important;}
+body.theme-light .nav-menu-two .nav-link{color:#1e1a16!important;}
+body.theme-light .nav-menu-two .nav-link:hover,
+body.theme-light .nav-menu-two .nav-link:focus-visible{color:#a67324!important;}
 .theme-toggle-button{display:inline-flex;align-items:center;gap:.55rem;padding:.55rem .8rem;border-radius:999px;background:rgba(10,10,10,.72);color:#f4efe7;border:1px solid rgba(255,255,255,.1);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;cursor:pointer;}
 .theme-toggle-track{position:relative;display:inline-flex;align-items:center;width:2.45rem;height:1.4rem;border-radius:999px;background:rgba(255,255,255,.16);padding:.15rem;transition:background-color .22s ease;}
 .theme-toggle-thumb{display:block;width:1.05rem;height:1.05rem;border-radius:999px;background:#e2b24c;transition:transform .22s ease,background-color .22s ease;}

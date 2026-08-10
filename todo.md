@@ -242,3 +242,6 @@
 - [x] Fix unreadable contrast across the CMS login and administrative interface.
 - [x] Restore readable dark-mode text for the homepage Our Services control.
 - [x] Add the supplied E4 Power logo above the homepage hero headline.
+- [x] Repair unreadable light-mode text in the homepage Team section.
+- [x] Repair light-mode contrast in the Sharpening Your Competitive Edge banner.
+- [x] Correct inconsistent light-mode navigation styling on interior pages.
