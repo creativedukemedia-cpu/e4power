@@ -37,6 +37,13 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('body.home-service-menu:not(.theme-light) .hero-services-panel summary:focus-visible');
   });
 
+  it("restores the hero emblem and keeps the desktop Services summary readable in dark mode", () => {
+    expect(homepage).toContain("content:url('/manus-storage/E4POWER_LOGOB12copy_0332af80.webp')");
+    expect(homepage).toContain('body.home-service-menu:not(.theme-light) .hero-services-panel > summary');
+    expect(homepage).toContain('background:rgba(20,17,13,.94)');
+    expect(homepage).toContain('color:#fff8ef!important');
+  });
+
   it("adds the shared cross-page theme system to representative interior pages", () => {
     expect(educatePage).toContain('id="cross-page-theme-system"');
     expect(educatePage).toContain('id="cross-page-theme-script"');

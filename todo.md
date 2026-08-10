@@ -240,3 +240,5 @@
 - [x] Fix dark-mode contrast in the expandable Our Services menu so its labels, panel surface, and interactive states remain readable.
 - [x] Fix the production deployment startup failure caused by the missing dist/client asset directory.
 - [x] Fix unreadable contrast across the CMS login and administrative interface.
+- [x] Restore readable dark-mode text for the homepage Our Services control.
+- [x] Add the supplied E4 Power logo above the homepage hero headline.
