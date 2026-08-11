@@ -84,10 +84,11 @@ describe("theme toggle markup", () => {
   it("uses zero Specialist Roles kerning, the supplied Bridge hub mark, and safe hero-logo clearance", () => {
     expect(homepage).toContain('id="bridge-brand-and-hero-refinement"');
     expect(homepage).toContain('.bridge-insight-count{letter-spacing:0!important;}');
-    expect(homepage).toContain('/manus-storage/E4-Bridge-Hub-Mark_db7e9a66.webp');
+    expect(homepage).toContain('/manus-storage/E4-Bridge-Hub-Icon_77f4a9c8.webp');
     expect(homepage).toContain('bridge-core-logo');
     expect(homepage).toContain('hero-brand-clearance');
-    expect(homepage).toContain('translate:0 clamp(1.25rem,3.5vw,3.4rem)!important');
+    expect(homepage).toContain('translate:0 clamp(3.25rem,6vw,6rem)!important');
+    expect(homepage).toContain('translate:0 clamp(2.15rem,9vw,3.5rem)!important');
   });
 
   it("keeps the supplied Bridge hub mark tightly paired with PMP", () => {

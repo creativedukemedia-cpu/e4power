@@ -257,3 +257,5 @@
 - [x] Replace the B.R.I.D.G.E. hub mark with the supplied E4 logo asset.
 - [x] Reposition the hero logo to prevent overlap with the header.
 - [x] Tighten the vertical spacing between the supplied E4 Bridge hub mark and PMP text.
+- [x] Replace the B.R.I.D.G.E. hub mark with the newly supplied E4 icon.
+- [x] Enforce hero-logo clearance from the header across desktop and mobile layouts.
