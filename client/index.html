@@ -1245,6 +1245,14 @@ body.home-service-menu.theme-light #educate .smaller-container.centered .h3-oran
 @media screen and (max-width:991px){#empower.bridge-program-section .bridge-insight{grid-template-columns:minmax(6rem,.6fr) minmax(10rem,1fr) minmax(13rem,1.5fr)!important;}#empower.bridge-program-section .bridge-insight-impact{grid-column:2/4;grid-row:2;margin-top:.25rem!important;}#empower.bridge-program-section .bridge-orbit{aspect-ratio:1.42/1!important;}}
 @media screen and (max-width:560px){#empower.bridge-program-section .bridge-orbit{display:grid!important;width:100%!important;aspect-ratio:auto!important;margin:0!important;background:transparent!important;}#empower.bridge-program-section .bridge-insight{display:block!important;margin-top:1.75rem!important;}#empower.bridge-program-section .bridge-insight h3{margin-top:.8rem!important;}#empower.bridge-program-section .bridge-insight>p:not(.bridge-insight-count){margin-top:1rem!important;}#empower.bridge-program-section .bridge-insight-impact{margin-top:1.25rem!important;}}
 </style>
+<style id="bridge-brand-and-hero-refinement">
+#empower.bridge-program-section .bridge-insight-count{letter-spacing:0!important;}
+#empower.bridge-program-section .bridge-core{overflow:visible!important;}
+#empower.bridge-program-section .bridge-core .bridge-core-logo{display:block;width:74%;height:auto;max-height:66%;margin:0 auto .18rem;object-fit:contain;}
+img.hero-brand-clearance{z-index:2!important;translate:0 clamp(1.25rem,3.5vw,3.4rem)!important;max-height:clamp(6.5rem,14vw,11rem)!important;width:auto!important;object-fit:contain!important;}
+@media screen and (max-width:560px){img.hero-brand-clearance{translate:0 clamp(.9rem,6vw,1.65rem)!important;max-height:6.25rem!important;}}
+</style>
+<script id="bridge-brand-and-hero-refinement-script">document.addEventListener('DOMContentLoaded',function(){var core=document.querySelector('#empower.bridge-program-section .bridge-core');if(core&&!core.querySelector('.bridge-core-logo')){var oldMark=core.querySelector('span');var mark=document.createElement('img');mark.className='bridge-core-logo';mark.src='/manus-storage/E4-Bridge-Hub-Mark_db7e9a66.webp';mark.alt='E4 Power';if(oldMark)oldMark.replaceWith(mark);else core.prepend(mark);}document.querySelectorAll('img[src*="E4POWER_LOGOB12"]').forEach(function(mark){mark.classList.add('hero-brand-clearance');});});</script>
 <style id="interactive-bridge-model">
 /* The B.R.I.D.G.E. model is a project-delivery instrument: orbiting roles illuminate the central PMP hub. */
 #empower.bridge-program-section{background:#090806!important;color:#fff8ef!important;overflow:hidden;position:relative;}

@@ -81,6 +81,15 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('width:58%!important;height:70%!important');
   });
 
+  it("uses zero Specialist Roles kerning, the supplied Bridge hub mark, and safe hero-logo clearance", () => {
+    expect(homepage).toContain('id="bridge-brand-and-hero-refinement"');
+    expect(homepage).toContain('.bridge-insight-count{letter-spacing:0!important;}');
+    expect(homepage).toContain('/manus-storage/E4-Bridge-Hub-Mark_db7e9a66.webp');
+    expect(homepage).toContain('bridge-core-logo');
+    expect(homepage).toContain('hero-brand-clearance');
+    expect(homepage).toContain('translate:0 clamp(1.25rem,3.5vw,3.4rem)!important');
+  });
+
   it("adds the shared cross-page theme system to representative interior pages", () => {
     expect(educatePage).toContain('id="cross-page-theme-system"');
     expect(educatePage).toContain('id="cross-page-theme-script"');

@@ -253,3 +253,6 @@
 - [x] Remove thin framing boxes from behind the model and specialist-role detail panel.
 - [x] Add breathing room around the B.R.I.D.G.E. orbit and reduce its visual scale.
 - [x] Keep the rotating gold orbit overlapping the specialist figures without colliding with the detail row.
+- [x] Set the B.R.I.D.G.E. Specialist Roles label to zero letter spacing.
+- [x] Replace the B.R.I.D.G.E. hub mark with the supplied E4 logo asset.
+- [x] Reposition the hero logo to prevent overlap with the header.
