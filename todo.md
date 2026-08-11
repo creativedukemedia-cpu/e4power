@@ -259,3 +259,4 @@
 - [x] Tighten the vertical spacing between the supplied E4 Bridge hub mark and PMP text.
 - [x] Replace the B.R.I.D.G.E. hub mark with the newly supplied E4 icon.
 - [x] Enforce hero-logo clearance from the header across desktop and mobile layouts.
+- [x] Verify the current homepage visual refinements and save a checkpoint for the confirmed state.
