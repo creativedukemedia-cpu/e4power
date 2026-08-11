@@ -245,3 +245,6 @@
 - [x] Repair unreadable light-mode text in the homepage Team section.
 - [x] Repair light-mode contrast in the Sharpening Your Competitive Edge banner.
 - [x] Correct inconsistent light-mode navigation styling on interior pages.
+- [x] Replace the homepage Bridge section with an interactive B.R.I.D.G.E. program model based on the supplied reference.
+- [x] Add hover, keyboard-focus, and mobile-tap role expansions that explain each specialist contribution to successful project delivery.
+- [x] Verify the interactive Bridge model on desktop and mobile before publishing the update.

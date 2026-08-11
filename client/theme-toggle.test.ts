@@ -51,6 +51,22 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('color:#fff8ef!important');
   });
 
+  it("adds an accessible interactive B.R.I.D.G.E. delivery model with six specialist roles", () => {
+    expect(homepage).toContain('id="interactive-bridge-model"');
+    expect(homepage).toContain('id="interactive-bridge-model-script"');
+    expect(homepage).toContain('The B.R.I.D.G.E. Delivery Model');
+    expect(homepage).toContain('Financial<br>Management');
+    expect(homepage).toContain('Subject Matter<br>Expert');
+    expect(homepage).toContain('Project<br>Reporting');
+    expect(homepage).toContain('Advertisement &amp;<br>Coordination');
+    expect(homepage).toContain('Compliance<br>Monitoring');
+    expect(homepage).toContain('Proposal Development<br>&amp; Writing');
+    expect(homepage).toContain("button.addEventListener('pointerenter'");
+    expect(homepage).toContain("button.addEventListener('focus'");
+    expect(homepage).toContain("button.addEventListener('click'");
+    expect(homepage).toContain('aria-live="polite"');
+  });
+
   it("adds the shared cross-page theme system to representative interior pages", () => {
     expect(educatePage).toContain('id="cross-page-theme-system"');
     expect(educatePage).toContain('id="cross-page-theme-script"');
