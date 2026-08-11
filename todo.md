@@ -251,3 +251,5 @@
 - [x] Expand the interactive B.R.I.D.G.E. model to use the full available homepage width.
 - [x] Move the specialist-role detail panel beneath the model and make it full width.
 - [x] Remove thin framing boxes from behind the model and specialist-role detail panel.
+- [x] Add breathing room around the B.R.I.D.G.E. orbit and reduce its visual scale.
+- [x] Keep the rotating gold orbit overlapping the specialist figures without colliding with the detail row.

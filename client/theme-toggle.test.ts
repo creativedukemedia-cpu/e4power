@@ -75,6 +75,12 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('border:0!important;background:transparent!important;box-shadow:none!important;');
   });
 
+  it("keeps the rotating Bridge orbit inset from the detail row while crossing the role field", () => {
+    expect(homepage).toContain('margin-bottom:clamp(1.5rem,3.5vw,4rem)!important');
+    expect(homepage).toContain('width:52%!important;height:66%!important');
+    expect(homepage).toContain('width:58%!important;height:70%!important');
+  });
+
   it("adds the shared cross-page theme system to representative interior pages", () => {
     expect(educatePage).toContain('id="cross-page-theme-system"');
     expect(educatePage).toContain('id="cross-page-theme-script"');
