@@ -1224,6 +1224,24 @@ body.home-service-menu.theme-light #educate .smaller-container.centered .h3-oran
   body.home-service-menu .reference-topbar-nav .mobile-theme-toggle{display:none!important;}
 }
 </style>
+<style id="bridge-full-width-refinement">
+/* Open the model across the viewport; the role intelligence now reads as a full-width continuation, not a side card. */
+#empower.bridge-program-section .bridge-program-shell{width:100%!important;max-width:none!important;padding-left:clamp(1.25rem,4vw,5rem)!important;padding-right:clamp(1.25rem,4vw,5rem)!important;}
+#empower.bridge-program-section .bridge-program-header{max-width:980px!important;}
+#empower.bridge-program-section .bridge-model-layout{display:block!important;}
+#empower.bridge-program-section .bridge-orbit{width:100vw!important;max-width:none!important;aspect-ratio:1.72/1!important;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important;border:0!important;background:radial-gradient(circle at 50% 48%,rgba(232,185,77,.14),rgba(11,10,7,.84) 45%,rgba(5,5,4,.96) 100%)!important;box-shadow:none!important;}
+#empower.bridge-program-section .bridge-role-label{width:clamp(5rem,10vw,8rem)!important;}
+#empower.bridge-program-section .bridge-role[data-anchor="left"] .bridge-role-label{right:calc(100% + .45rem)!important;}
+#empower.bridge-program-section .bridge-role[data-anchor="right"] .bridge-role-label{left:calc(100% + .45rem)!important;}
+#empower.bridge-program-section .bridge-insight{display:grid!important;grid-template-columns:minmax(7rem,.7fr) minmax(11rem,1.1fr) minmax(15rem,1.85fr) minmax(10rem,.9fr);gap:clamp(1rem,2.6vw,3.6rem)!important;align-items:center;width:100%!important;min-height:0!important;margin-top:clamp(2.25rem,5vw,5rem)!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;}
+#empower.bridge-program-section .bridge-insight-count{grid-column:1;grid-row:1;margin:0!important;}
+#empower.bridge-program-section .bridge-insight h3{grid-column:2;grid-row:1;margin:0!important;}
+#empower.bridge-program-section .bridge-insight>p:not(.bridge-insight-count){grid-column:3;grid-row:1;margin:0!important;max-width:44rem;}
+#empower.bridge-program-section .bridge-insight-impact{grid-column:4;grid-row:1;margin:0!important;padding:0!important;border:0!important;}
+#empower.bridge-program-section .bridge-interaction-hint{margin-top:2.3rem!important;}
+@media screen and (max-width:991px){#empower.bridge-program-section .bridge-insight{grid-template-columns:minmax(6rem,.6fr) minmax(10rem,1fr) minmax(13rem,1.5fr)!important;}#empower.bridge-program-section .bridge-insight-impact{grid-column:2/4;grid-row:2;margin-top:.25rem!important;}#empower.bridge-program-section .bridge-orbit{aspect-ratio:1.42/1!important;}}
+@media screen and (max-width:560px){#empower.bridge-program-section .bridge-orbit{display:grid!important;width:100%!important;aspect-ratio:auto!important;margin:0!important;background:transparent!important;}#empower.bridge-program-section .bridge-insight{display:block!important;margin-top:1.75rem!important;}#empower.bridge-program-section .bridge-insight h3{margin-top:.8rem!important;}#empower.bridge-program-section .bridge-insight>p:not(.bridge-insight-count){margin-top:1rem!important;}#empower.bridge-program-section .bridge-insight-impact{margin-top:1.25rem!important;}}
+</style>
 <style id="interactive-bridge-model">
 /* The B.R.I.D.G.E. model is a project-delivery instrument: orbiting roles illuminate the central PMP hub. */
 #empower.bridge-program-section{background:#090806!important;color:#fff8ef!important;overflow:hidden;position:relative;}

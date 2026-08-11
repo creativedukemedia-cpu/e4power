@@ -248,3 +248,6 @@
 - [x] Replace the homepage Bridge section with an interactive B.R.I.D.G.E. program model based on the supplied reference.
 - [x] Add hover, keyboard-focus, and mobile-tap role expansions that explain each specialist contribution to successful project delivery.
 - [x] Verify the interactive Bridge model on desktop and mobile before publishing the update.
+- [x] Expand the interactive B.R.I.D.G.E. model to use the full available homepage width.
+- [x] Move the specialist-role detail panel beneath the model and make it full width.
+- [x] Remove thin framing boxes from behind the model and specialist-role detail panel.

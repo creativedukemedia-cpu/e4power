@@ -67,6 +67,14 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('aria-live="polite"');
   });
 
+  it("renders the Bridge model full width with an open detail row beneath it", () => {
+    expect(homepage).toContain('id="bridge-full-width-refinement"');
+    expect(homepage).toContain('width:100vw!important');
+    expect(homepage).toContain('aspect-ratio:1.72/1!important');
+    expect(homepage).toContain('grid-template-columns:minmax(7rem,.7fr) minmax(11rem,1.1fr) minmax(15rem,1.85fr) minmax(10rem,.9fr)');
+    expect(homepage).toContain('border:0!important;background:transparent!important;box-shadow:none!important;');
+  });
+
   it("adds the shared cross-page theme system to representative interior pages", () => {
     expect(educatePage).toContain('id="cross-page-theme-system"');
     expect(educatePage).toContain('id="cross-page-theme-script"');
