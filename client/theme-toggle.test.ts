@@ -80,7 +80,11 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('aspect-ratio:2.03/1!important');
     expect(homepage).toContain('width:44%!important;height:72%!important;left:28%!important;top:14%!important');
     expect(homepage).toContain('width:52%!important;height:80%!important;left:24%!important;top:10%!important');
-    expect(homepage).toContain('top:88%!important');
+    expect(homepage).toContain('id="bridge-reference-connector-calibration"');
+    expect(homepage).toContain('.bridge-role[data-role="financial"]{left:24%!important;top:14.4%!important;}');
+    expect(homepage).toContain('.bridge-role[data-role="coordination"]{left:76%!important;top:47.4%!important;}');
+    expect(homepage).toContain('.bridge-role[data-role="proposal"]{left:63%!important;top:76.4%!important;}');
+    expect(homepage).toContain("line.setAttribute('x1','44')");
   });
 
   it("uses zero Specialist Roles kerning, the supplied Bridge hub mark, and safe hero-logo clearance", () => {

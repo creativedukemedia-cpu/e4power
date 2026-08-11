@@ -265,3 +265,4 @@
 - [x] Rebuild the hero safe zone so the seal cannot overlap the WE ARE E4POWER headline.
 - [x] Rebuild the B.R.I.D.G.E. orbit and six specialist-role positions to match the supplied spacing reference.
 - [x] Validate the repaired hero and Bridge geometry at desktop and mobile widths against the supplied screenshots.
+- [x] Recalibrate the B.R.I.D.G.E. orbit, central core, and specialist-node spacing to match the supplied role-map reference while retaining the fixed hero.
