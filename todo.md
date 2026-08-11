@@ -256,3 +256,4 @@
 - [x] Set the B.R.I.D.G.E. Specialist Roles label to zero letter spacing.
 - [x] Replace the B.R.I.D.G.E. hub mark with the supplied E4 logo asset.
 - [x] Reposition the hero logo to prevent overlap with the header.
+- [x] Tighten the vertical spacing between the supplied E4 Bridge hub mark and PMP text.

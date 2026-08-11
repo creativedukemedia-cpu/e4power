@@ -90,6 +90,12 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('translate:0 clamp(1.25rem,3.5vw,3.4rem)!important');
   });
 
+  it("keeps the supplied Bridge hub mark tightly paired with PMP", () => {
+    expect(homepage).toContain('margin:0 auto -.48rem');
+    expect(homepage).toContain('.bridge-core strong{margin-top:0!important;line-height:.92!important;}');
+    expect(homepage).toContain('.bridge-core small{margin-top:.25rem!important;}');
+  });
+
   it("adds the shared cross-page theme system to representative interior pages", () => {
     expect(educatePage).toContain('id="cross-page-theme-system"');
     expect(educatePage).toContain('id="cross-page-theme-script"');
