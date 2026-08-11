@@ -261,3 +261,4 @@
 - [x] Enforce hero-logo clearance from the header across desktop and mobile layouts.
 - [x] Verify the current homepage visual refinements and save a checkpoint for the confirmed state.
 - [x] Re-verify the active homepage visual refinements and save a fresh checkpoint.
+- [x] Perform a final verification of the active homepage refinements and save a new checkpoint.
