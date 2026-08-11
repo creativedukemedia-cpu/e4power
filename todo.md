@@ -262,3 +262,6 @@
 - [x] Verify the current homepage visual refinements and save a checkpoint for the confirmed state.
 - [x] Re-verify the active homepage visual refinements and save a fresh checkpoint.
 - [x] Perform a final verification of the active homepage refinements and save a new checkpoint.
+- [x] Rebuild the hero safe zone so the seal cannot overlap the WE ARE E4POWER headline.
+- [x] Rebuild the B.R.I.D.G.E. orbit and six specialist-role positions to match the supplied spacing reference.
+- [x] Validate the repaired hero and Bridge geometry at desktop and mobile widths against the supplied screenshots.

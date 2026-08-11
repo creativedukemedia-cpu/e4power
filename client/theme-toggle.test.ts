@@ -75,10 +75,12 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('border:0!important;background:transparent!important;box-shadow:none!important;');
   });
 
-  it("keeps the rotating Bridge orbit inset from the detail row while crossing the role field", () => {
-    expect(homepage).toContain('margin-bottom:clamp(1.5rem,3.5vw,4rem)!important');
-    expect(homepage).toContain('width:52%!important;height:66%!important');
-    expect(homepage).toContain('width:58%!important;height:70%!important');
+  it("uses an inset rotating Bridge orbit with explicit wide-model geometry", () => {
+    expect(homepage).toContain('id="hero-and-bridge-geometry-rebuild"');
+    expect(homepage).toContain('aspect-ratio:2.03/1!important');
+    expect(homepage).toContain('width:44%!important;height:72%!important;left:28%!important;top:14%!important');
+    expect(homepage).toContain('width:52%!important;height:80%!important;left:24%!important;top:10%!important');
+    expect(homepage).toContain('top:88%!important');
   });
 
   it("uses zero Specialist Roles kerning, the supplied Bridge hub mark, and safe hero-logo clearance", () => {
@@ -95,6 +97,13 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('margin:0 auto -.48rem');
     expect(homepage).toContain('.bridge-core strong{margin-top:0!important;line-height:.92!important;}');
     expect(homepage).toContain('.bridge-core small{margin-top:.25rem!important;}');
+  });
+
+  it("separates the hero seal and headline into explicit non-overlapping safe zones", () => {
+    expect(homepage).toContain('.reference-static-emblem.hero-brand-clearance{top:20%!important');
+    expect(homepage).toContain('.reference-hero-copy{top:48%!important;bottom:auto!important;transform:translateX(-50%)!important');
+    expect(homepage).toContain('top:17%!important');
+    expect(homepage).toContain('top:43%!important;bottom:auto!important;transform:translateX(-50%)!important');
   });
 
   it("adds the shared cross-page theme system to representative interior pages", () => {
