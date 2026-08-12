@@ -87,6 +87,16 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain("line.setAttribute('x1','44')");
   });
 
+  it("switches the Bridge model to responsive role cards before medium and small screens become cramped", () => {
+    expect(homepage).toContain('Responsive Bridge contract: preserve the calibrated diagram where it fits');
+    expect(homepage).toContain('@media screen and (min-width:768px) and (max-width:991px)');
+    expect(homepage).toContain('@media screen and (min-width:561px) and (max-width:767px)');
+    expect(homepage).toContain('grid-template-columns:repeat(2,minmax(0,1fr))!important');
+    expect(homepage).toContain('@media screen and (max-width:480px)');
+    expect(homepage).toContain('grid-template-columns:1fr!important');
+    expect(homepage).toContain('@media screen and (min-width:1600px)');
+  });
+
   it("uses zero Specialist Roles kerning, the supplied Bridge hub mark, and safe hero-logo clearance", () => {
     expect(homepage).toContain('id="bridge-brand-and-hero-refinement"');
     expect(homepage).toContain('.bridge-insight-count{letter-spacing:0!important;}');
