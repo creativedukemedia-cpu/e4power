@@ -268,3 +268,6 @@
 - [x] Recalibrate the B.R.I.D.G.E. orbit, central core, and specialist-node spacing to match the supplied role-map reference while retaining the fixed hero.
 - [x] Make the interactive B.R.I.D.G.E. model responsive across phone, tablet, laptop, desktop, and wide-screen viewports.
 - [x] Verify responsive Bridge layout and interactions at each target breakpoint before publishing.
+- [x] Rebuild the central E4/PMP lockup so the supplied mark, PMP, and delivery caption form a compact measured composition.
+- [x] Preserve the circular six-figure specialist model on mobile rather than replacing it with stacked role cards.
+- [x] Verify the revised Bridge hub and mobile figure layout before publishing.

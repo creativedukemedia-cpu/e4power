@@ -97,6 +97,15 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('@media screen and (min-width:1600px)');
   });
 
+  it("keeps the E4/PMP hub compact and preserves the orbiting figures on touch screens", () => {
+    expect(homepage).toContain('Lock the E4/PMP mark into one measured composition');
+    expect(homepage).toContain('margin:.12rem 0 0!important');
+    expect(homepage).toContain('retain the delivery map on touch devices');
+    expect(homepage).toContain('#empower.bridge-program-section .bridge-orbit{display:block!important;position:relative!important');
+    expect(homepage).toContain('#empower.bridge-program-section .bridge-role[data-role="financial"]{left:25%!important;top:18%!important;}');
+    expect(homepage).toContain('#empower.bridge-program-section .bridge-role[data-role="proposal"]{left:74%!important;top:81%!important;}');
+  });
+
   it("uses zero Specialist Roles kerning, the supplied Bridge hub mark, and safe hero-logo clearance", () => {
     expect(homepage).toContain('id="bridge-brand-and-hero-refinement"');
     expect(homepage).toContain('.bridge-insight-count{letter-spacing:0!important;}');
