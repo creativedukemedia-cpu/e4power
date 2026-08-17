@@ -274,3 +274,4 @@
 - [x] Rebuild the homepage mobile breakpoint so real phone viewports reflow rather than compress the desktop layout.
 - [x] Eliminate horizontal clipping, undersized text, and obstructive overlays in the mobile homepage flow.
 - [x] Validate the repaired homepage on real-phone and tablet-sized viewports before publishing.
+- [x] Push the current committed project state to the configured Git remote repository.
