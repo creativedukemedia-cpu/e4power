@@ -106,6 +106,15 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('#empower.bridge-program-section .bridge-role[data-role="proposal"]{left:74%!important;top:81%!important;}');
   });
 
+  it("reflows the homepage at tablet-width mobile browsers instead of squeezing desktop columns", () => {
+    expect(homepage).toContain('Treat compact desktop-browser viewports as mobile layouts');
+    expect(homepage).toContain('@media screen and (max-width:1024px)');
+    expect(homepage).toContain('html,body{max-width:100%!important;overflow-x:hidden!important;}');
+    expect(homepage).toContain('#elevate .service-preview-grid{grid-template-columns:1fr!important;gap:1rem!important;}');
+    expect(homepage).toContain('#elevate .mask.w-slider-mask{display:flex!important;height:auto!important;overflow:visible!important;flex-direction:column!important;white-space:normal!important;}');
+    expect(homepage).toContain('#elevate .testimonial-slide-wrapper.w-slide{position:relative!important;float:none!important;');
+  });
+
   it("uses zero Specialist Roles kerning, the supplied Bridge hub mark, and safe hero-logo clearance", () => {
     expect(homepage).toContain('id="bridge-brand-and-hero-refinement"');
     expect(homepage).toContain('.bridge-insight-count{letter-spacing:0!important;}');

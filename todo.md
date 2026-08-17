@@ -271,3 +271,6 @@
 - [x] Rebuild the central E4/PMP lockup so the supplied mark, PMP, and delivery caption form a compact measured composition.
 - [x] Preserve the circular six-figure specialist model on mobile rather than replacing it with stacked role cards.
 - [x] Verify the revised Bridge hub and mobile figure layout before publishing.
+- [x] Rebuild the homepage mobile breakpoint so real phone viewports reflow rather than compress the desktop layout.
+- [x] Eliminate horizontal clipping, undersized text, and obstructive overlays in the mobile homepage flow.
+- [x] Validate the repaired homepage on real-phone and tablet-sized viewports before publishing.
