@@ -282,3 +282,4 @@
 - [x] Verify the LinkedIn feed on desktop and mobile before publishing.
 - [x] Move the homepage LinkedIn feed section below the Team section while retaining its responsive behavior and styling.
 - [x] Re-verify the LinkedIn feed relocation and save a fresh checkpoint.
+- [x] Eliminate the homepage ResizeObserver loop warning while preserving responsive layout behavior.

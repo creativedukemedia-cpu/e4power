@@ -131,6 +131,12 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('team.parentNode.insertBefore(feed,team.nextSibling)');
   });
 
+  it("guards the known third-party ResizeObserver notification loop without masking other errors", () => {
+    expect(homepage).toContain('id="resize-observer-error-guard"');
+    expect(homepage).toContain("event.message==='ResizeObserver loop completed with undelivered notifications.'");
+    expect(homepage).toContain('event.preventDefault();event.stopImmediatePropagation();');
+  });
+
   it("uses zero Specialist Roles kerning, the supplied Bridge hub mark, and safe hero-logo clearance", () => {
     expect(homepage).toContain('id="bridge-brand-and-hero-refinement"');
     expect(homepage).toContain('.bridge-insight-count{letter-spacing:0!important;}');
