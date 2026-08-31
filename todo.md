@@ -280,3 +280,4 @@
 - [x] Add the supplied Elfsight LinkedIn feed to the homepage with E4Power-consistent styling.
 - [x] Ensure the LinkedIn feed section uses no em dashes and no colored square card enclosures.
 - [x] Verify the LinkedIn feed on desktop and mobile before publishing.
+- [x] Move the homepage LinkedIn feed section below the Team section while retaining its responsive behavior and styling.

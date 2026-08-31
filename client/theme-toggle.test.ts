@@ -125,6 +125,12 @@ describe("theme toggle markup", () => {
     expect(homepage).not.toContain('E4Power —');
   });
 
+  it("moves the LinkedIn feed below the Team section after dynamic homepage sections are constructed", () => {
+    expect(homepage).toContain('id="linkedin-feed-placement-script"');
+    expect(homepage).toContain("var feed=document.getElementById('linkedin-feed');var team=document.getElementById('engage')");
+    expect(homepage).toContain('team.parentNode.insertBefore(feed,team.nextSibling)');
+  });
+
   it("uses zero Specialist Roles kerning, the supplied Bridge hub mark, and safe hero-logo clearance", () => {
     expect(homepage).toContain('id="bridge-brand-and-hero-refinement"');
     expect(homepage).toContain('.bridge-insight-count{letter-spacing:0!important;}');
