@@ -103,7 +103,14 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('retain the delivery map on touch devices');
     expect(homepage).toContain('#empower.bridge-program-section .bridge-orbit{display:block!important;position:relative!important');
     expect(homepage).toContain('#empower.bridge-program-section .bridge-role[data-role="financial"]{left:25%!important;top:18%!important;}');
-    expect(homepage).toContain('#empower.bridge-program-section .bridge-role[data-role="proposal"]{left:74%!important;top:81%!important;}');
+    expect(homepage).toContain('#empower.bridge-program-section .bridge-role[data-role="proposal"]{left:74%!important;top:76%!important;}');
+  });
+
+  it("shows each full specialist role name beneath its figure in the mobile circular Bridge model", () => {
+    expect(homepage).toContain('Keep every specialist identifiable inside the circular touch layout');
+    expect(homepage).toContain('top:calc(100% - .5rem)!important;left:50%!important');
+    expect(homepage).toContain('width:4.75rem!important');
+    expect(homepage).toContain('letter-spacing:0!important;line-height:1.08!important;text-align:center!important');
   });
 
   it("reflows the homepage at tablet-width mobile browsers instead of squeezing desktop columns", () => {

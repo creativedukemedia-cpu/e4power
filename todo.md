@@ -283,3 +283,5 @@
 - [x] Move the homepage LinkedIn feed section below the Team section while retaining its responsive behavior and styling.
 - [x] Re-verify the LinkedIn feed relocation and save a fresh checkpoint.
 - [x] Eliminate the homepage ResizeObserver loop warning while preserving responsive layout behavior.
+- [x] Display each specialist role name below its colored figure in the mobile B.R.I.D.G.E. model.
+- [x] Verify mobile role-label readability and tap behavior before publishing.
