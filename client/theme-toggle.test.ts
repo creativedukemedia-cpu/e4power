@@ -115,6 +115,16 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('#elevate .testimonial-slide-wrapper.w-slide{position:relative!important;float:none!important;');
   });
 
+  it("embeds the requested LinkedIn feed in an open E4Power-styled homepage section", () => {
+    expect(homepage).toContain('id="linkedin-feed-section-script"');
+    expect(homepage).toContain('elfsight-app-47c25495-5abf-415f-99ee-fb9ad001b53a');
+    expect(homepage).toContain('https://elfsightcdn.com/platform.js');
+    expect(homepage).toContain('id="linkedin-feed-heading"');
+    expect(homepage).toContain('E4Power <span>on LinkedIn</span>');
+    expect(homepage).toContain('LinkedIn is presented as an open editorial section');
+    expect(homepage).not.toContain('E4Power —');
+  });
+
   it("uses zero Specialist Roles kerning, the supplied Bridge hub mark, and safe hero-logo clearance", () => {
     expect(homepage).toContain('id="bridge-brand-and-hero-refinement"');
     expect(homepage).toContain('.bridge-insight-count{letter-spacing:0!important;}');

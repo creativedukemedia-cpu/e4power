@@ -276,4 +276,7 @@
 - [x] Validate the repaired homepage on real-phone and tablet-sized viewports before publishing.
 - [x] Push the current committed project state to the configured Git remote repository.
 - [ ] Retry the direct authenticated push to the configured Git remote.
-- [x] Push the current project state to the newly connected repository.
+- [ ] Push the current project state to the newly connected repository.
+- [x] Add the supplied Elfsight LinkedIn feed to the homepage with E4Power-consistent styling.
+- [x] Ensure the LinkedIn feed section uses no em dashes and no colored square card enclosures.
+- [x] Verify the LinkedIn feed on desktop and mobile before publishing.
