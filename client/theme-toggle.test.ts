@@ -10,6 +10,12 @@ const educatePath = path.join(clientRoot, "educate", "index.html");
 const educatePage = fs.readFileSync(educatePath, "utf8");
 const teamMemberPath = path.join(clientRoot, "team-members", "kandy-rose", "index.html");
 const teamMemberPage = fs.readFileSync(teamMemberPath, "utf8");
+const clientSuccessPath = path.join(clientRoot, "client-success", "index.html");
+const clientSuccessPage = fs.readFileSync(clientSuccessPath, "utf8");
+const searchPagePath = path.join(clientRoot, "search", "index.html");
+const searchPage = fs.readFileSync(searchPagePath, "utf8");
+const globalNavigationPath = path.join(clientRoot, "e4-global-navigation.js");
+const globalNavigation = fs.readFileSync(globalNavigationPath, "utf8");
 
 describe("theme toggle markup", () => {
   it("keeps a desktop theme toggle and adds a mobile menu toggle on the homepage", () => {
@@ -190,5 +196,48 @@ describe("theme toggle markup", () => {
   it("converts team-member biography panels to light surfaces in light mode", () => {
     expect(teamMemberPage).toContain('body.theme-light .smaller-container.gray');
     expect(teamMemberPage).toContain('body.theme-light .main-content-block.gray');
+  });
+
+  it("centers the homepage Our Services control without changing its disclosure markup", () => {
+    expect(homepage).toContain('.hero-container.reference-hero .hero-services-panel{left:50%!important;right:auto!important;transform:translateX(-50%)!important;');
+    expect(homepage).toContain('width:min(calc(100% - 2.5rem),49rem)!important;');
+    expect(homepage).toContain('width:calc(100% - 2rem)!important;');
+  });
+
+  it("removes only the requested homepage Partners heading", () => {
+    expect(homepage).toContain('id="homepage-partners-heading-removal"');
+    expect(homepage).toContain('^partners\\s*\\(cur+ent\\/previous\\)$');
+    expect(homepage).toContain('node.remove();');
+  });
+
+  it("loads shared sticky navigation and accessible keyword search on homepage and interior pages", () => {
+    expect(homepage).toContain('id="e4-global-navigation-script" src="/e4-global-navigation.js"');
+    expect(educatePage).toContain('id="e4-global-navigation-script" src="/e4-global-navigation.js"');
+    expect(globalNavigation).toContain('.reference-topbar{position:sticky!important;top:0!important;z-index:10000!important;');
+    expect(globalNavigation).toContain('.navbar-logo-left{position:sticky!important;top:0!important;z-index:1000!important;');
+    expect(globalNavigation).toContain("form.setAttribute('role', 'search')");
+    expect(globalNavigation).toContain("form.setAttribute('aria-label', 'Search E4 Power')");
+    expect(globalNavigation).toContain("form.action = '/search/'");
+    expect(globalNavigation).toContain("mobileSearchLink.href = '/search/'");
+    expect(globalNavigation).toContain("mobileSearchLink.textContent = 'Search'");
+  });
+
+  it("provides a dedicated keyword search page with accessible empty and no-results states", () => {
+    expect(searchPage).toContain('data-e4-search-input');
+    expect(searchPage).toContain('data-e4-search-results');
+    expect(searchPage).toContain('role="search"');
+    expect(globalNavigation).toContain('Enter a keyword to search the E4 Power website.');
+    expect(globalNavigation).toContain('No results found for');
+  });
+
+  it("creates an independent Client Success page by reusing the existing homepage Elevate section", () => {
+    expect(clientSuccessPage).toContain('<title>Client Success | E4 Power</title>');
+    expect(clientSuccessPage).toContain('Client <span>Success</span>');
+    expect(clientSuccessPage).toContain("source.getElementById('elevate')");
+    expect(clientSuccessPage).toContain("elevate.id='client-success-elevate'");
+    expect(clientSuccessPage).toContain('src="/e4-global-navigation.js"');
+    expect(clientSuccessPage).toContain('position:sticky;top:0;');
+    expect(clientSuccessPage).toContain('.client-success-nav-links a:nth-child(3){display:none;}');
+    expect(clientSuccessPage).toContain('.client-success-nav .e4-search-link{color:#f8f4ec!important;}');
   });
 });

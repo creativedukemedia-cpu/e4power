@@ -363,6 +363,7 @@ SCRIPT_BLOCK = """
 
 DESKTOP_BUTTON = '<button aria-label="Toggle light and dark mode" class="theme-toggle-button" id="theme-toggle-button" type="button"><span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span><span class="theme-toggle-label">Theme</span></button>'
 MOBILE_BUTTON = '<button aria-label="Toggle light and dark mode" class="theme-toggle-button mobile-theme-toggle" id="mobile-theme-toggle-button" type="button"><span class="theme-toggle-label">Theme</span><span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span></button>'
+NAVIGATION_SCRIPT = '<script id="e4-global-navigation-script" src="/e4-global-navigation.js"></script>'
 
 body_re = re.compile(r'<body class="([^"]*)">', re.IGNORECASE)
 
@@ -396,6 +397,14 @@ for path in TARGETS:
         text = text.replace('</html>', SCRIPT_BLOCK + '</html>')
     else:
         text = text.rstrip() + '\n' + SCRIPT_BLOCK + '\n'
+
+    if 'id="e4-global-navigation-script"' not in text:
+        if '</body>' in text:
+            text = text.replace('</body>', NAVIGATION_SCRIPT + '</body>')
+        elif '</html>' in text:
+            text = text.replace('</html>', NAVIGATION_SCRIPT + '</html>')
+        else:
+            text = text.rstrip() + '\n' + NAVIGATION_SCRIPT + '\n'
 
     path.write_text(text)
 

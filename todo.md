@@ -285,3 +285,9 @@
 - [x] Eliminate the homepage ResizeObserver loop warning while preserving responsive layout behavior.
 - [x] Display each specialist role name below its colored figure in the mobile B.R.I.D.G.E. model.
 - [x] Verify mobile role-label readability and tap behavior before publishing.
+- [x] Create an independent Client Success page using the existing homepage Elevate content and layout.
+- [x] Remove the homepage Partners (Current/Previous) header without removing partner content.
+- [x] Add accessible keyword search at the top of the site navigation.
+- [x] Center the homepage hero Our Services control.
+- [x] Make the navigation sticky across all site pages and responsive breakpoints.
+- [x] Test the Client Success page, keyword search, centered hero control, and sticky navigation before publishing.

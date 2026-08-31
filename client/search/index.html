@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Search the E4 Power website" />
+    <title>Search | E4 Power</title>
+    <style>
+      :root{font-family:Arial,Helvetica,sans-serif;background:#090908;color:#fff8ef;}
+      *{box-sizing:border-box;}
+      body{min-width:320px;margin:0;background:radial-gradient(circle at 76% 12%,rgba(237,190,89,.16),transparent 28%),#090908;color:#fff8ef;}
+      .e4-visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;}
+      .search-nav{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:5rem;padding:1rem clamp(1rem,4vw,4.5rem);background:rgba(9,9,8,.95);border-bottom:1px solid rgba(237,190,89,.28);backdrop-filter:blur(18px);}
+      .search-brand{display:inline-flex;align-items:center;gap:.8rem;color:#fff8ef;text-decoration:none;font-size:.76rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;}
+      .search-brand img{display:block;width:2.4rem;height:2.4rem;object-fit:contain;}
+      .search-nav a:last-child{color:#fff8ef;font-size:.7rem;font-weight:800;letter-spacing:.12em;text-decoration:none;text-transform:uppercase;}
+      .search-nav a:last-child:hover,.search-nav a:last-child:focus-visible{color:#edbe59;}
+      main{width:min(100% - 2.5rem,76rem);margin:0 auto;padding:clamp(4rem,9vw,8rem) 0 7rem;}
+      .search-kicker{margin:0 0 .9rem;color:#edbe59;font-size:.75rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;}
+      h1{max-width:10ch;margin:0 0 2.25rem;font-size:clamp(3.1rem,8vw,7rem);line-height:.9;letter-spacing:-.075em;text-transform:uppercase;}
+      h1 span{color:#edbe59;}
+      .search-form{display:flex;gap:.75rem;max-width:54rem;margin:0 0 2.75rem;padding-bottom:1.25rem;border-bottom:1px solid rgba(255,248,239,.24);}
+      .search-form input{width:100%;min-width:0;padding:.95rem 1rem;border:1px solid rgba(237,190,89,.52);border-radius:0;background:rgba(255,255,255,.04);color:#fff8ef;font:inherit;font-size:1rem;}
+      .search-form input:focus{outline:2px solid #edbe59;outline-offset:2px;}
+      .search-form button{padding:.95rem 1.35rem;border:1px solid #edbe59;background:#edbe59;color:#17130c;font:inherit;font-size:.72rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase;cursor:pointer;}
+      .search-form button:hover,.search-form button:focus-visible{background:#fff8ef;}
+      .e4-search-summary,.e4-search-empty{margin:0 0:1.4rem;color:rgba(255,248,239,.78);font-size:1rem;line-height:1.55;}
+      .e4-search-summary strong,.e4-search-empty strong{color:#edbe59;}
+      .e4-search-list{display:grid;gap:.85rem;max-width:54rem;margin:0;padding:0;list-style:none;}
+      .e4-search-list a{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.2rem 0;border-bottom:1px solid rgba(255,248,239,.16);color:#fff8ef;font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:800;text-decoration:none;}
+      .e4-search-list a:hover,.e4-search-list a:focus-visible{color:#edbe59;}
+      .e4-search-list span{flex:0 0 auto;font-size:.66rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;}
+      @media (max-width:600px){.search-nav{min-height:4.5rem;padding:.8rem 1rem;}.search-brand span{display:none;}main{width:min(100% - 2rem,76rem);padding-top:4.25rem;}.search-form{gap:.5rem;}.search-form button{padding:.95rem .85rem;}.e4-search-list a{align-items:flex-start;flex-direction:column;gap:.5rem;}}
+    </style>
+  </head>
+  <body>
+    <header class="search-nav">
+      <a class="search-brand" href="/" aria-label="E4 Power home"><img src="https://cdn.prod.website-files.com/68ba0532388ab756f96c84d5/68bcc54da8714105bb252c7f_e4_logo_white.svg" alt="E4 Power" /><span>E4 Power</span></a>
+      <a href="/">Home</a>
+    </header>
+    <main>
+      <p class="search-kicker">E4 Power</p>
+      <h1>Search <span>the site</span></h1>
+      <form class="search-form" action="/search/" method="get" role="search">
+        <label class="e4-visually-hidden" for="site-search-query">Search E4 Power</label>
+        <input id="site-search-query" data-e4-search-input type="search" name="q" autocomplete="off" placeholder="Search by keyword" />
+        <button type="submit">Search</button>
+      </form>
+      <section data-e4-search-results aria-live="polite" aria-atomic="true"></section>
+    </main>
+    <script src="/e4-global-navigation.js"></script>
+  </body>
+</html>

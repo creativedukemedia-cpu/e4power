@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="description" content="Client Success | E4 Power" />
+    <title>Client Success | E4 Power</title>
+    <style>
+      :root{color-scheme:dark;font-family:Arial,Helvetica,sans-serif;background:#090908;color:#f8f4ec;}
+      *{box-sizing:border-box;}
+      html{background:#090908;}
+      body{margin:0;min-width:320px;background:#090908;color:#f8f4ec;}
+      .client-success-nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;min-height:5rem;padding:1rem clamp(1rem,4vw,4.25rem);background:rgba(9,9,8,.96);border-bottom:1px solid rgba(237,190,89,.28);backdrop-filter:blur(18px);}
+      .client-success-brand{display:inline-flex;align-items:center;gap:.85rem;color:#f8f4ec;text-decoration:none;font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.76rem;}
+      .client-success-brand img{display:block;width:2.35rem;height:2.35rem;object-fit:contain;}
+      .client-success-nav-links{display:flex;align-items:center;gap:clamp(.75rem,2.1vw,2.25rem);}
+      .client-success-nav-links a{color:#f8f4ec;text-decoration:none;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;}
+      .client-success-nav-links a:hover,.client-success-nav-links a:focus-visible{color:#edbe59;}
+      .client-success-nav .e4-search-link{color:#f8f4ec!important;}
+      .client-success-page-intro{padding:clamp(4.5rem,9vw,8.5rem) clamp(1rem,6vw,6.5rem) clamp(2.5rem,5vw,4.5rem);background:radial-gradient(circle at 78% 10%,rgba(237,190,89,.18),transparent 32%),#090908;}
+      .client-success-page-intro p{margin:0 0 1rem;color:#edbe59;font-size:clamp(.68rem,1vw,.82rem);font-weight:800;letter-spacing:.22em;text-transform:uppercase;}
+      .client-success-page-intro h1{max-width:17ch;margin:0;color:#f8f4ec;font-size:clamp(3rem,8vw,7.5rem);line-height:.92;letter-spacing:-.065em;text-transform:uppercase;}
+      .client-success-page-intro h1 span{color:#edbe59;}
+      #client-success-content{min-height:42rem;background:#2d2d2b;}
+      #client-success-content .section{scroll-margin-top:6.5rem;}
+      .client-success-loading{display:grid;min-height:42rem;place-items:center;padding:2rem;color:#f8f4ec;font-size:.8rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;}
+      .client-success-error{max-width:46rem;margin:0 auto;padding:5rem 1.5rem;color:#f8f4ec;text-align:center;}
+      .client-success-error a{color:#edbe59;}
+      @media (max-width:720px){
+        .client-success-nav{min-height:4.5rem;padding:.8rem 1rem;}
+        .client-success-brand span{display:none;}
+        .client-success-nav-links{gap:.85rem;}
+        .client-success-nav-links a{font-size:.62rem;letter-spacing:.08em;}
+        .client-success-nav-links a:nth-child(3){display:none;}
+        .client-success-page-intro{padding:4.25rem 1.25rem 2.75rem;}
+      }
+    </style>
+  </head>
+  <body>
+    <header class="client-success-nav">
+      <a class="client-success-brand" href="/" aria-label="E4 Power home">
+        <img alt="E4 Power" src="https://cdn.prod.website-files.com/68ba0532388ab756f96c84d5/68bcc54da8714105bb252c7f_e4_logo_white.svg" />
+        <span>E4 Power</span>
+      </a>
+      <nav class="client-success-nav-links" aria-label="Client Success page">
+        <a href="/">Home</a>
+        <a href="/team/">Our Team</a>
+        <a href="/contact-us/">Contact</a>
+      </nav>
+    </header>
+    <main>
+      <section class="client-success-page-intro" aria-labelledby="client-success-title">
+        <p>Elevate</p>
+        <h1 id="client-success-title">Client <span>Success</span></h1>
+      </section>
+      <div id="client-success-content" aria-live="polite">
+        <div class="client-success-loading">Loading client success</div>
+      </div>
+    </main>
+    <script src="/e4-global-navigation.js"></script>
+    <script>
+      (async function renderClientSuccess(){
+        const host=document.getElementById('client-success-content');
+        try{
+          const response=await fetch('/index.html',{credentials:'same-origin'});
+          if(!response.ok)throw new Error('Unable to load the client success content.');
+          const source=new DOMParser().parseFromString(await response.text(),'text/html');
+          source.querySelectorAll('link[rel="stylesheet"],style').forEach(function(node){
+            const key=node.href||node.id||node.textContent.slice(0,80);
+            const exists=[...document.head.querySelectorAll('link[rel="stylesheet"],style')].some(function(existing){return (existing.href||existing.id||existing.textContent.slice(0,80))===key;});
+            if(!exists)document.head.appendChild(node.cloneNode(true));
+          });
+          const elevate=source.getElementById('elevate');
+          if(!elevate)throw new Error('Client success content is unavailable.');
+          elevate.removeAttribute('id');
+          elevate.id='client-success-elevate';
+          elevate.querySelectorAll('[style*="opacity: 0"]').forEach(function(node){node.style.opacity='1';});
+          host.replaceChildren(elevate);
+        }catch(error){
+          host.innerHTML='<div class="client-success-error"><p>The Client Success page is temporarily unavailable.</p><a href="/">Return home</a></div>';
+        }
+      })();
+    </script>
+  </body>
+</html>
