@@ -291,8 +291,8 @@
 - [x] Center the homepage hero Our Services control.
 - [x] Make the navigation sticky across all site pages and responsive breakpoints.
 - [x] Test the Client Success page, keyword search, centered hero control, and sticky navigation before publishing.
-- [ ] Investigate why the latest Client Success, search, sticky navigation, and homepage updates are not appearing on the published domains.
-- [ ] Compare the published domain output with the verified release artifact and correct any deployment or routing mismatch.
-- [ ] Verify the corrected release directly on both published domains before reporting back.
+- [x] Investigate why the latest Client Success, search, sticky navigation, and homepage updates are not appearing on the published domains.
+- [x] Compare the published domain output with the verified release artifact and correct any deployment or routing mismatch.
+- [x] Verify the corrected release directly on both published domains before reporting back.
 - [x] Add a visible Client Success navigation link across the shared desktop and mobile navigation.
 - [x] Verify the Client Success link works responsively and is available on the published site.
