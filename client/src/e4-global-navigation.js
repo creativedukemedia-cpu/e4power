@@ -50,13 +50,15 @@
       .nav-menu-wrapper .e4-nav-search{display:none;width:100%;max-width:none;margin:0 0 1rem;color:#f4efe7;}\
       body.theme-light .nav-menu-wrapper .e4-nav-search{color:#1e1a16;}\
       .e4-search-link{color:inherit!important;font-size:.7rem!important;font-weight:800!important;letter-spacing:.12em!important;text-decoration:none!important;text-transform:uppercase;}\
+      .e4-client-success-link{white-space:nowrap;}\
       .e4-search-link:hover,.e4-search-link:focus-visible{color:#edbe59!important;}\
       .e4-mobile-search-link{display:none;color:inherit!important;font-size:.64rem!important;font-weight:800!important;letter-spacing:.11em!important;text-decoration:none!important;text-transform:uppercase;}\
       .e4-mobile-search-link:hover,.e4-mobile-search-link:focus-visible{color:#edbe59!important;}\
       .reference-topbar-nav{gap:clamp(.65rem,1.1vw,1.1rem)!important;flex-wrap:nowrap!important;}\
+      @media screen and (min-width:992px) and (max-width:1320px){.reference-topbar-inner{grid-template-columns:minmax(22rem,29vw) 1fr!important;}.reference-topbar-brand{gap:1rem!important;padding:0 1.45rem!important;}.reference-socials{gap:.6rem!important;}.reference-socials a{width:2.3rem!important;height:2.3rem!important;}.reference-topbar-nav{gap:.75rem!important;padding:0 1rem!important;}.reference-topbar-nav a{font-size:.65rem!important;letter-spacing:.045em!important;}.reference-topbar-nav .e4-nav-search{min-width:7.1rem!important;max-width:8rem!important;}}\
       @media screen and (max-width:1180px){.navbar-right-div .e4-nav-search{min-width:7.25rem;max-width:8.5rem;}.reference-topbar-nav .e4-nav-search{min-width:7.25rem;max-width:8.5rem;}}\
-      @media screen and (max-width:991px){.navbar-right-div>.e4-nav-search{display:none!important;}.e4-mobile-search-link{display:inline-flex!important;align-items:center;}.nav-menu-wrapper .e4-nav-search{display:inline-flex!important;}.reference-topbar-inner{flex-wrap:wrap!important;}.reference-topbar-brand{width:100%!important;min-height:4.5rem;}.reference-topbar-nav{width:100%!important;min-height:3.75rem;justify-content:center;}.reference-topbar-nav .e4-nav-search{margin-right:.3rem;}}\
-      @media screen and (max-width:767px){.reference-topbar{min-height:4.6rem!important;}.reference-topbar-nav .e4-nav-search{min-width:0;max-width:none;flex:1;margin-right:0;}.reference-topbar-nav .e4-nav-search input{font-size:.61rem!important;}.reference-topbar-nav>a{display:none!important;}.reference-topbar-nav #theme-toggle-button{margin-left:.65rem;}}\
+      @media screen and (max-width:991px){.navbar-right-div>.e4-nav-search,.navbar-right-div>.e4-client-success-link{display:none!important;}.e4-mobile-search-link{display:inline-flex!important;align-items:center;}.nav-menu-wrapper .e4-nav-search{display:inline-flex!important;}.reference-topbar-inner{flex-wrap:wrap!important;}.reference-topbar-brand{width:100%!important;min-height:4.5rem;}.reference-topbar-nav{width:100%!important;min-height:3.75rem;justify-content:center;}.reference-topbar-nav .e4-nav-search{margin-right:.3rem;}}\
+      @media screen and (max-width:767px){.reference-topbar{min-height:4.6rem!important;}.reference-topbar-nav .e4-nav-search{min-width:0;max-width:none;flex:1;margin-right:0;}.reference-topbar-nav .e4-nav-search input{font-size:.61rem!important;}.reference-topbar-nav #theme-toggle-button{margin-left:.65rem;}}\
     ';
     document.head.appendChild(style);
   }
@@ -70,6 +72,45 @@
     form.setAttribute('aria-label', 'Search E4 Power');
     form.innerHTML = '<label class="e4-visually-hidden" for="' + id + '">Search E4 Power</label><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m16 16 5 5"></path></svg><input id="' + id + '" name="q" type="search" autocomplete="off" placeholder="Search" />';
     return form;
+  }
+
+  function clientSuccessLink(className) {
+    var link = document.createElement('a');
+    link.className = className || '';
+    link.href = '/client-success/';
+    link.textContent = 'Client Success';
+    link.setAttribute('data-e4-client-success-link', 'true');
+    return link;
+  }
+
+  function addClientSuccessNavigation(homeNav, utilityNav, menu) {
+    if (homeNav && !homeNav.querySelector('[data-e4-client-success-link]')) {
+      var homeLink = clientSuccessLink('e4-client-success-link');
+      var servicesLink = Array.prototype.find.call(homeNav.querySelectorAll('a'), function (link) {
+        return link.getAttribute('href') === '/services/';
+      });
+      homeNav.insertBefore(homeLink, servicesLink ? servicesLink.nextSibling : null);
+    }
+
+    if (utilityNav && !utilityNav.querySelector('[data-e4-client-success-link]')) {
+      var utilityLink = clientSuccessLink('text-link e4-client-success-link');
+      var contactLink = Array.prototype.find.call(utilityNav.querySelectorAll('a'), function (link) {
+        return /contact/i.test(link.textContent || '');
+      });
+      utilityNav.insertBefore(utilityLink, contactLink || null);
+    }
+
+    var menuList = menu && menu.querySelector('.nav-menu-two');
+    if (menuList && !menuList.querySelector('[data-e4-client-success-link]')) {
+      var item = document.createElement('li');
+      item.className = 'e4-client-success-menu-item';
+      item.appendChild(clientSuccessLink('nav-link'));
+      var servicesMenuLink = Array.prototype.find.call(menuList.querySelectorAll('a'), function (link) {
+        return link.getAttribute('href') === '/services/';
+      });
+      var servicesItem = servicesMenuLink && servicesMenuLink.closest('li');
+      menuList.insertBefore(item, servicesItem ? servicesItem.nextSibling : menuList.firstChild);
+    }
   }
 
   function installNavigation() {
@@ -100,6 +141,8 @@
     if (menu && !menu.querySelector('.e4-nav-search')) {
       menu.insertBefore(searchForm('e4-mobile-search'), menu.firstChild);
     }
+
+    addClientSuccessNavigation(homeNav, utilityNav, menu);
 
     var clientNav = document.querySelector('.client-success-nav-links');
     if (clientNav && !clientNav.querySelector('.e4-search-link')) {

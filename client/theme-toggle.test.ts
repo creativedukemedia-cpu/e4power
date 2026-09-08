@@ -222,6 +222,15 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain("mobileSearchLink.textContent = 'Search'");
   });
 
+  it("adds Client Success as a visible shared desktop and mobile navigation destination", () => {
+    expect(globalNavigation).toContain("link.href = '/client-success/'");
+    expect(globalNavigation).toContain("link.textContent = 'Client Success'");
+    expect(globalNavigation).toContain("addClientSuccessNavigation(homeNav, utilityNav, menu)");
+    expect(globalNavigation).toContain("item.className = 'e4-client-success-menu-item'");
+    expect(globalNavigation).not.toContain('.reference-topbar-nav>a{display:none!important;}');
+    expect(globalNavigation).toContain('@media screen and (min-width:992px) and (max-width:1320px)');
+  });
+
   it("provides a dedicated keyword search page with accessible empty and no-results states", () => {
     expect(searchPage).toContain('data-e4-search-input');
     expect(searchPage).toContain('data-e4-search-results');
