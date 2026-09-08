@@ -298,4 +298,4 @@
 - [x] Verify the Client Success link works responsively and is available on the published site.
 - [x] Investigate the malformed Client Success page layout, missing images, and unintended generated content on the live site.
 - [x] Replace the dynamic Client Success content extraction with a stable Elevate-only implementation that preserves the intended layout and media.
-- [ ] Test the corrected Client Success page on desktop and mobile in preview and directly on both published domains.
+- [x] Test the corrected Client Success page on desktop and mobile in preview and directly on both published domains.
