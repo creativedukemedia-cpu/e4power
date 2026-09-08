@@ -14,7 +14,7 @@ const clientSuccessPath = path.join(clientRoot, "client-success", "index.html");
 const clientSuccessPage = fs.readFileSync(clientSuccessPath, "utf8");
 const searchPagePath = path.join(clientRoot, "search", "index.html");
 const searchPage = fs.readFileSync(searchPagePath, "utf8");
-const globalNavigationPath = path.join(clientRoot, "e4-global-navigation.js");
+const globalNavigationPath = path.join(clientRoot, "public", "e4-global-navigation.js");
 const globalNavigation = fs.readFileSync(globalNavigationPath, "utf8");
 
 describe("theme toggle markup", () => {
