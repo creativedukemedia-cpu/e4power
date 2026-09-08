@@ -14,7 +14,7 @@ const clientSuccessPath = path.join(clientRoot, "client-success", "index.html");
 const clientSuccessPage = fs.readFileSync(clientSuccessPath, "utf8");
 const searchPagePath = path.join(clientRoot, "search", "index.html");
 const searchPage = fs.readFileSync(searchPagePath, "utf8");
-const globalNavigationPath = path.join(clientRoot, "public", "e4-global-navigation.js");
+const globalNavigationPath = path.join(clientRoot, "src", "e4-global-navigation.js");
 const globalNavigation = fs.readFileSync(globalNavigationPath, "utf8");
 
 describe("theme toggle markup", () => {
@@ -211,8 +211,8 @@ describe("theme toggle markup", () => {
   });
 
   it("loads shared sticky navigation and accessible keyword search on homepage and interior pages", () => {
-    expect(homepage).toContain('id="e4-global-navigation-script" src="/e4-global-navigation.js"');
-    expect(educatePage).toContain('id="e4-global-navigation-script" src="/e4-global-navigation.js"');
+    expect(homepage).toContain('id="e4-global-navigation-script" type="module" src="/src/e4-global-navigation.js"');
+    expect(educatePage).toContain('id="e4-global-navigation-script" type="module" src="/src/e4-global-navigation.js"');
     expect(globalNavigation).toContain('.reference-topbar{position:sticky!important;top:0!important;z-index:10000!important;');
     expect(globalNavigation).toContain('.navbar-logo-left{position:sticky!important;top:0!important;z-index:1000!important;');
     expect(globalNavigation).toContain("form.setAttribute('role', 'search')");
@@ -235,7 +235,7 @@ describe("theme toggle markup", () => {
     expect(clientSuccessPage).toContain('Client <span>Success</span>');
     expect(clientSuccessPage).toContain("source.getElementById('elevate')");
     expect(clientSuccessPage).toContain("elevate.id='client-success-elevate'");
-    expect(clientSuccessPage).toContain('src="/e4-global-navigation.js"');
+    expect(clientSuccessPage).toContain('type="module" src="/src/e4-global-navigation.js"');
     expect(clientSuccessPage).toContain('position:sticky;top:0;');
     expect(clientSuccessPage).toContain('.client-success-nav-links a:nth-child(3){display:none;}');
     expect(clientSuccessPage).toContain('.client-success-nav .e4-search-link{color:#f8f4ec!important;}');

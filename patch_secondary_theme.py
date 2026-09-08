@@ -363,7 +363,7 @@ SCRIPT_BLOCK = """
 
 DESKTOP_BUTTON = '<button aria-label="Toggle light and dark mode" class="theme-toggle-button" id="theme-toggle-button" type="button"><span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span><span class="theme-toggle-label">Theme</span></button>'
 MOBILE_BUTTON = '<button aria-label="Toggle light and dark mode" class="theme-toggle-button mobile-theme-toggle" id="mobile-theme-toggle-button" type="button"><span class="theme-toggle-label">Theme</span><span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span></button>'
-NAVIGATION_SCRIPT = '<script id="e4-global-navigation-script" src="/e4-global-navigation.js"></script>'
+NAVIGATION_SCRIPT = '<script id="e4-global-navigation-script" type="module" src="/src/e4-global-navigation.js"></script>'
 
 body_re = re.compile(r'<body class="([^"]*)">', re.IGNORECASE)
 
@@ -398,7 +398,9 @@ for path in TARGETS:
     else:
         text = text.rstrip() + '\n' + SCRIPT_BLOCK + '\n'
 
-    if 'id="e4-global-navigation-script"' not in text:
+    if 'id="e4-global-navigation-script"' in text:
+        text = re.sub(r'<script id="e4-global-navigation-script".*?</script>', NAVIGATION_SCRIPT, text, flags=re.DOTALL)
+    else:
         if '</body>' in text:
             text = text.replace('</body>', NAVIGATION_SCRIPT + '</body>')
         elif '</html>' in text:
