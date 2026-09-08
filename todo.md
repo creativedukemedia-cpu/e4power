@@ -302,3 +302,5 @@
 - [x] Compare Client Success testimonials with the original E4Power homepage Elevate testimonials and identify the presentation difference.
 - [x] Restore the original testimonial presentation and content treatment on the Client Success page without adding substitute copy or layouts.
 - [x] Verify the restored Client Success testimonials across desktop and mobile before publishing.
+- [x] Remove the complete Client Success and Elevate content block from the homepage while retaining the standalone Client Success page and navigation link.
+- [x] Verify homepage continuity and independent Client Success page access across desktop and mobile before publishing.

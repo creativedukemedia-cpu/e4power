@@ -123,9 +123,7 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('Treat compact desktop-browser viewports as mobile layouts');
     expect(homepage).toContain('@media screen and (max-width:1024px)');
     expect(homepage).toContain('html,body{max-width:100%!important;overflow-x:hidden!important;}');
-    expect(homepage).toContain('#elevate .service-preview-grid{grid-template-columns:1fr!important;gap:1rem!important;}');
-    expect(homepage).toContain('#elevate .mask.w-slider-mask{display:flex!important;height:auto!important;overflow:visible!important;flex-direction:column!important;white-space:normal!important;}');
-    expect(homepage).toContain('#elevate .testimonial-slide-wrapper.w-slide{position:relative!important;float:none!important;');
+    expect(homepage).toContain('#empower.bridge-program-section .bridge-orbit{aspect-ratio:1.42/1!important;}');
   });
 
   it("embeds the requested LinkedIn feed in an open E4Power-styled homepage section", () => {
@@ -262,5 +260,14 @@ describe("theme toggle markup", () => {
     expect(clientSuccessPage).toContain('position:sticky;top:0;');
     expect(clientSuccessPage).toContain('.client-success-nav-links a:nth-child(3){display:none;}');
     expect(clientSuccessPage).toContain('.client-success-nav .e4-search-link{color:#f8f4ec!important;}');
+  });
+
+  it("keeps Client Success content exclusive to the independent page rather than duplicating it on the homepage", () => {
+    expect(homepage).not.toMatch(/<section[^>]*id="elevate"/);
+    expect(homepage).not.toContain('Celebrating Our Clients\' Success');
+    expect(homepage).not.toContain('Proposals Funded');
+    expect(globalNavigation).toContain("link.href = '/client-success/'");
+    expect(clientSuccessPage).toContain('Celebrating Our Clients\' Success');
+    expect(clientSuccessPage).toContain('Proposals Funded');
   });
 });
