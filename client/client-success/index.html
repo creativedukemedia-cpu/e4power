@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Client Success | E4 Power" />
     <title>Client Success | E4 Power</title>
     <style>
@@ -10,6 +10,7 @@
       *{box-sizing:border-box;}
       html{background:#090908;}
       body{margin:0;min-width:320px;background:#090908;color:#f8f4ec;}
+      a{color:inherit;}
       .client-success-nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;min-height:5rem;padding:1rem clamp(1rem,4vw,4.25rem);background:rgba(9,9,8,.96);border-bottom:1px solid rgba(237,190,89,.28);backdrop-filter:blur(18px);}
       .client-success-brand{display:inline-flex;align-items:center;gap:.85rem;color:#f8f4ec;text-decoration:none;font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.76rem;}
       .client-success-brand img{display:block;width:2.35rem;height:2.35rem;object-fit:contain;}
@@ -17,23 +18,29 @@
       .client-success-nav-links a{color:#f8f4ec;text-decoration:none;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;}
       .client-success-nav-links a:hover,.client-success-nav-links a:focus-visible{color:#edbe59;}
       .client-success-nav .e4-search-link{color:#f8f4ec!important;}
-      .client-success-page-intro{padding:clamp(4.5rem,9vw,8.5rem) clamp(1rem,6vw,6.5rem) clamp(2.5rem,5vw,4.5rem);background:radial-gradient(circle at 78% 10%,rgba(237,190,89,.18),transparent 32%),#090908;}
-      .client-success-page-intro p{margin:0 0 1rem;color:#edbe59;font-size:clamp(.68rem,1vw,.82rem);font-weight:800;letter-spacing:.22em;text-transform:uppercase;}
-      .client-success-page-intro h1{max-width:17ch;margin:0;color:#f8f4ec;font-size:clamp(3rem,8vw,7.5rem);line-height:.92;letter-spacing:-.065em;text-transform:uppercase;}
-      .client-success-page-intro h1 span{color:#edbe59;}
-      #client-success-content{min-height:42rem;background:#2d2d2b;}
-      #client-success-content .section{scroll-margin-top:6.5rem;}
-      .client-success-loading{display:grid;min-height:42rem;place-items:center;padding:2rem;color:#f8f4ec;font-size:.8rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;}
-      .client-success-error{max-width:46rem;margin:0 auto;padding:5rem 1.5rem;color:#f8f4ec;text-align:center;}
-      .client-success-error a{color:#edbe59;}
-      @media (max-width:720px){
-        .client-success-nav{min-height:4.5rem;padding:.8rem 1rem;}
-        .client-success-brand span{display:none;}
-        .client-success-nav-links{gap:.85rem;}
-        .client-success-nav-links a{font-size:.62rem;letter-spacing:.08em;}
-        .client-success-nav-links a:nth-child(3){display:none;}
-        .client-success-page-intro{padding:4.25rem 1.25rem 2.75rem;}
-      }
+      .client-success-hero{padding:clamp(4.5rem,9vw,8.5rem) clamp(1rem,6vw,6.5rem) clamp(2.5rem,5vw,4.5rem);background:radial-gradient(circle at 78% 10%,rgba(237,190,89,.18),transparent 32%),#090908;}
+      .eyebrow{margin:0 0 1rem;color:#edbe59;font-size:clamp(.68rem,1vw,.82rem);font-weight:800;letter-spacing:.22em;text-transform:uppercase;}
+      .client-success-hero h1{max-width:17ch;margin:0;color:#f8f4ec;font-size:clamp(3rem,8vw,7.5rem);line-height:.92;letter-spacing:-.065em;text-transform:uppercase;}
+      .client-success-hero h1 span{color:#edbe59;}
+      .client-success-shell{max-width:1280px;margin:0 auto;padding:clamp(3.25rem,7vw,7rem) clamp(1.25rem,5vw,4.5rem) clamp(4.5rem,10vw,9rem);}
+      .section-label{display:flex;align-items:center;gap:1rem;margin:0 0 3rem;color:#edbe59;font-size:.74rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;}
+      .section-label::after{content:"";display:block;width:min(22vw,13rem);height:1px;background:rgba(248,244,236,.46);}
+      .intro-grid{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:clamp(1.5rem,5vw,5.5rem);align-items:center;}
+      .intro-copy h2,.funding-copy h2{margin:0;color:#f8f4ec;font-size:clamp(2rem,4.3vw,4.5rem);line-height:.98;letter-spacing:-.045em;text-transform:uppercase;}
+      .intro-copy h2 span{color:#edbe59;}
+      .intro-copy p,.funding-copy p{max-width:40rem;margin:1.5rem 0 0;color:#e8e0d5;font-size:clamp(1rem,1.3vw,1.2rem);line-height:1.7;}
+      .intro-media{margin:0;min-width:0;}
+      .intro-media img{display:block;width:100%;min-height:19rem;object-fit:cover;}
+      .testimonials-section{margin-top:clamp(4rem,9vw,9rem);}
+      .testimonials-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(237,190,89,.3);}
+      .testimonial{display:flex;min-height:17rem;flex-direction:column;justify-content:space-between;padding:clamp(1.5rem,3vw,3rem);background:#151411;}
+      .testimonial p{margin:0;color:#f8f4ec;font-size:clamp(1rem,1.35vw,1.18rem);line-height:1.65;}
+      .testimonial footer{margin-top:2rem;color:#edbe59;font-size:.75rem;font-style:normal;font-weight:800;letter-spacing:.08em;line-height:1.5;text-transform:uppercase;}
+      .funding-section{display:grid;grid-template-columns:minmax(0,.95fr) minmax(16rem,.85fr);gap:clamp(2rem,7vw,7rem);align-items:center;margin-top:clamp(4rem,10vw,10rem);padding-top:clamp(3rem,7vw,6rem);border-top:1px solid rgba(237,190,89,.32);}
+      .agency-marks{display:grid;grid-template-columns:repeat(3,minmax(4rem,1fr));gap:1.25rem;align-items:center;}
+      .agency-marks img{display:block;width:100%;max-height:7.5rem;object-fit:contain;filter:none;opacity:1;}
+      @media (max-width:850px){.intro-grid,.funding-section{grid-template-columns:1fr;}.intro-media{order:-1;}.testimonials-list{grid-template-columns:1fr;}.agency-marks{max-width:32rem;}.section-label{margin-bottom:2rem;}}
+      @media (max-width:720px){.client-success-nav{min-height:4.5rem;padding:.8rem 1rem;}.client-success-brand span{display:none;}.client-success-nav-links{gap:.85rem;}.client-success-nav-links a{font-size:.62rem;letter-spacing:.08em;}.client-success-nav-links a:nth-child(3){display:none;}.client-success-hero{padding:4.25rem 1.25rem 2.75rem;}.intro-media img{min-height:15rem;}.agency-marks{grid-template-columns:repeat(2,minmax(4rem,1fr));}}
     </style>
   </head>
   <body>
@@ -49,37 +56,44 @@
       </nav>
     </header>
     <main>
-      <section class="client-success-page-intro" aria-labelledby="client-success-title">
-        <p>Elevate</p>
+      <section class="client-success-hero" aria-labelledby="client-success-title">
+        <p class="eyebrow">Elevate</p>
         <h1 id="client-success-title">Client <span>Success</span></h1>
       </section>
-      <div id="client-success-content" aria-live="polite">
-        <div class="client-success-loading">Loading client success</div>
+      <div class="client-success-shell">
+        <p class="section-label">Celebrating Our Clients' Success</p>
+        <section class="intro-grid" aria-labelledby="celebrating-client-success">
+          <div class="intro-copy">
+            <h2 id="celebrating-client-success">Celebrating <span>Client Success</span></h2>
+            <p>At E4 we create pathways to sustainable growth for a client base that spans educational institutions, non-profit organizations, and private industry companies. Through our BRIDGE model as well as individual collaborations, we enable our clients to execute thier vision to the fullest extent.</p>
+          </div>
+          <figure class="intro-media">
+            <img alt="E4 Power client success" src="https://cdn.prod.website-files.com/68ba0532388ab756f96c84d5/68d8811dee8e329fe0f879dc_elevate%20picture.webp" />
+          </figure>
+        </section>
+        <section class="testimonials-section" aria-label="Client testimonials">
+          <div class="testimonials-list">
+            <article class="testimonial"><p>As a key partner in the 2025 AMIE Resilience Hub with LADWP, E4 Power helped Tennessee State University deliver a transformative experience for 15 HBCU engineering students, providing professional development and inspiring the next generation of leaders.</p><footer>Dr. Catherine Armwood, Ph.D., A.M.ASCE | Tennessee State University</footer></article>
+            <article class="testimonial"><p>Working with E4 Power was a transformative experience. Their expert guidance made the grant writing process seamless, helping me secure my first NSF grant on the first submission the institution’s first in over 20 years.</p><footer>Pamleya Brady | Talladega College</footer></article>
+            <article class="testimonial"><p>My experience with E4 Power has been consistently positive. Their consultants bring exceptional professionalism and structure to the proposal development process, providing valuable insight that enhances both efficiency and competitiveness. E4 Power’s expertise continues to strengthen our organization’s research capacity and streamline complex submissions. We look forward to collaborating with them on future opportunities.</p><footer>Clyde Varner | Alabama A&amp;M University</footer></article>
+            <article class="testimonial"><p>My experience with E4 Power was overwhelmingly positive. They provided exceptional service and truly dedicated consultants who guided me through the entire grant process. With their support, I successfully submitted my first proposal following a STEM leadership workshop, and after being awarded, E4 Power played a key role in implementing the program. I would absolutely work with E4 Power again, as their partnership has had a meaningful impact on expanding opportunities within my organization.</p><footer>Loretta D. Westry, Ph.D. | Miles College</footer></article>
+          </div>
+        </section>
+        <section class="funding-section" aria-labelledby="proposals-funded-title">
+          <div class="funding-copy">
+            <h2 id="proposals-funded-title">Proposals Funded</h2>
+            <p>We empower our clients by turning vision into reality. We have successfully secured funding for our partners by writing, submitting, advocating, team building, and evaluating compelling grant and contract proposals on their behalf or in conjunction with them in the areas shown (not an exhaustive list). Our expertise extends to navigating complex opportunities with major federal agencies and state agencies.</p>
+          </div>
+          <div class="agency-marks" aria-label="Funding agencies">
+            <img alt="United States Department of Defense" src="https://cdn.prod.website-files.com/68ba0532388ab756f96c84d5/68d89a9c8726a885fd299125_Seal_of_the_United_States_Department_of_Defense.svg" />
+            <img alt="United States Department of Energy" src="https://cdn.prod.website-files.com/68ba0532388ab756f96c84d5/68d89a9bcc987492d4ca4fa3_Seal_of_the_United_States_Department_of_Energy.svg" />
+            <img alt="United States Department of Education" src="https://cdn.prod.website-files.com/68ba0532388ab756f96c84d5/68d89a9be8c10b04a7b77862_Seal_of_the_United_States_Department_of_Education.svg" />
+            <img alt="United States Department of Labor" src="https://cdn.prod.website-files.com/68ba0532388ab756f96c84d5/68d89a9b7ca91f74c1f3bf08_Seal_of_the_United_States_Department_of_Labor.svg" />
+            <img alt="National Science Foundation" src="https://cdn.prod.website-files.com/68ba0532388ab756f96c84d5/68d89a9b16786469feac1af8_NSF_logo.svg" />
+          </div>
+        </section>
       </div>
     </main>
     <script id="e4-global-navigation-script" type="module" src="/src/e4-global-navigation.js"></script>
-    <script>
-      (async function renderClientSuccess(){
-        const host=document.getElementById('client-success-content');
-        try{
-          const response=await fetch('/index.html',{credentials:'same-origin'});
-          if(!response.ok)throw new Error('Unable to load the client success content.');
-          const source=new DOMParser().parseFromString(await response.text(),'text/html');
-          source.querySelectorAll('link[rel="stylesheet"],style').forEach(function(node){
-            const key=node.href||node.id||node.textContent.slice(0,80);
-            const exists=[...document.head.querySelectorAll('link[rel="stylesheet"],style')].some(function(existing){return (existing.href||existing.id||existing.textContent.slice(0,80))===key;});
-            if(!exists)document.head.appendChild(node.cloneNode(true));
-          });
-          const elevate=source.getElementById('elevate');
-          if(!elevate)throw new Error('Client success content is unavailable.');
-          elevate.removeAttribute('id');
-          elevate.id='client-success-elevate';
-          elevate.querySelectorAll('[style*="opacity: 0"]').forEach(function(node){node.style.opacity='1';});
-          host.replaceChildren(elevate);
-        }catch(error){
-          host.innerHTML='<div class="client-success-error"><p>The Client Success page is temporarily unavailable.</p><a href="/">Return home</a></div>';
-        }
-      })();
-    </script>
   </body>
 </html>

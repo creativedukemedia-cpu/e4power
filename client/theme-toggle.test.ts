@@ -239,11 +239,18 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('No results found for');
   });
 
-  it("creates an independent Client Success page by reusing the existing homepage Elevate section", () => {
+  it("creates a stable Client Success page from the intended homepage Elevate content", () => {
     expect(clientSuccessPage).toContain('<title>Client Success | E4 Power</title>');
     expect(clientSuccessPage).toContain('Client <span>Success</span>');
-    expect(clientSuccessPage).toContain("source.getElementById('elevate')");
-    expect(clientSuccessPage).toContain("elevate.id='client-success-elevate'");
+    expect(clientSuccessPage).toContain('Celebrating Our Clients\' Success');
+    expect(clientSuccessPage).toContain('Celebrating <span>Client Success</span>');
+    expect(clientSuccessPage).toContain('68d8811dee8e329fe0f879dc_elevate%20picture.webp');
+    expect(clientSuccessPage).toContain('Dr. Catherine Armwood, Ph.D., A.M.ASCE | Tennessee State University');
+    expect(clientSuccessPage).toContain('Proposals Funded');
+    expect(clientSuccessPage).toContain('.agency-marks img{display:block;width:100%;max-height:7.5rem;object-fit:contain;filter:none;opacity:1;}');
+    expect(clientSuccessPage).not.toContain('Broader Services in Elevate');
+    expect(clientSuccessPage).not.toContain('Execution Services that Protect Awarded Work');
+    expect(clientSuccessPage).not.toContain("fetch('/index.html'");
     expect(clientSuccessPage).toContain('type="module" src="/src/e4-global-navigation.js"');
     expect(clientSuccessPage).toContain('position:sticky;top:0;');
     expect(clientSuccessPage).toContain('.client-success-nav-links a:nth-child(3){display:none;}');
