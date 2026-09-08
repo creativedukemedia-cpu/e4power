@@ -299,3 +299,6 @@
 - [x] Investigate the malformed Client Success page layout, missing images, and unintended generated content on the live site.
 - [x] Replace the dynamic Client Success content extraction with a stable Elevate-only implementation that preserves the intended layout and media.
 - [x] Test the corrected Client Success page on desktop and mobile in preview and directly on both published domains.
+- [x] Compare Client Success testimonials with the original E4Power homepage Elevate testimonials and identify the presentation difference.
+- [x] Restore the original testimonial presentation and content treatment on the Client Success page without adding substitute copy or layouts.
+- [x] Verify the restored Client Success testimonials across desktop and mobile before publishing.

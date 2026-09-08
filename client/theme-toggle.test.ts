@@ -248,6 +248,13 @@ describe("theme toggle markup", () => {
     expect(clientSuccessPage).toContain('Dr. Catherine Armwood, Ph.D., A.M.ASCE | Tennessee State University');
     expect(clientSuccessPage).toContain('Proposals Funded');
     expect(clientSuccessPage).toContain('.agency-marks img{display:block;width:100%;max-height:7.5rem;object-fit:contain;filter:none;opacity:1;}');
+    expect(clientSuccessPage).toContain('class="testimonial-track" data-testimonial-track');
+    expect(clientSuccessPage).toContain('class="testimonial-text-div"');
+    expect(clientSuccessPage).toContain('background:rgba(255,255,255,.97);color:#333;');
+    expect(clientSuccessPage).toContain('data-testimonial-next');
+    expect(clientSuccessPage).toContain('id="client-success-testimonial-carousel"');
+    expect(clientSuccessPage).toContain('@media (max-width:1024px){.intro-grid,.funding-section{grid-template-columns:1fr;}.intro-media{order:-1;}.testimonial-viewport{overflow:visible;}.testimonial-track{flex-direction:column;transform:none!important;}');
+    expect(clientSuccessPage).not.toContain('.testimonials-list{display:grid');
     expect(clientSuccessPage).not.toContain('Broader Services in Elevate');
     expect(clientSuccessPage).not.toContain('Execution Services that Protect Awarded Work');
     expect(clientSuccessPage).not.toContain("fetch('/index.html'");

@@ -31,15 +31,20 @@
       .intro-copy p,.funding-copy p{max-width:40rem;margin:1.5rem 0 0;color:#e8e0d5;font-size:clamp(1rem,1.3vw,1.2rem);line-height:1.7;}
       .intro-media{margin:0;min-width:0;}
       .intro-media img{display:block;width:100%;min-height:19rem;object-fit:cover;}
-      .testimonials-section{margin-top:clamp(4rem,9vw,9rem);}
-      .testimonials-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(237,190,89,.3);}
-      .testimonial{display:flex;min-height:17rem;flex-direction:column;justify-content:space-between;padding:clamp(1.5rem,3vw,3rem);background:#151411;}
-      .testimonial p{margin:0;color:#f8f4ec;font-size:clamp(1rem,1.35vw,1.18rem);line-height:1.65;}
-      .testimonial footer{margin-top:2rem;color:#edbe59;font-size:.75rem;font-style:normal;font-weight:800;letter-spacing:.08em;line-height:1.5;text-transform:uppercase;}
+      .testimonials-section{--testimonial-gap:clamp(1.5rem,3vw,2.4rem);position:relative;margin-top:clamp(4rem,9vw,9rem);}
+      .testimonial-viewport{overflow:hidden;}
+      .testimonial-track{display:flex;align-items:flex-start;gap:var(--testimonial-gap);transition:transform .5s cubic-bezier(.23,1,.32,1);will-change:transform;}
+      .testimonial{display:flex;flex:0 0 min(27rem,calc(100% - 1rem));min-height:26.5rem;flex-direction:column;background:#000;}
+      .testimonial-text-div{display:flex;flex:1;align-items:flex-start;padding:clamp(2rem,3.5vw,3.75rem) clamp(1.75rem,3.5vw,3rem);}
+      .testimonial p{margin:0;color:rgba(255,255,255,.97);font-size:clamp(1rem,1.63vw,1.3rem);font-weight:500;line-height:1.3;}
+      .testimonial footer{display:flex;min-height:3.55rem;align-items:center;margin:0;padding:.6rem clamp(1.25rem,3vw,3rem);background:rgba(255,255,255,.97);color:#333;font-size:.75rem;font-style:normal;font-weight:800;letter-spacing:.03em;line-height:1.35;text-transform:uppercase;}
+      .testimonial-next{position:absolute;z-index:2;top:50%;right:clamp(.35rem,1vw,1rem);display:grid;width:3.35rem;height:3.35rem;place-items:center;transform:translateY(-50%);border:0;background:transparent;color:#fff;cursor:pointer;transition:transform 160ms cubic-bezier(.23,1,.32,1),opacity 160ms ease-out;}
+      .testimonial-next:hover,.testimonial-next:focus-visible{transform:translateY(-50%) scale(1.06);}.testimonial-next:active{transform:translateY(-50%) scale(.97);}.testimonial-next:focus-visible{outline:2px solid #edbe59;outline-offset:3px;}
+      .testimonial-next img{display:block;width:100%;height:100%;object-fit:contain;}
       .funding-section{display:grid;grid-template-columns:minmax(0,.95fr) minmax(16rem,.85fr);gap:clamp(2rem,7vw,7rem);align-items:center;margin-top:clamp(4rem,10vw,10rem);padding-top:clamp(3rem,7vw,6rem);border-top:1px solid rgba(237,190,89,.32);}
       .agency-marks{display:grid;grid-template-columns:repeat(3,minmax(4rem,1fr));gap:1.25rem;align-items:center;}
       .agency-marks img{display:block;width:100%;max-height:7.5rem;object-fit:contain;filter:none;opacity:1;}
-      @media (max-width:850px){.intro-grid,.funding-section{grid-template-columns:1fr;}.intro-media{order:-1;}.testimonials-list{grid-template-columns:1fr;}.agency-marks{max-width:32rem;}.section-label{margin-bottom:2rem;}}
+      @media (max-width:1024px){.intro-grid,.funding-section{grid-template-columns:1fr;}.intro-media{order:-1;}.testimonial-viewport{overflow:visible;}.testimonial-track{flex-direction:column;transform:none!important;}.testimonial{flex:0 0 auto;width:100%;min-height:0;}.testimonial-text-div{min-height:0;}.testimonial-next{display:none;}.agency-marks{max-width:32rem;}.section-label{margin-bottom:2rem;}}
       @media (max-width:720px){.client-success-nav{min-height:4.5rem;padding:.8rem 1rem;}.client-success-brand span{display:none;}.client-success-nav-links{gap:.85rem;}.client-success-nav-links a{font-size:.62rem;letter-spacing:.08em;}.client-success-nav-links a:nth-child(3){display:none;}.client-success-hero{padding:4.25rem 1.25rem 2.75rem;}.intro-media img{min-height:15rem;}.agency-marks{grid-template-columns:repeat(2,minmax(4rem,1fr));}}
     </style>
   </head>
@@ -72,12 +77,15 @@
           </figure>
         </section>
         <section class="testimonials-section" aria-label="Client testimonials">
-          <div class="testimonials-list">
-            <article class="testimonial"><p>As a key partner in the 2025 AMIE Resilience Hub with LADWP, E4 Power helped Tennessee State University deliver a transformative experience for 15 HBCU engineering students, providing professional development and inspiring the next generation of leaders.</p><footer>Dr. Catherine Armwood, Ph.D., A.M.ASCE | Tennessee State University</footer></article>
-            <article class="testimonial"><p>Working with E4 Power was a transformative experience. Their expert guidance made the grant writing process seamless, helping me secure my first NSF grant on the first submission the institution’s first in over 20 years.</p><footer>Pamleya Brady | Talladega College</footer></article>
-            <article class="testimonial"><p>My experience with E4 Power has been consistently positive. Their consultants bring exceptional professionalism and structure to the proposal development process, providing valuable insight that enhances both efficiency and competitiveness. E4 Power’s expertise continues to strengthen our organization’s research capacity and streamline complex submissions. We look forward to collaborating with them on future opportunities.</p><footer>Clyde Varner | Alabama A&amp;M University</footer></article>
-            <article class="testimonial"><p>My experience with E4 Power was overwhelmingly positive. They provided exceptional service and truly dedicated consultants who guided me through the entire grant process. With their support, I successfully submitted my first proposal following a STEM leadership workshop, and after being awarded, E4 Power played a key role in implementing the program. I would absolutely work with E4 Power again, as their partnership has had a meaningful impact on expanding opportunities within my organization.</p><footer>Loretta D. Westry, Ph.D. | Miles College</footer></article>
+          <div class="testimonial-viewport">
+            <div class="testimonial-track" data-testimonial-track>
+              <article class="testimonial" data-testimonial-card><div class="testimonial-text-div"><p>As a key partner in the 2025 AMIE Resilience Hub with LADWP, E4 Power helped Tennessee State University deliver a transformative experience for 15 HBCU engineering students, providing professional development and inspiring the next generation of leaders.</p></div><footer>- Dr. Catherine Armwood, Ph.D., A.M.ASCE | Tennessee State University</footer></article>
+              <article class="testimonial" data-testimonial-card><div class="testimonial-text-div"><p>Working with E4 Power was a transformative experience. Their expert guidance made the grant writing process seamless, helping me secure my first NSF grant on the first submission the institution’s first in over 20 years.</p></div><footer>- Pamleya Brady | Talladega College</footer></article>
+              <article class="testimonial" data-testimonial-card><div class="testimonial-text-div"><p>My experience with E4 Power has been consistently positive. Their consultants bring exceptional professionalism and structure to the proposal development process, providing valuable insight that enhances both efficiency and competitiveness. E4 Power’s expertise continues to strengthen our organization’s research capacity and streamline complex submissions. We look forward to collaborating with them on future opportunities.</p></div><footer>- Clyde Varner | Alabama A&amp;M University</footer></article>
+              <article class="testimonial" data-testimonial-card><div class="testimonial-text-div"><p>My experience with E4 Power was overwhelmingly positive. They provided exceptional service and truly dedicated consultants who guided me through the entire grant process. With their support, I successfully submitted my first proposal following a STEM leadership workshop, and after being awarded, E4 Power played a key role in implementing the program. I would absolutely work with E4 Power again, as their partnership has had a meaningful impact on expanding opportunities within my organization.</p></div><footer>- Loretta D. Westry, Ph.D. | Miles College</footer></article>
+            </div>
           </div>
+          <button class="testimonial-next" type="button" data-testimonial-next aria-label="Show next client testimonial"><img src="https://cdn.prod.website-files.com/68ba0532388ab756f96c84d5/68d88744b6033920cd0ca6f4_right%20arrow.svg" alt="" /></button>
         </section>
         <section class="funding-section" aria-labelledby="proposals-funded-title">
           <div class="funding-copy">
@@ -94,6 +102,28 @@
         </section>
       </div>
     </main>
+    <script id="client-success-testimonial-carousel">
+      (() => {
+        const section = document.querySelector('.testimonials-section');
+        const track = section?.querySelector('[data-testimonial-track]');
+        const cards = track ? [...track.querySelectorAll('[data-testimonial-card]')] : [];
+        const next = section?.querySelector('[data-testimonial-next]');
+        let index = 0;
+        const isCompact = () => window.matchMedia('(max-width: 1024px)').matches;
+        const render = () => {
+          if (!track || !cards.length || isCompact()) return;
+          const gap = parseFloat(getComputedStyle(track).gap) || 0;
+          const step = cards[0].getBoundingClientRect().width + gap;
+          track.style.transform = `translateX(${-index * step}px)`;
+        };
+        next?.addEventListener('click', () => {
+          index = (index + 1) % cards.length;
+          render();
+        });
+        window.addEventListener('resize', render, { passive: true });
+        render();
+      })();
+    </script>
     <script id="e4-global-navigation-script" type="module" src="/src/e4-global-navigation.js"></script>
   </body>
 </html>
