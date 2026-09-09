@@ -310,3 +310,7 @@
 - [x] Remove the subtle outline treatment from all boxes in the E4 Power contact inquiry form.
 - [x] Remove the pretext above the contact inquiry form header while retaining the clear form title and routing questions.
 - [x] Verify the refined contact form remains visually clear and functional across desktop and mobile before publishing.
+- [x] Remove the subtle background color from the E4 Power inquiry form surface.
+- [x] Replace the gold square backgrounds behind each inquiry-step number with gold number text.
+- [x] Add a clear down-arrow indicator at the right side of each inquiry-form dropdown.
+- [x] Verify the refined form surface, numbered steps, and dropdown controls across desktop and mobile before publishing.

@@ -291,4 +291,14 @@ describe("theme toggle markup", () => {
     expect(contactPage).toContain('box-shadow:0 0 0 3px rgba(226,178,76,.5)!important');
     expect(contactPage).not.toContain('<div class="e4-inquiry-kicker">E4 Power inquiry</div>');
   });
+
+  it("uses a transparent inquiry surface, gold step numbers, and explicit dropdown arrows", () => {
+    const contactPage = fs.readFileSync(path.join(clientRoot, 'contact-us', 'index.html'), 'utf8');
+    expect(contactPage).toContain('id="e4-inquiry-control-refinement"');
+    expect(contactPage).toContain('.e4-inquiry-form,.e4-inquiry-success{background:transparent!important}');
+    expect(contactPage).toContain('background:transparent!important;color:#e2b24c!important;font-size:1rem!important');
+    expect(contactPage).toContain('class="e4-inquiry-select-wrap"');
+    expect(contactPage).toContain(".e4-inquiry-select-wrap::after{content:'↓'");
+    expect(contactPage).toContain('.e4-inquiry-select-wrap select{background-image:none!important;padding-right:3.25rem!important}');
+  });
 });
