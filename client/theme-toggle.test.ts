@@ -273,7 +273,7 @@ describe("theme toggle markup", () => {
 
   it("builds the branded three-question inquiry form with a persisted routing submission", () => {
     const contactPage = fs.readFileSync(path.join(clientRoot, 'contact-us', 'index.html'), 'utf8');
-    expect(contactPage).toContain('E4 Power inquiry');
+    expect(contactPage).toContain('Start a <span>Conversation</span>');
     expect(contactPage).toContain('What are you reaching out to E4 Power about');
     expect(contactPage).toContain('What type of organization do you represent');
     expect(contactPage).toContain('What would you like E4 Power to help you accomplish');
@@ -281,5 +281,14 @@ describe("theme toggle markup", () => {
     expect(contactPage).toContain('Government / Defense / HBCU Engagement');
     expect(contactPage).toContain("fetch('/api/contact-inquiries'");
     expect(contactPage).toContain('.e4-routing-signal[hidden],.e4-inquiry-success[hidden]{display:none!important}');
+  });
+
+  it("removes inquiry form outlines and the preheader copy while retaining visible focus feedback", () => {
+    const contactPage = fs.readFileSync(path.join(clientRoot, 'contact-us', 'index.html'), 'utf8');
+    expect(contactPage).toContain('id="e4-inquiry-minimal-surface-refinement"');
+    expect(contactPage).toContain('.e4-inquiry-form,.e4-inquiry-success{border:0!important;box-shadow:none!important}');
+    expect(contactPage).toContain('.e4-inquiry-form input,.e4-inquiry-form select,.e4-inquiry-form textarea{border:0!important;box-shadow:none!important;');
+    expect(contactPage).toContain('box-shadow:0 0 0 3px rgba(226,178,76,.5)!important');
+    expect(contactPage).not.toContain('<div class="e4-inquiry-kicker">E4 Power inquiry</div>');
   });
 });

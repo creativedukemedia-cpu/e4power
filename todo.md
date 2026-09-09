@@ -307,3 +307,6 @@
 - [x] Replace the contact experience with an E4 Power branded three-question inquiry form covering service need, organization type, and desired outcome.
 - [x] Add accessible validation, responsive behavior, and internal routing guidance driven by the selected inquiry category.
 - [x] Test the new contact inquiry flow across desktop and mobile before publishing.
+- [x] Remove the subtle outline treatment from all boxes in the E4 Power contact inquiry form.
+- [x] Remove the pretext above the contact inquiry form header while retaining the clear form title and routing questions.
+- [x] Verify the refined contact form remains visually clear and functional across desktop and mobile before publishing.
