@@ -314,3 +314,7 @@
 - [x] Replace the gold square backgrounds behind each inquiry-step number with gold number text.
 - [x] Add a clear down-arrow indicator at the right side of each inquiry-form dropdown.
 - [x] Verify the refined form surface, numbered steps, and dropdown controls across desktop and mobile before publishing.
+- [x] Create an independent About Us page using the current homepage Engage and Team content and presentation exactly as it exists.
+- [x] Remove the relocated Engage and Team sections from the homepage without changing the independent About Us content.
+- [x] Add About Us to the shared desktop and mobile navigation.
+- [x] Verify the About Us page, homepage continuity, and responsive navigation across desktop and mobile before publishing.

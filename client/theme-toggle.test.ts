@@ -14,6 +14,8 @@ const clientSuccessPath = path.join(clientRoot, "client-success", "index.html");
 const clientSuccessPage = fs.readFileSync(clientSuccessPath, "utf8");
 const searchPagePath = path.join(clientRoot, "search", "index.html");
 const searchPage = fs.readFileSync(searchPagePath, "utf8");
+const aboutUsPath = path.join(clientRoot, "about-us", "index.html");
+const aboutUsPage = fs.readFileSync(aboutUsPath, "utf8");
 const globalNavigationPath = path.join(clientRoot, "src", "e4-global-navigation.js");
 const globalNavigation = fs.readFileSync(globalNavigationPath, "utf8");
 
@@ -126,20 +128,19 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('#empower.bridge-program-section .bridge-orbit{aspect-ratio:1.42/1!important;}');
   });
 
-  it("embeds the requested LinkedIn feed in an open E4Power-styled homepage section", () => {
-    expect(homepage).toContain('id="linkedin-feed-section-script"');
-    expect(homepage).toContain('elfsight-app-47c25495-5abf-415f-99ee-fb9ad001b53a');
-    expect(homepage).toContain('https://elfsightcdn.com/platform.js');
-    expect(homepage).toContain('id="linkedin-feed-heading"');
-    expect(homepage).toContain('E4Power <span>on LinkedIn</span>');
-    expect(homepage).toContain('LinkedIn is presented as an open editorial section');
-    expect(homepage).not.toContain('E4Power —');
+  it("embeds the requested LinkedIn feed in the relocated About Us content", () => {
+    expect(aboutUsPage).toContain('elfsight-app-47c25495-5abf-415f-99ee-fb9ad001b53a');
+    expect(aboutUsPage).toContain('https://elfsightcdn.com/platform.js');
+    expect(aboutUsPage).toContain('id="linkedin-feed-heading"');
+    expect(aboutUsPage).toContain('E4Power <span>on LinkedIn</span>');
+    expect(aboutUsPage).not.toContain('E4Power —');
+    expect(homepage).not.toContain('id="linkedin-feed-section-script"');
   });
 
-  it("moves the LinkedIn feed below the Team section after dynamic homepage sections are constructed", () => {
-    expect(homepage).toContain('id="linkedin-feed-placement-script"');
-    expect(homepage).toContain("var feed=document.getElementById('linkedin-feed');var team=document.getElementById('engage')");
-    expect(homepage).toContain('team.parentNode.insertBefore(feed,team.nextSibling)');
+  it("keeps the LinkedIn feed directly after the relocated Team section", () => {
+    expect(aboutUsPage.indexOf('id="engage"')).toBeLessThan(aboutUsPage.indexOf('id="linkedin-feed"'));
+    expect(homepage).not.toContain('id="linkedin-feed-placement-script"');
+    expect(homepage).not.toContain('id="engage"');
   });
 
   it("guards the known third-party ResizeObserver notification loop without masking other errors", () => {
@@ -300,5 +301,22 @@ describe("theme toggle markup", () => {
     expect(contactPage).toContain('class="e4-inquiry-select-wrap"');
     expect(contactPage).toContain(".e4-inquiry-select-wrap::after{content:'↓'");
     expect(contactPage).toContain('.e4-inquiry-select-wrap select{background-image:none!important;padding-right:3.25rem!important}');
+  });
+
+  it("provides an independent About Us page that preserves the homepage Engage team presentation", () => {
+    const homepage = fs.readFileSync(path.join(clientRoot, 'index.html'), 'utf8');
+    const aboutPage = fs.readFileSync(path.join(clientRoot, 'about-us', 'index.html'), 'utf8');
+    const navigation = fs.readFileSync(path.join(clientRoot, 'src', 'e4-global-navigation.js'), 'utf8');
+    expect(homepage).not.toContain('<section class="section dark-gray" id="engage"');
+    expect(homepage).not.toContain('id="linkedin-feed-section-script"');
+    expect(aboutPage).toContain('<section class="section dark-gray" id="engage"');
+    expect(aboutPage).toContain('Meet the experts behind your success');
+    expect(aboutPage).toContain('<section id="linkedin-feed" class="section linkedin-feed-section"');
+    expect(aboutPage).toContain('class="elfsight-app-47c25495-5abf-415f-99ee-fb9ad001b53a"');
+    expect(aboutPage).toContain('id="about-us-visible-content-guard"');
+    expect(aboutPage).toContain('id="about-us-linkedin-feed-style"');
+    expect(navigation).toContain("{ title: 'About Us', url: '/about-us/'");
+    expect(navigation).toContain('function addAboutUsNavigation');
+    expect(navigation).toContain("link.href = '/about-us/#engage';");
   });
 });

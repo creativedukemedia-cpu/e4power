@@ -3,7 +3,7 @@
   window.__e4GlobalNavigationLoaded = true;
 
   var pages = [
-    { title: 'About E4 Power', url: '/#about', keywords: 'about e4 power consulting mission team partnership' },
+    { title: 'About Us', url: '/about-us/', keywords: 'about e4 power consulting mission team partnership leadership engage' },
     { title: 'Our Services', url: '/services/', keywords: 'services consulting grant project management financial readiness technology workshops speaking' },
     { title: 'Client Success', url: '/client-success/', keywords: 'client success elevate partnership testimonials grant awards growth' },
     { title: 'The B.R.I.D.G.E. Model', url: '/#empower', keywords: 'bridge model project delivery financial subject matter expert reporting coordination compliance proposal writing' },
@@ -51,6 +51,7 @@
       body.theme-light .nav-menu-wrapper .e4-nav-search{color:#1e1a16;}\
       .e4-search-link{color:inherit!important;font-size:.7rem!important;font-weight:800!important;letter-spacing:.12em!important;text-decoration:none!important;text-transform:uppercase;}\
       .e4-client-success-link{white-space:nowrap;}\
+      .e4-about-us-link{white-space:nowrap;}\
       .e4-search-link:hover,.e4-search-link:focus-visible{color:#edbe59!important;}\
       .e4-mobile-search-link{display:none;color:inherit!important;font-size:.64rem!important;font-weight:800!important;letter-spacing:.11em!important;text-decoration:none!important;text-transform:uppercase;}\
       .e4-mobile-search-link:hover,.e4-mobile-search-link:focus-visible{color:#edbe59!important;}\
@@ -81,6 +82,53 @@
     link.textContent = 'Client Success';
     link.setAttribute('data-e4-client-success-link', 'true');
     return link;
+  }
+
+  function aboutUsLink(className) {
+    var link = document.createElement('a');
+    link.className = className || '';
+    link.href = '/about-us/';
+    link.textContent = 'About Us';
+    link.setAttribute('data-e4-about-us-link', 'true');
+    return link;
+  }
+
+  function addAboutUsNavigation(homeNav, utilityNav, menu) {
+    if (homeNav) {
+      var legacyAbout = Array.prototype.find.call(homeNav.querySelectorAll('a'), function (link) {
+        return /about\s*e4/i.test(link.textContent || '') || link.getAttribute('href') === '/#about';
+      });
+      if (legacyAbout) {
+        legacyAbout.href = '/about-us/';
+        legacyAbout.textContent = 'ABOUT US';
+        legacyAbout.classList.add('e4-about-us-link');
+        legacyAbout.setAttribute('data-e4-about-us-link', 'true');
+      } else if (!homeNav.querySelector('[data-e4-about-us-link]')) {
+        homeNav.insertBefore(aboutUsLink('e4-about-us-link'), homeNav.firstChild);
+      }
+    }
+
+    if (utilityNav && !utilityNav.querySelector('[data-e4-about-us-link]')) {
+      var utilityLink = aboutUsLink('text-link e4-about-us-link');
+      var clientLink = utilityNav.querySelector('[data-e4-client-success-link]');
+      utilityNav.insertBefore(utilityLink, clientLink || utilityNav.firstChild);
+    }
+
+    var menuList = menu && menu.querySelector('.nav-menu-two');
+    if (menuList && !menuList.querySelector('[data-e4-about-us-link]')) {
+      var item = document.createElement('li');
+      item.className = 'e4-about-us-menu-item';
+      item.appendChild(aboutUsLink('nav-link'));
+      menuList.insertBefore(item, menuList.firstChild);
+    }
+
+    [homeNav, utilityNav, menu].filter(Boolean).forEach(function (container) {
+      Array.prototype.forEach.call(container.querySelectorAll('a'), function (link) {
+        if (/our\s+team/i.test(link.textContent || '') || link.getAttribute('href') === '#engage') {
+          link.href = '/about-us/#engage';
+        }
+      });
+    });
   }
 
   function addClientSuccessNavigation(homeNav, utilityNav, menu) {
@@ -143,6 +191,7 @@
     }
 
     addClientSuccessNavigation(homeNav, utilityNav, menu);
+    addAboutUsNavigation(homeNav, utilityNav, menu);
 
     var clientNav = document.querySelector('.client-success-nav-links');
     if (clientNav && !clientNav.querySelector('.e4-search-link')) {
