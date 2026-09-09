@@ -59,73 +59,46 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('color:#fff8ef!important');
   });
 
-  it("adds an accessible interactive B.R.I.D.G.E. delivery model with six specialist roles", () => {
-    expect(homepage).toContain('id="interactive-bridge-model"');
+  it("adds an accessible branded B.R.I.D.G.E. model library with all four supplied organizational variations", () => {
+    expect(homepage).toContain('id="bridge-model-library-styles"');
     expect(homepage).toContain('id="interactive-bridge-model-script"');
-    expect(homepage).toContain('The B.R.I.D.G.E. Delivery Model');
-    expect(homepage).toContain('Financial<br>Management');
-    expect(homepage).toContain('Subject Matter<br>Expert');
-    expect(homepage).toContain('Project<br>Reporting');
-    expect(homepage).toContain('Advertisement &amp;<br>Coordination');
-    expect(homepage).toContain('Compliance<br>Monitoring');
-    expect(homepage).toContain('Proposal Development<br>&amp; Writing');
-    expect(homepage).toContain("button.addEventListener('pointerenter'");
-    expect(homepage).toContain("button.addEventListener('focus'");
-    expect(homepage).toContain("button.addEventListener('click'");
+    expect(homepage).toContain('B.R.I.D.G.E. <span>Model Library</span>');
+    expect(homepage).toContain('Traditional Structure to Enhance Growth');
+    expect(homepage).toContain('Transformative Growth to Enhancement');
+    expect(homepage).toContain("center:'PMP'");
+    expect(homepage).toContain("center:'Chief Technology Officer'");
+    expect(homepage).toContain('Assistant VP of Research');
+    expect(homepage).toContain('Grant/Content Developer');
+    expect(homepage).toContain('Proposal Development & Writing');
+    expect(homepage).toContain('Certified Patent Agent');
+    expect(homepage).toContain("control.addEventListener('pointerenter'");
+    expect(homepage).toContain("control.addEventListener('focus'");
+    expect(homepage).toContain("control.addEventListener('click'");
     expect(homepage).toContain('aria-live="polite"');
   });
 
-  it("renders the Bridge model full width with an open detail row beneath it", () => {
-    expect(homepage).toContain('id="bridge-full-width-refinement"');
-    expect(homepage).toContain('width:100vw!important');
-    expect(homepage).toContain('aspect-ratio:1.72/1!important');
-    expect(homepage).toContain('grid-template-columns:minmax(7rem,.7fr) minmax(11rem,1.1fr) minmax(15rem,1.85fr) minmax(10rem,.9fr)');
-    expect(homepage).toContain('border:0!important;background:transparent!important;box-shadow:none!important;');
+  it("displays every model on the homepage in a responsive library rather than hiding variations behind a selector", () => {
+    expect(homepage).toContain('.bridge-model-grid{display:grid;grid-template-columns:1fr;gap:clamp(1.25rem,2vw,2rem);}');
+    expect(homepage).toContain("'<article class=\"bridge-model-card\" id=\"bridge-model-'+model.id+'\">");
+    expect(homepage).toContain('models.map(cardMarkup).join');
+    expect(homepage).toContain('@media screen and (max-width:760px)');
+    expect(homepage).toContain('.bridge-model-grid{grid-template-columns:1fr;gap:1.15rem}');
   });
 
-  it("uses an inset rotating Bridge orbit with explicit wide-model geometry", () => {
-    expect(homepage).toContain('id="hero-and-bridge-geometry-rebuild"');
-    expect(homepage).toContain('aspect-ratio:2.03/1!important');
-    expect(homepage).toContain('width:44%!important;height:72%!important;left:28%!important;top:14%!important');
-    expect(homepage).toContain('width:52%!important;height:80%!important;left:24%!important;top:10%!important');
-    expect(homepage).toContain('id="bridge-reference-connector-calibration"');
-    expect(homepage).toContain('.bridge-role[data-role="financial"]{left:24%!important;top:14.4%!important;}');
-    expect(homepage).toContain('.bridge-role[data-role="coordination"]{left:76%!important;top:47.4%!important;}');
-    expect(homepage).toContain('.bridge-role[data-role="proposal"]{left:63%!important;top:76.4%!important;}');
-    expect(homepage).toContain("line.setAttribute('x1','44')");
+  it("uses one consistent branded relationship-map treatment for every supplied model", () => {
+    expect(homepage).toContain('.bridge-network-core{position:absolute');
+    expect(homepage).toContain('/manus-storage/E4-Bridge-Hub-Icon_77f4a9c8.webp');
+    expect(homepage).toContain('bridge-network-links');
+    expect(homepage).toContain('bridge-network-node');
+    expect(homepage).toContain('bridge-network-person');
+    expect(homepage).toContain('bridge-role-list');
   });
 
-  it("switches the Bridge model to responsive role cards before medium and small screens become cramped", () => {
-    expect(homepage).toContain('Responsive Bridge contract: preserve the calibrated diagram where it fits');
-    expect(homepage).toContain('@media screen and (min-width:768px) and (max-width:991px)');
-    expect(homepage).toContain('@media screen and (min-width:561px) and (max-width:767px)');
-    expect(homepage).toContain('grid-template-columns:repeat(2,minmax(0,1fr))!important');
-    expect(homepage).toContain('@media screen and (max-width:480px)');
-    expect(homepage).toContain('grid-template-columns:1fr!important');
-    expect(homepage).toContain('@media screen and (min-width:1600px)');
-  });
-
-  it("keeps the E4/PMP hub compact and preserves the orbiting figures on touch screens", () => {
-    expect(homepage).toContain('Lock the E4/PMP mark into one measured composition');
-    expect(homepage).toContain('margin:.12rem 0 0!important');
-    expect(homepage).toContain('retain the delivery map on touch devices');
-    expect(homepage).toContain('#empower.bridge-program-section .bridge-orbit{display:block!important;position:relative!important');
-    expect(homepage).toContain('#empower.bridge-program-section .bridge-role[data-role="financial"]{left:25%!important;top:18%!important;}');
-    expect(homepage).toContain('#empower.bridge-program-section .bridge-role[data-role="proposal"]{left:74%!important;top:76%!important;}');
-  });
-
-  it("shows each full specialist role name beneath its figure in the mobile circular Bridge model", () => {
-    expect(homepage).toContain('Keep every specialist identifiable inside the circular touch layout');
-    expect(homepage).toContain('top:calc(100% - .5rem)!important;left:50%!important');
-    expect(homepage).toContain('width:4.75rem!important');
-    expect(homepage).toContain('letter-spacing:0!important;line-height:1.08!important;text-align:center!important');
-  });
-
-  it("reflows the homepage at tablet-width mobile browsers instead of squeezing desktop columns", () => {
-    expect(homepage).toContain('Treat compact desktop-browser viewports as mobile layouts');
-    expect(homepage).toContain('@media screen and (max-width:1024px)');
-    expect(homepage).toContain('html,body{max-width:100%!important;overflow-x:hidden!important;}');
-    expect(homepage).toContain('#empower.bridge-program-section .bridge-orbit{aspect-ratio:1.42/1!important;}');
+  it("keeps the role labels reachable on touch devices and supports keyboard-visible interactions", () => {
+    expect(homepage).toContain('.bridge-network-node:focus-visible{outline:2px solid #fff8ef');
+    expect(homepage).toContain('.bridge-role-list button:focus-visible{outline:2px solid #fff8ef');
+    expect(homepage).toContain('.bridge-role-list{grid-template-columns:1fr;margin-top:1rem}');
+    expect(homepage).toContain("' selected in the '+model.center+' model'");
   });
 
   it("embeds the requested LinkedIn feed in the relocated About Us content", () => {
@@ -149,20 +122,12 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('event.preventDefault();event.stopImmediatePropagation();');
   });
 
-  it("uses zero Specialist Roles kerning, the supplied Bridge hub mark, and safe hero-logo clearance", () => {
+  it("uses the supplied Bridge hub mark and retains safe hero-logo clearance", () => {
     expect(homepage).toContain('id="bridge-brand-and-hero-refinement"');
-    expect(homepage).toContain('.bridge-insight-count{letter-spacing:0!important;}');
     expect(homepage).toContain('/manus-storage/E4-Bridge-Hub-Icon_77f4a9c8.webp');
-    expect(homepage).toContain('bridge-core-logo');
     expect(homepage).toContain('hero-brand-clearance');
     expect(homepage).toContain('translate:0 clamp(3.25rem,6vw,6rem)!important');
     expect(homepage).toContain('translate:0 clamp(2.15rem,9vw,3.5rem)!important');
-  });
-
-  it("keeps the supplied Bridge hub mark tightly paired with PMP", () => {
-    expect(homepage).toContain('margin:0 auto -.48rem');
-    expect(homepage).toContain('.bridge-core strong{margin-top:0!important;line-height:.92!important;}');
-    expect(homepage).toContain('.bridge-core small{margin-top:.25rem!important;}');
   });
 
   it("separates the hero seal and headline into explicit non-overlapping safe zones", () => {
