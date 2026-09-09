@@ -40,9 +40,24 @@ export const cmsContentItems = mysqlTable("cms_content_items", {
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
 
+export const contactInquiries = mysqlTable("contact_inquiries", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 160 }).notNull(),
+  email: varchar("email", { length: 320 }).notNull(),
+  inquiryTopic: varchar("inquiryTopic", { length: 160 }).notNull(),
+  organizationType: varchar("organizationType", { length: 160 }).notNull(),
+  message: text("message").notNull(),
+  routingLane: varchar("routingLane", { length: 160 }).notNull(),
+  routingReason: varchar("routingReason", { length: 255 }).notNull(),
+  status: mysqlEnum("status", ["new", "reviewed"]).default("new").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 export type CmsUser = typeof cmsUsers.$inferSelect;
 export type InsertCmsUser = typeof cmsUsers.$inferInsert;
 export type CmsContentItem = typeof cmsContentItems.$inferSelect;
 export type InsertCmsContentItem = typeof cmsContentItems.$inferInsert;
+export type ContactInquiry = typeof contactInquiries.$inferSelect;
+export type InsertContactInquiry = typeof contactInquiries.$inferInsert;

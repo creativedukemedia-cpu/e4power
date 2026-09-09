@@ -6,6 +6,7 @@ import {
   createCmsContentItem,
   createCmsUser,
   countCmsUsers,
+  createContactInquiry,
   deleteCmsContentItem,
   getCmsContentItemById,
   getCmsUserByEmail,
@@ -27,6 +28,100 @@ const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 5 * 1024 * 1024 },
 });
+
+export const inquiryRouting = {
+  'Grants, Funding Opportunities & Proposal Support': {
+    lane: 'Grants and Research Development',
+    reason: 'Funding opportunities, proposal support, and grant strategy',
+  },
+  'Research Development / Research Administration': {
+    lane: 'Grants and Research Development',
+    reason: 'Research development and research administration',
+  },
+  'Strategic Planning & Organizational Capacity Building': {
+    lane: 'Strategy and Capacity Building',
+    reason: 'Strategic planning and organizational capacity building',
+  },
+  'Workforce Development & Training': {
+    lane: 'Workforce and Training',
+    reason: 'Workforce development and training',
+  },
+  'Business Development / Partnerships': {
+    lane: 'Business Development and Partnerships',
+    reason: 'Business development and partnership opportunities',
+  },
+  'AI, Technology & Innovation': {
+    lane: 'Innovation and Technology',
+    reason: 'AI, technology, and innovation support',
+  },
+  'Events, Workshops or Speaking Engagements': {
+    lane: 'Engagements and Communications',
+    reason: 'Events, workshops, and speaking engagements',
+  },
+  'Coaching / Leadership Development': {
+    lane: 'Leadership Development',
+    reason: 'Coaching and leadership development',
+  },
+  'Communications / Marketing': {
+    lane: 'Engagements and Communications',
+    reason: 'Communications and marketing support',
+  },
+  'Government / Defense / HBCU Engagement': {
+    lane: 'Public Sector and HBCU Engagement',
+    reason: 'Government, defense, and HBCU engagement',
+  },
+  'General Inquiry / Not Sure': {
+    lane: 'General Intake',
+    reason: 'General inquiry awaiting team review',
+  },
+} as const;
+
+const organizationTypes = new Set([
+  'College / University / HBCU',
+  'Federal, State or Local Government',
+  'Business / Corporation',
+  'Nonprofit / Community Organization',
+  'K-12 School / School District',
+  'Faith-Based Organization',
+  'Workforce / Economic Development Organization',
+  'Individual / Consultant',
+  'Other',
+]);
+
+function normalizeInquiryText(value: unknown, maxLength: number) {
+  return typeof value === 'string' ? value.trim().slice(0, maxLength) : '';
+}
+
+export function normalizeContactInquiry(body: Record<string, unknown> | null | undefined) {
+  const name = normalizeInquiryText(body?.name, 160);
+  const email = normalizeInquiryText(body?.email, 320).toLowerCase();
+  const inquiryTopic = normalizeInquiryText(body?.inquiryTopic, 160) as keyof typeof inquiryRouting;
+  const organizationType = normalizeInquiryText(body?.organizationType, 160);
+  const message = normalizeInquiryText(body?.message, 5000);
+
+  if (!name || !email || !inquiryTopic || !organizationType || !message) {
+    return { error: 'Please complete each inquiry field.' } as const;
+  }
+  if (!/^\S+@\S+\.\S+$/.test(email)) {
+    return { error: 'Please enter a valid email address.' } as const;
+  }
+  if (!(inquiryTopic in inquiryRouting) || !organizationTypes.has(organizationType)) {
+    return { error: 'Please select a listed inquiry topic and organization type.' } as const;
+  }
+
+  return {
+    value: {
+      name,
+      email,
+      inquiryTopic,
+      organizationType,
+      message,
+      routingLane: inquiryRouting[inquiryTopic].lane,
+      routingReason: inquiryRouting[inquiryTopic].reason,
+      status: 'new' as const,
+    },
+  } as const;
+}
 
 async function getCmsUserFromRequest(req: Request) {
   const cookies = parseCookieHeader(req.headers.cookie || '');
@@ -80,6 +175,33 @@ function normalizeContentPayload(body: Record<string, unknown> | null | undefine
 }
 
 export function registerCmsRoutes(app: Express) {
+  app.post('/api/contact-inquiries', async (req: Request, res: Response) => {
+    if (normalizeInquiryText(req.body?.companyWebsite, 200)) {
+      res.status(201).json({ success: true });
+      return;
+    }
+
+    const normalized = normalizeContactInquiry(req.body);
+    if ('error' in normalized) {
+      res.status(400).json(normalized);
+      return;
+    }
+
+    try {
+      await createContactInquiry(normalized.value);
+      res.status(201).json({
+        success: true,
+        routing: {
+          lane: normalized.value.routingLane,
+          reason: normalized.value.routingReason,
+        },
+      });
+    } catch (error) {
+      console.error('[Contact inquiry] Failed to save inquiry', error);
+      res.status(503).json({ error: 'We could not send your inquiry. Please try again.' });
+    }
+  });
+
   app.get('/api/cms/public/content', async (req: Request, res: Response) => {
     const contentType = typeof req.query.contentType === 'string' ? req.query.contentType : undefined;
     const normalizedContentType = contentType && ['white-paper', 'newsletter', 'funding-opportunity', 'thought-leadership'].includes(contentType)

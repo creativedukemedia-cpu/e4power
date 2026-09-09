@@ -304,3 +304,6 @@
 - [x] Verify the restored Client Success testimonials across desktop and mobile before publishing.
 - [x] Remove the complete Client Success and Elevate content block from the homepage while retaining the standalone Client Success page and navigation link.
 - [x] Verify homepage continuity and independent Client Success page access across desktop and mobile before publishing.
+- [x] Replace the contact experience with an E4 Power branded three-question inquiry form covering service need, organization type, and desired outcome.
+- [x] Add accessible validation, responsive behavior, and internal routing guidance driven by the selected inquiry category.
+- [x] Test the new contact inquiry flow across desktop and mobile before publishing.

@@ -1,6 +1,6 @@
 import { and, desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { CmsContentItem, CmsUser, InsertCmsContentItem, InsertCmsUser, InsertUser, cmsContentItems, cmsUsers, users } from "../drizzle/schema";
+import { CmsContentItem, CmsUser, InsertCmsContentItem, InsertCmsUser, InsertContactInquiry, InsertUser, cmsContentItems, cmsUsers, contactInquiries, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -172,4 +172,13 @@ export async function deleteCmsContentItem(id: number) {
   const db = await getDb();
   if (!db) throw new Error('Database unavailable');
   await db.delete(cmsContentItems).where(eq(cmsContentItems.id, id));
+}
+
+export async function createContactInquiry(inquiry: InsertContactInquiry) {
+  const db = await getDb();
+  if (!db) throw new Error('Database unavailable');
+  const result = await db.insert(contactInquiries).values(inquiry);
+  const id = Number(result[0].insertId);
+  const rows = await db.select().from(contactInquiries).where(eq(contactInquiries.id, id)).limit(1);
+  return rows[0];
 }

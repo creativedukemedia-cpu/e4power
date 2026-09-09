@@ -270,4 +270,16 @@ describe("theme toggle markup", () => {
     expect(clientSuccessPage).toContain('Celebrating Our Clients\' Success');
     expect(clientSuccessPage).toContain('Proposals Funded');
   });
+
+  it("builds the branded three-question inquiry form with a persisted routing submission", () => {
+    const contactPage = fs.readFileSync(path.join(clientRoot, 'contact-us', 'index.html'), 'utf8');
+    expect(contactPage).toContain('E4 Power inquiry');
+    expect(contactPage).toContain('What are you reaching out to E4 Power about');
+    expect(contactPage).toContain('What type of organization do you represent');
+    expect(contactPage).toContain('What would you like E4 Power to help you accomplish');
+    expect(contactPage).toContain('Grants, Funding Opportunities &amp; Proposal Support');
+    expect(contactPage).toContain('Government / Defense / HBCU Engagement');
+    expect(contactPage).toContain("fetch('/api/contact-inquiries'");
+    expect(contactPage).toContain('.e4-routing-signal[hidden],.e4-inquiry-success[hidden]{display:none!important}');
+  });
 });
