@@ -101,6 +101,9 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('bridge-network-role-label');
     expect(homepage).toContain('bridge-model-pillars');
     expect(homepage).toContain('bridge-model-pillar-icon');
+    expect(homepage).toContain('id="bridge-editorial-pillars-refinement-v1"');
+    expect(homepage).toContain('grid-template-columns: repeat(4, minmax(0, 1fr)) !important;');
+    expect(homepage).toContain('pillarIcons[index%pillarIcons.length]');
     expect(homepage).not.toContain('bridge-library-kicker">The B.R.I.D.G.E. Delivery Model');
     expect(homepage).toContain('The PMP coordinates the workstream so priorities, deliverables, and milestones remain visible to the full team.');
     expect(homepage).toContain('The Chief Technology Officer provides a strategic technology center for research initiatives and innovation.');
@@ -109,7 +112,8 @@ describe("theme toggle markup", () => {
   it("keeps the role labels reachable on touch devices and supports keyboard-visible interactions", () => {
     expect(homepage).toContain('.bridge-network-node:focus-visible{outline:2px solid #fff8ef');
     expect(homepage).toContain('bridge-network-role-label');
-    expect(homepage).toContain('bridge-model-pillar');
+    expect(homepage).toContain('bridge-model-pillar-icon svg');
+    expect(homepage).toContain('grid-template-columns: 2.2rem minmax(0, 1fr) !important;');
     expect(homepage).toContain("' selected in the '+model.center+' model'");
   });
 

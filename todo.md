@@ -340,3 +340,5 @@
 - [x] Stabilize dropdown menus so users can move from triggers to menu options and improve shared navigation text contrast.
 - [x] Make the rotating homepage logo banner span the full viewport width without black side bars.
 - [x] Verify the refined B.R.I.D.G.E. layout, dropdown behavior, navigation contrast, and logo banner across desktop and mobile before publishing.
+- [x] Redesign the B.R.I.D.G.E. supporting-point treatment as a more structured E4 Power editorial icon-column layout inspired by the supplied reference.
+- [x] Verify the redesigned B.R.I.D.G.E. supporting-point layout at desktop and mobile sizes before publishing.
