@@ -247,6 +247,22 @@
     list.appendChild(makeContactLink(true));
   }
 
+  function installQuickContact() {
+    if (!document.getElementById('e4-quick-contact-style')) {
+      var style = document.createElement('style');
+      style.id = 'e4-quick-contact-style';
+      style.textContent = '.e4-quick-contact{position:fixed;right:1.35rem;bottom:1.35rem;z-index:29000;display:inline-flex;align-items:center;gap:.58rem;padding:.82rem 1rem;border:1px solid #edbe59;background:#edbe59;color:#171511!important;box-shadow:0 .85rem 2.1rem rgba(0,0,0,.28);font-family:Montserrat,Arial,sans-serif;font-size:.68rem;font-weight:900;letter-spacing:.09em;line-height:1;text-decoration:none!important;text-transform:uppercase;transition:transform .2s cubic-bezier(.23,1,.32,1),background .2s ease,color .2s ease}.e4-quick-contact svg{width:1.05rem;height:1.05rem;fill:currentColor}.e4-quick-contact:hover,.e4-quick-contact:focus-visible{transform:translateY(-3px);background:#fff4da;color:#171511!important;outline:2px solid #edbe59;outline-offset:3px}@media screen and (max-width:767px){.e4-quick-contact{right:.85rem;bottom:calc(.85rem + env(safe-area-inset-bottom));padding:.78rem .86rem;font-size:.62rem}}';
+      document.head.appendChild(style);
+    }
+    if (document.querySelector('.e4-quick-contact')) return;
+    var link = document.createElement('a');
+    link.className = 'e4-quick-contact';
+    link.href = '/contact-us/';
+    link.setAttribute('aria-label', 'Start an inquiry with E4 Power');
+    link.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5.1 3.7 8.6 3l2.1 4.7-2.3 1.8c1.4 2.8 3.3 4.7 6.1 6.1l1.8-2.3 4.7 2.1-.7 3.5c-.2 1-1.1 1.8-2.2 1.8C10.1 20.7 3.3 13.9 3.3 5.9c0-1.1.8-2 1.8-2.2z"/></svg><span>Contact E4</span>';
+    document.body.appendChild(link);
+  }
+
   function installNavigation() {
     var homeNav = document.querySelector('.reference-topbar-nav');
     var utilityNav = document.querySelector('.navbar-right-div');
@@ -257,6 +273,7 @@
     if (utilityNav) installDesktopNavigation(utilityNav, 'e4-site-search', { mobileSearch: true });
     if (clientNav) installDesktopNavigation(clientNav, 'e4-client-success-search');
     installMobileNavigation(menu);
+    installQuickContact();
 
     document.addEventListener('click', function (event) {
       if (!event.target.closest('.e4-nav-group,.e4-mobile-nav-group')) closeDropdowns();

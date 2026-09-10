@@ -16,6 +16,8 @@ const searchPagePath = path.join(clientRoot, "search", "index.html");
 const searchPage = fs.readFileSync(searchPagePath, "utf8");
 const aboutUsPath = path.join(clientRoot, "about-us", "index.html");
 const aboutUsPage = fs.readFileSync(aboutUsPath, "utf8");
+const servicesPath = path.join(clientRoot, "services", "index.html");
+const servicesPage = fs.readFileSync(servicesPath, "utf8");
 const globalNavigationPath = path.join(clientRoot, "src", "e4-global-navigation.js");
 const globalNavigation = fs.readFileSync(globalNavigationPath, "utf8");
 
@@ -103,10 +105,20 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('bridge-model-pillar-icon');
     expect(homepage).toContain('id="bridge-editorial-pillars-refinement-v1"');
     expect(homepage).toContain('grid-template-columns: repeat(4, minmax(0, 1fr)) !important;');
-    expect(homepage).toContain('pillarIcons[index%pillarIcons.length]');
+    expect(homepage).toContain('pillarIconSets={traditional:');
+    expect(homepage).toContain('pillarIcons=pillarIconSets[model.id]||pillarIconSets.traditional');
     expect(homepage).not.toContain('bridge-library-kicker">The B.R.I.D.G.E. Delivery Model');
     expect(homepage).toContain('The PMP coordinates the workstream so priorities, deliverables, and milestones remain visible to the full team.');
     expect(homepage).toContain('The Chief Technology Officer provides a strategic technology center for research initiatives and innovation.');
+  });
+
+  it("uses contextual support icons and offers an accessible full-screen view for every B.R.I.D.G.E. model", () => {
+    expect(homepage).toContain('bridge-model-fullscreen-refinement-v1');
+    expect(homepage).toContain('function installExpandedModelView()');
+    expect(homepage).toContain('bridge-model-overlay');
+    expect(homepage).toContain('bridge-model-overlay-close');
+    expect(homepage).toContain('Expand model');
+    expect(homepage).toContain("event.key==='Escape'&&!overlay.hidden");
   });
 
   it("keeps the role labels reachable on touch devices and supports keyboard-visible interactions", () => {
@@ -222,6 +234,13 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).not.toContain('top:calc(100% + .45rem)');
   });
 
+  it("adds a consistent accessible quick-contact control across pages", () => {
+    expect(globalNavigation).toContain('function installQuickContact()');
+    expect(globalNavigation).toContain("link.className = 'e4-quick-contact'");
+    expect(globalNavigation).toContain("link.href = '/contact-us/'");
+    expect(globalNavigation).toContain('Start an inquiry with E4 Power');
+  });
+
   it("uses an enclosure-free B.R.I.D.G.E. layout and a full-width rotating partner banner", () => {
     expect(homepage).toContain('#empower .bridge-model-card {\n    padding: clamp(2.75rem, 6vw, 5.5rem) 0 !important;');
     expect(homepage).toContain('background: transparent !important;');
@@ -317,5 +336,18 @@ describe("theme toggle markup", () => {
     expect(navigation).toContain("{ title: 'About Us', url: '/about-us/'");
     expect(navigation).toContain("label: 'Our Team', url: '/about-us/#engage'");
     expect(navigation).toContain("label: 'In the News', url: '/about-us/#linkedin-feed'");
+  });
+
+  it("updates the Our Services page with the approved flyer information while retaining the E4 Power visual system", () => {
+    expect(servicesPage).toContain('services-flyer-refinement-v1');
+    expect(servicesPage).toContain('Full-life cycle grant, research, and project consulting for Universities, Non-profits, and For-profits.');
+    expect(servicesPage).toContain('Grant Writing <span>Pre-Award</span>');
+    expect(servicesPage).toContain('Grant Management <span>Post-Award</span>');
+    expect(servicesPage).toContain('Intellectual Property Services');
+    expect(servicesPage).toContain('Department of War (DoW)');
+    expect(servicesPage).toContain('National Science Foundation (NSF)');
+    expect(servicesPage).toContain('Institutions We Serve');
+    expect(servicesPage).toContain('Modular, plug-and-play services (no bundled requirement)');
+    expect(servicesPage).toContain('We <span>Bridge</span> the Gap');
   });
 });

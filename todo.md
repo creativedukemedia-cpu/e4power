@@ -342,3 +342,8 @@
 - [x] Verify the refined B.R.I.D.G.E. layout, dropdown behavior, navigation contrast, and logo banner across desktop and mobile before publishing.
 - [x] Redesign the B.R.I.D.G.E. supporting-point treatment as a more structured E4 Power editorial icon-column layout inspired by the supplied reference.
 - [x] Verify the redesigned B.R.I.D.G.E. supporting-point layout at desktop and mobile sizes before publishing.
+- [x] Map each B.R.I.D.G.E. supporting-point icon to its corresponding message rather than using generic repeated symbols.
+- [x] Add an accessible Expand Model control that opens each B.R.I.D.G.E. model in a full-screen view.
+- [x] Add a persistent quick-contact button at the bottom right that links to the contact inquiry page.
+- [x] Update the Our Services page with the supplied flyer’s service descriptions, institutional audiences, federal agency experience, and E4 Power value points while retaining the existing page style.
+- [x] Verify the model controls, quick-contact button, updated services page, and navigation links across desktop and mobile before publishing.
