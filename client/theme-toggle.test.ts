@@ -92,6 +92,9 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('bridge-network-links');
     expect(homepage).toContain('bridge-network-node');
     expect(homepage).toContain('bridge-network-person');
+    expect(homepage).toContain('id="bridge-human-figure-refinement"');
+    expect(homepage).toContain('clip-path:polygon(36% 22%,18% 35%,4% 52%');
+    expect(homepage).toContain('radial-gradient(circle at 64% 30%');
     expect(homepage).toContain('bridge-role-list');
   });
 

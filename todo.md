@@ -324,3 +324,5 @@
 - [x] Verify all four B.R.I.D.G.E. models, individual role labels, interaction states, and responsive layouts on the homepage before publishing.
 - [x] Remove the Model 01 through Model 04 pretext above the B.R.I.D.G.E. organizational model headings.
 - [x] Verify the simplified B.R.I.D.G.E. heading hierarchy across desktop and mobile before publishing.
+- [x] Refine the B.R.I.D.G.E. role figures so their silhouettes read more clearly as human forms while retaining the current color coding and interactions.
+- [x] Verify the refined B.R.I.D.G.E. figures and role controls across desktop and mobile before publishing.
