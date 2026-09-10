@@ -322,3 +322,5 @@
 - [x] Redesign the four B.R.I.D.G.E. model variations as one cohesive E4 Power branded homepage showcase without changing the supplied role information.
 - [x] Add accessible model selection and detail interactions so visitors can understand each organizational application on desktop and mobile.
 - [x] Verify all four B.R.I.D.G.E. models, individual role labels, interaction states, and responsive layouts on the homepage before publishing.
+- [x] Remove the Model 01 through Model 04 pretext above the B.R.I.D.G.E. organizational model headings.
+- [x] Verify the simplified B.R.I.D.G.E. heading hierarchy across desktop and mobile before publishing.

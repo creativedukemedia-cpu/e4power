@@ -81,6 +81,7 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('.bridge-model-grid{display:grid;grid-template-columns:1fr;gap:clamp(1.25rem,2vw,2rem);}');
     expect(homepage).toContain("'<article class=\"bridge-model-card\" id=\"bridge-model-'+model.id+'\">");
     expect(homepage).toContain('models.map(cardMarkup).join');
+    expect(homepage).not.toContain('<span class="bridge-model-index">Model ');
     expect(homepage).toContain('@media screen and (max-width:760px)');
     expect(homepage).toContain('.bridge-model-grid{grid-template-columns:1fr;gap:1.15rem}');
   });
