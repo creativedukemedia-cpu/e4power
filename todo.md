@@ -326,3 +326,11 @@
 - [x] Verify the simplified B.R.I.D.G.E. heading hierarchy across desktop and mobile before publishing.
 - [x] Refine the B.R.I.D.G.E. role figures so their silhouettes read more clearly as human forms while retaining the current color coding and interactions.
 - [x] Verify the refined B.R.I.D.G.E. figures and role controls across desktop and mobile before publishing.
+- [x] Repair the B.R.I.D.G.E. human figure treatment so each figure has a visible head and clear silhouette.
+- [x] Add every specialist role title directly beneath its corresponding B.R.I.D.G.E. figure across all four models.
+- [x] Add meaningful supporting bullet points to the PMP and Chief Technology Officer B.R.I.D.G.E. models, matching the presentation of the first two models.
+- [x] Make the homepage and interior-page navigation consistent through the shared navigation implementation.
+- [x] Add an About Us dropdown containing About Us, Our Team, and In the News destinations.
+- [x] Consolidate Client Success and Insights under a shared dropdown navigation group.
+- [x] Place The Bridge Model and Workshops under an Our Services dropdown navigation group.
+- [x] Verify the B.R.I.D.G.E. refinements and responsive dropdown navigation across desktop, mobile, homepage, and representative interior pages before publishing.

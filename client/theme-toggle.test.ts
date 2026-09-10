@@ -96,6 +96,10 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('clip-path:polygon(36% 22%,18% 35%,4% 52%');
     expect(homepage).toContain('radial-gradient(circle at 64% 30%');
     expect(homepage).toContain('bridge-role-list');
+    expect(homepage).toContain('id="bridge-role-label-and-notes-refinement"');
+    expect(homepage).toContain('bridge-network-role-label');
+    expect(homepage).toContain('The PMP coordinates the workstream so priorities, deliverables, and milestones remain visible to the full team.');
+    expect(homepage).toContain('The Chief Technology Officer provides a strategic technology center for research initiatives and innovation.');
   });
 
   it("keeps the role labels reachable on touch devices and supports keyboard-visible interactions", () => {
@@ -186,16 +190,24 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain("form.setAttribute('role', 'search')");
     expect(globalNavigation).toContain("form.setAttribute('aria-label', 'Search E4 Power')");
     expect(globalNavigation).toContain("form.action = '/search/'");
-    expect(globalNavigation).toContain("mobileSearchLink.href = '/search/'");
-    expect(globalNavigation).toContain("mobileSearchLink.textContent = 'Search'");
+    expect(globalNavigation).toContain("mobileSearch.href = '/search/'");
+    expect(globalNavigation).toContain("mobileSearch.textContent = 'Search'");
   });
 
-  it("adds Client Success as a visible shared desktop and mobile navigation destination", () => {
-    expect(globalNavigation).toContain("link.href = '/client-success/'");
-    expect(globalNavigation).toContain("link.textContent = 'Client Success'");
-    expect(globalNavigation).toContain("addClientSuccessNavigation(homeNav, utilityNav, menu)");
-    expect(globalNavigation).toContain("item.className = 'e4-client-success-menu-item'");
-    expect(globalNavigation).not.toContain('.reference-topbar-nav>a{display:none!important;}');
+  it("uses consistent accessible shared dropdown navigation on the homepage and interior pages", () => {
+    expect(globalNavigation).toContain("label: 'About Us'");
+    expect(globalNavigation).toContain("label: 'Our Team', url: '/about-us/#engage'");
+    expect(globalNavigation).toContain("label: 'In the News', url: '/about-us/#linkedin-feed'");
+    expect(globalNavigation).toContain("label: 'Our Services'");
+    expect(globalNavigation).toContain("label: 'The B.R.I.D.G.E. Model', url: '/#empower'");
+    expect(globalNavigation).toContain("label: 'Workshops', url: '/services/workshops-training/'");
+    expect(globalNavigation).toContain("label: 'Resources'");
+    expect(globalNavigation).toContain("label: 'Client Success', url: '/client-success/'");
+    expect(globalNavigation).toContain("label: 'Insights', url: '/content/'");
+    expect(globalNavigation).toContain("function makeDropdown(group, mobile, index)");
+    expect(globalNavigation).toContain("toggle.setAttribute('aria-expanded'");
+    expect(globalNavigation).toContain("installDesktopNavigation(homeNav, 'e4-home-search')");
+    expect(globalNavigation).toContain("installDesktopNavigation(utilityNav, 'e4-site-search', { mobileSearch: true })");
     expect(globalNavigation).toContain('@media screen and (min-width:992px) and (max-width:1320px)');
   });
 
@@ -236,7 +248,7 @@ describe("theme toggle markup", () => {
     expect(homepage).not.toMatch(/<section[^>]*id="elevate"/);
     expect(homepage).not.toContain('Celebrating Our Clients\' Success');
     expect(homepage).not.toContain('Proposals Funded');
-    expect(globalNavigation).toContain("link.href = '/client-success/'");
+    expect(globalNavigation).toContain("label: 'Client Success', url: '/client-success/'");
     expect(clientSuccessPage).toContain('Celebrating Our Clients\' Success');
     expect(clientSuccessPage).toContain('Proposals Funded');
   });
@@ -285,7 +297,7 @@ describe("theme toggle markup", () => {
     expect(aboutPage).toContain('id="about-us-visible-content-guard"');
     expect(aboutPage).toContain('id="about-us-linkedin-feed-style"');
     expect(navigation).toContain("{ title: 'About Us', url: '/about-us/'");
-    expect(navigation).toContain('function addAboutUsNavigation');
-    expect(navigation).toContain("link.href = '/about-us/#engage';");
+    expect(navigation).toContain("label: 'Our Team', url: '/about-us/#engage'");
+    expect(navigation).toContain("label: 'In the News', url: '/about-us/#linkedin-feed'");
   });
 });
