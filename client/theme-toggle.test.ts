@@ -95,17 +95,21 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('id="bridge-human-figure-refinement"');
     expect(homepage).toContain('clip-path:polygon(36% 22%,18% 35%,4% 52%');
     expect(homepage).toContain('radial-gradient(circle at 64% 30%');
-    expect(homepage).toContain('bridge-role-list');
+    expect(homepage).toContain('id="bridge-presentation-refinement-v1"');
+    expect(homepage).toContain('#empower .bridge-role-list {\n    display: none !important;');
     expect(homepage).toContain('id="bridge-role-label-and-notes-refinement"');
     expect(homepage).toContain('bridge-network-role-label');
+    expect(homepage).toContain('bridge-model-pillars');
+    expect(homepage).toContain('bridge-model-pillar-icon');
+    expect(homepage).not.toContain('bridge-library-kicker">The B.R.I.D.G.E. Delivery Model');
     expect(homepage).toContain('The PMP coordinates the workstream so priorities, deliverables, and milestones remain visible to the full team.');
     expect(homepage).toContain('The Chief Technology Officer provides a strategic technology center for research initiatives and innovation.');
   });
 
   it("keeps the role labels reachable on touch devices and supports keyboard-visible interactions", () => {
     expect(homepage).toContain('.bridge-network-node:focus-visible{outline:2px solid #fff8ef');
-    expect(homepage).toContain('.bridge-role-list button:focus-visible{outline:2px solid #fff8ef');
-    expect(homepage).toContain('.bridge-role-list{grid-template-columns:1fr;margin-top:1rem}');
+    expect(homepage).toContain('bridge-network-role-label');
+    expect(homepage).toContain('bridge-model-pillar');
     expect(homepage).toContain("' selected in the '+model.center+' model'");
   });
 
@@ -209,6 +213,16 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain("installDesktopNavigation(homeNav, 'e4-home-search')");
     expect(globalNavigation).toContain("installDesktopNavigation(utilityNav, 'e4-site-search', { mobileSearch: true })");
     expect(globalNavigation).toContain('@media screen and (min-width:992px) and (max-width:1320px)');
+    expect(globalNavigation).toContain('.reference-topbar .e4-nav-primary,.reference-topbar .e4-nav-contact,.reference-topbar .e4-nav-toggle');
+    expect(globalNavigation).toContain('.e4-nav-menu{position:absolute;top:100%');
+    expect(globalNavigation).not.toContain('top:calc(100% + .45rem)');
+  });
+
+  it("uses an enclosure-free B.R.I.D.G.E. layout and a full-width rotating partner banner", () => {
+    expect(homepage).toContain('#empower .bridge-model-card {\n    padding: clamp(2.75rem, 6vw, 5.5rem) 0 !important;');
+    expect(homepage).toContain('background: transparent !important;');
+    expect(homepage).toContain('.partner-marquee-section {\n    width: 100vw !important;');
+    expect(homepage).toContain('margin-right: calc(50% - 50vw) !important;');
   });
 
   it("provides a dedicated keyword search page with accessible empty and no-results states", () => {

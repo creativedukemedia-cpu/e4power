@@ -334,3 +334,9 @@
 - [x] Consolidate Client Success and Insights under a shared dropdown navigation group.
 - [x] Place The Bridge Model and Workshops under an Our Services dropdown navigation group.
 - [x] Verify the B.R.I.D.G.E. refinements and responsive dropdown navigation across desktop, mobile, homepage, and representative interior pages before publishing.
+- [x] Remove the B.R.I.D.G.E. Delivery Model pretext and duplicate specialist role lists from the homepage model library.
+- [x] Replace plain supporting bullets with branded gold-icon content columns for each B.R.I.D.G.E. model.
+- [x] Remove the B.R.I.D.G.E. model card enclosure and gold top border while preserving readable layout separation.
+- [x] Stabilize dropdown menus so users can move from triggers to menu options and improve shared navigation text contrast.
+- [x] Make the rotating homepage logo banner span the full viewport width without black side bars.
+- [x] Verify the refined B.R.I.D.G.E. layout, dropdown behavior, navigation contrast, and logo banner across desktop and mobile before publishing.
