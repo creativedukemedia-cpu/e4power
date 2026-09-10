@@ -243,18 +243,19 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).not.toContain('top:calc(100% + .45rem)');
   });
 
-  it("normalizes the homepage header to the shared interior navigation treatment", () => {
-    expect(globalNavigation).toContain('.e4-home-unified-header,.e4-home-unified-header .reference-topbar-inner,.e4-home-unified-header .reference-topbar-nav{background:#050505!important;}');
-    expect(globalNavigation).toContain('.e4-home-unified-header .brand-logo img{filter:none!important;}');
-    expect(globalNavigation).toContain('function normalizeHomepageHeader()');
-    expect(globalNavigation).toContain("homeHeader.classList.add('e4-home-unified-header')");
-    expect(globalNavigation).toContain("desktopTheme.classList.add('e4-home-theme-toggle')");
-    expect(globalNavigation).toContain('homeNav.insertBefore(desktopTheme');
-    expect(globalNavigation).toContain("mobileSearch.className = 'e4-home-mobile-search'");
-    expect(globalNavigation).toContain("mobileSearch.href = '/search/'");
-    expect(globalNavigation).toContain('.e4-home-unified-header .reference-socials{display:none!important;}');
-    expect(globalNavigation).toContain('.e4-home-unified-header .e4-home-mobile-search{display:inline-flex!important;');
-    expect(globalNavigation).toContain('normalizeHomepageHeader();');
+  it("uses the original homepage header presentation as the shared interior navigation default", () => {
+    expect(globalNavigation).toContain('.navbar-logo-left.e4-home-origin-header,.navbar-logo-left.e4-home-origin-header .navbar-logo-left-container,.navbar-logo-left.e4-home-origin-header .navbar-container{height:5.625rem!important;min-height:5.625rem!important;padding:0!important;background:#050505!important;box-shadow:none!important;}');
+    expect(globalNavigation).toContain('.navbar-logo-left.e4-home-origin-header .e4-site-brand-cluster{box-sizing:border-box!important;display:grid!important;grid-template-columns:3rem minmax(0,1fr) auto!important;');
+    expect(globalNavigation).toContain('function applyHomepageDesignToInteriorHeaders()');
+    expect(globalNavigation).toContain("cluster.className = 'e4-site-brand-cluster'");
+    expect(globalNavigation).toContain('cluster.appendChild(brand);');
+    expect(globalNavigation).toContain('cluster.appendChild(socials);');
+    expect(globalNavigation).toContain('cluster.appendChild(theme);');
+    expect(globalNavigation).toContain('cluster.appendChild(menuButton);');
+    expect(globalNavigation).toContain("header.classList.add('e4-home-origin-header')");
+    expect(globalNavigation).toContain('applyHomepageDesignToInteriorHeaders();');
+    expect(globalNavigation).not.toContain('e4-home-unified-header');
+    expect(globalNavigation).not.toContain('normalizeHomepageHeader');
   });
 
   it("adds a consistent accessible quick-contact control across pages", () => {

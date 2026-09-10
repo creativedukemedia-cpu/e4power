@@ -351,3 +351,5 @@
 - [x] Verify the focused expanded model view and its close behavior across desktop and mobile before publishing.
 - [x] Align the homepage navigation with the shared navigation structure, dropdown behavior, contrast, and responsive treatment used on all other pages.
 - [x] Verify matching homepage and interior navigation behavior across desktop and mobile before publishing.
+- [x] Recover the previous homepage navigation design and apply it as the shared default across homepage and interior pages.
+- [x] Verify the restored homepage-origin navigation design across desktop and mobile before publishing.
