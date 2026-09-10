@@ -349,3 +349,5 @@
 - [x] Verify the model controls, quick-contact button, updated services page, and navigation links across desktop and mobile before publishing.
 - [x] Simplify the expanded B.R.I.D.G.E. model view so it displays only the figure network and role labels.
 - [x] Verify the focused expanded model view and its close behavior across desktop and mobile before publishing.
+- [x] Align the homepage navigation with the shared navigation structure, dropdown behavior, contrast, and responsive treatment used on all other pages.
+- [x] Verify matching homepage and interior navigation behavior across desktop and mobile before publishing.

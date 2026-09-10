@@ -243,6 +243,20 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).not.toContain('top:calc(100% + .45rem)');
   });
 
+  it("normalizes the homepage header to the shared interior navigation treatment", () => {
+    expect(globalNavigation).toContain('.e4-home-unified-header,.e4-home-unified-header .reference-topbar-inner,.e4-home-unified-header .reference-topbar-nav{background:#050505!important;}');
+    expect(globalNavigation).toContain('.e4-home-unified-header .brand-logo img{filter:none!important;}');
+    expect(globalNavigation).toContain('function normalizeHomepageHeader()');
+    expect(globalNavigation).toContain("homeHeader.classList.add('e4-home-unified-header')");
+    expect(globalNavigation).toContain("desktopTheme.classList.add('e4-home-theme-toggle')");
+    expect(globalNavigation).toContain('homeNav.insertBefore(desktopTheme');
+    expect(globalNavigation).toContain("mobileSearch.className = 'e4-home-mobile-search'");
+    expect(globalNavigation).toContain("mobileSearch.href = '/search/'");
+    expect(globalNavigation).toContain('.e4-home-unified-header .reference-socials{display:none!important;}');
+    expect(globalNavigation).toContain('.e4-home-unified-header .e4-home-mobile-search{display:inline-flex!important;');
+    expect(globalNavigation).toContain('normalizeHomepageHeader();');
+  });
+
   it("adds a consistent accessible quick-contact control across pages", () => {
     expect(globalNavigation).toContain('function installQuickContact()');
     expect(globalNavigation).toContain("link.className = 'e4-quick-contact'");
