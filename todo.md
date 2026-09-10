@@ -353,3 +353,5 @@
 - [x] Verify matching homepage and interior navigation behavior across desktop and mobile before publishing.
 - [x] Recover the previous homepage navigation design and apply it as the shared default across homepage and interior pages.
 - [x] Verify the restored homepage-origin navigation design across desktop and mobile before publishing.
+- [x] Remove super-thin visual section separator lines across shared and page-specific site layouts.
+- [x] Verify line-free section transitions across homepage and representative interior pages on desktop and mobile before publishing.

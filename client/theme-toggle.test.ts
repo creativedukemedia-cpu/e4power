@@ -258,6 +258,19 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).not.toContain('normalizeHomepageHeader');
   });
 
+  it("removes named structural section separators without flattening component borders", () => {
+    expect(globalNavigation).toContain('function removeSectionSeparators()');
+    expect(globalNavigation).toContain('hr,.ref-divider,.hero-services-separator');
+    expect(globalNavigation).toContain("removeSectionSeparators();");
+    expect(globalNavigation).toContain('.funding-section{border-top:0!important;}');
+    expect(globalNavigation).toContain('body :where(main,header,section,article,aside){border-color:transparent!important;}');
+    expect(globalNavigation).toContain('main :where(ol,ul,li){border-color:transparent!important;}');
+    expect(globalNavigation).toContain('.client-success-nav,.search-nav{border-bottom:0!important;}');
+    expect(globalNavigation).toContain('.bridge-model-card::after{display:none!important;}');
+    expect(globalNavigation).toContain('.section-label::after{display:none!important;}');
+    expect(globalNavigation).toContain("section.style.setProperty('border-color', 'transparent', 'important')");
+  });
+
   it("adds a consistent accessible quick-contact control across pages", () => {
     expect(globalNavigation).toContain('function installQuickContact()');
     expect(globalNavigation).toContain("link.className = 'e4-quick-contact'");
