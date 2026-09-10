@@ -347,3 +347,5 @@
 - [x] Add a persistent quick-contact button at the bottom right that links to the contact inquiry page.
 - [x] Update the Our Services page with the supplied flyer’s service descriptions, institutional audiences, federal agency experience, and E4 Power value points while retaining the existing page style.
 - [x] Verify the model controls, quick-contact button, updated services page, and navigation links across desktop and mobile before publishing.
+- [x] Simplify the expanded B.R.I.D.G.E. model view so it displays only the figure network and role labels.
+- [x] Verify the focused expanded model view and its close behavior across desktop and mobile before publishing.

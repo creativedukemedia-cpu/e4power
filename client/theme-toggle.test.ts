@@ -121,6 +121,15 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain("event.key==='Escape'&&!overlay.hidden");
   });
 
+  it("focuses the expanded B.R.I.D.G.E. view on the figure network and role labels", () => {
+    expect(homepage).toContain('id="bridge-expanded-network-focus-refinement"');
+    expect(homepage).toContain('.bridge-model-card--expanded .bridge-model-copy,');
+    expect(homepage).toContain('.bridge-model-card--expanded .bridge-model-focus,');
+    expect(homepage).toContain('display: none !important;');
+    expect(homepage).toContain('width: min(72vmin, 680px) !important;');
+    expect(homepage).toContain('height: min(72vmin, 680px) !important;');
+  });
+
   it("keeps the role labels reachable on touch devices and supports keyboard-visible interactions", () => {
     expect(homepage).toContain('.bridge-network-node:focus-visible{outline:2px solid #fff8ef');
     expect(homepage).toContain('bridge-network-role-label');
