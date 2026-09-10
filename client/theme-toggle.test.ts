@@ -265,6 +265,14 @@ describe("theme toggle markup", () => {
   it("removes the Services-only menu takeover and gives Client Success the homepage-origin navigation treatment", () => {
     expect(servicesPage).not.toContain('id="manus-home-menu-override"');
     expect(servicesPage).not.toContain('id="services-nav-hardening"');
+    expect(globalNavigation).toContain('@media screen and (min-width:992px) and (max-width:1180px)');
+    expect(globalNavigation).toContain('.navbar-logo-left.e4-home-origin-header .e4-site-brand-cluster{box-sizing:border-box!important;display:grid!important;grid-template-columns:3rem minmax(0,1fr) auto!important;align-items:center!important;column-gap:1.05rem!important;flex:0 0 clamp(28.75rem,34vw,30rem)!important;');
+    expect(globalNavigation).toContain('.navbar-logo-left.e4-home-origin-header .e4-site-brand-cluster #theme-toggle-button{display:inline-flex!important;padding:.5rem .55rem!important;}');
+    expect(globalNavigation).toContain('.navbar-logo-left.e4-home-origin-header .e4-site-brand-cluster{flex-basis:25rem!important;width:25rem!important;');
+    expect(globalNavigation).toContain('.navbar-logo-left.e4-home-origin-header .navbar-logo-left-container{flex:1 1 100%!important;}');
+    expect(globalNavigation).toContain('.navbar-logo-left.e4-home-origin-header,.navbar-logo-left.e4-home-origin-header .navbar-logo-left-container,.navbar-logo-left.e4-home-origin-header .navbar-container,.navbar-logo-left.e4-home-origin-header .navbar-wrapper{width:100vw!important;max-width:100vw!important;box-sizing:border-box!important;height:auto!important;');
+    expect(globalNavigation).toContain('.navbar-logo-left.e4-home-origin-header .e4-site-brand-cluster{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:1.05rem!important;flex:0 0 100vw!important;width:100vw!important;max-width:100vw!important;');
+    expect(globalNavigation).toContain('.navbar-logo-left.e4-home-origin-header .e4-site-brand-cluster .w-nav-button,.navbar-logo-left.e4-home-origin-header .e4-site-brand-cluster .menu-button{position:fixed!important;top:.75rem!important;right:.75rem!important;z-index:1002!important;');
     expect(globalNavigation).toContain('function normalizeClientSuccessHeader()');
     expect(globalNavigation).toContain("right.className = 'e4-client-success-right'");
     expect(globalNavigation).toContain("drawer.className = 'e4-client-success-drawer'");

@@ -364,3 +364,4 @@
 - [x] Diagnose and repair the inconsistent Client Success-page shared navigation on desktop and mobile.
 - [x] Rebrand the Content page to match the established E4 Power visual system without changing its published content.
 - [x] Verify the repaired Services, Client Success, and Content pages in preview and on the live custom domain before publishing.
+- [x] Eliminate the overlapping Services shared header at the affected responsive breakpoint without altering the established homepage-origin navigation design.
