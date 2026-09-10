@@ -355,3 +355,8 @@
 - [x] Verify the restored homepage-origin navigation design across desktop and mobile before publishing.
 - [x] Remove super-thin visual section separator lines across shared and page-specific site layouts.
 - [x] Verify line-free section transitions across homepage and representative interior pages on desktop and mobile before publishing.
+- [x] Enforce zero letter spacing across site text while preserving readable type hierarchy.
+- [x] Remove generic pretext and overline copy above headers throughout the site while preserving meaningful headings.
+- [x] Align the contact-page header with the restored homepage-origin shared navigation design.
+- [x] Use the established About Us brown tone as a balanced section-break color across key site areas, including the homepage B.R.I.D.G.E. sequence.
+- [x] Verify typography, pretext removal, contact navigation, and section-tone balance across desktop and mobile before publishing.

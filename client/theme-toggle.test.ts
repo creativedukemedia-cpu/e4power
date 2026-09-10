@@ -258,6 +258,36 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).not.toContain('normalizeHomepageHeader');
   });
 
+  it("enforces zero letter spacing across rendered content and removes generic heading pretext site-wide", () => {
+    expect(globalNavigation).toContain('body,body *,body *::before,body *::after{letter-spacing:0!important;}');
+    expect(globalNavigation).toContain('function removeGenericHeadingPretext()');
+    expect(globalNavigation).toContain("'.eyebrow', '.hero-service-kicker', '.linkedin-feed-eyebrow'");
+    expect(globalNavigation).toContain("'.section-label', '.service-preview-kicker', '.services-flyer-kicker'");
+    expect(globalNavigation).toContain("'.team-line-subheading-div .subheading-div'");
+    expect(globalNavigation).toContain("pretext.setAttribute('aria-hidden', 'true')");
+    expect(globalNavigation).toContain('pretext.remove();');
+    expect(globalNavigation).toContain("pretext.textContent.trim().toLowerCase() !== 'meet the experts behind your success'");
+    expect(globalNavigation).toContain('function enforceZeroKerning()');
+    expect(globalNavigation).toContain("element.style.setProperty('letter-spacing', '0', 'important')");
+    expect(globalNavigation).toContain('enforceZeroKerning();');
+  });
+
+  it("normalizes the Contact header with the homepage-origin brand cluster even when the legacy header has no desktop theme control", () => {
+    expect(globalNavigation).toContain('function makeHeaderThemeToggle()');
+    expect(globalNavigation).toContain("button.id = 'theme-toggle-button'");
+    expect(globalNavigation).toContain('if (!wrapper || !brand || !right || !socials) return;');
+    expect(globalNavigation).toContain('if (!theme) {\n        theme = makeHeaderThemeToggle();\n        right.appendChild(theme);\n      }');
+    expect(globalNavigation).toContain('body.theme-light .navbar-logo-left.e4-home-origin-header');
+  });
+
+  it("uses the established About Us brown as a full-width alternating B.R.I.D.G.E. section break without restoring model enclosures", () => {
+    expect(globalNavigation).toContain(':root{--e4-section-brown:#110b00;}');
+    expect(globalNavigation).toContain('#empower.bridge-program-section .bridge-model-grid{gap:0!important;}');
+    expect(globalNavigation).toContain('#empower.bridge-program-section .bridge-model-card:nth-child(even)::before');
+    expect(globalNavigation).toContain('inset:0 calc(50% - 50vw);background:var(--e4-section-brown);');
+    expect(globalNavigation).toContain('#empower.bridge-program-section .bridge-model-card{border:0!important;border-top:0!important;border-radius:0!important;box-shadow:none!important;}');
+  });
+
   it("removes named structural section separators without flattening component borders", () => {
     expect(globalNavigation).toContain('function removeSectionSeparators()');
     expect(globalNavigation).toContain('hr,.ref-divider,.hero-services-separator');

@@ -63,6 +63,8 @@
     var style = document.createElement('style');
     style.id = 'e4-global-navigation-style';
     style.textContent = '\
+      :root{--e4-section-brown:#110b00;}\
+      body,body *,body *::before,body *::after{letter-spacing:0!important;}\
       .e4-visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;}\
       .reference-topbar{position:sticky!important;top:0!important;z-index:10000!important;background:rgba(9,9,8,.94)!important;backdrop-filter:blur(18px);border-bottom:1px solid rgba(237,190,89,.18)!important;}\
       .navbar-logo-left{position:sticky!important;top:0!important;z-index:1000!important;background:#050505!important;border-bottom:1px solid rgba(255,255,255,.08)!important;}\
@@ -119,6 +121,15 @@
       .client-success-nav,.search-nav{border-bottom:0!important;}\
       .bridge-model-card::after{display:none!important;}\
       .section-label::after{display:none!important;}\
+      .eyebrow,.hero-service-kicker,.linkedin-feed-eyebrow,.ref-detail-kicker,.ref-heading-accent,.ref-overline,.search-kicker,.section-label,.service-preview-kicker,.services-flyer-kicker,.services-flyer-section-kicker,.e4-inquiry-kicker,.bridge-library-kicker,.bridge-model-index,.team-line-subheading-div .subheading-div{display:none!important;}\
+      #empower.bridge-program-section .bridge-model-grid{gap:0!important;}\
+      #empower.bridge-program-section .bridge-model-card{border:0!important;border-top:0!important;border-radius:0!important;box-shadow:none!important;}\
+      #empower.bridge-program-section .bridge-model-card:nth-child(even){position:relative;isolation:isolate;}\
+      #empower.bridge-program-section .bridge-model-card:nth-child(even)::before{content:"";position:absolute;z-index:-1;inset:0 calc(50% - 50vw);background:var(--e4-section-brown);pointer-events:none;}\
+      body.theme-light #empower.bridge-program-section .bridge-model-card:nth-child(even)::before{background:var(--e4-section-brown);}\
+      body.theme-light .navbar-logo-left.e4-home-origin-header,body.theme-light .navbar-logo-left.e4-home-origin-header .navbar-logo-left-container,body.theme-light .navbar-logo-left.e4-home-origin-header .navbar-container,body.theme-light .navbar-logo-left.e4-home-origin-header .navbar-wrapper,body.theme-light .navbar-logo-left.e4-home-origin-header .navbar-right-div{background:#050505!important;}\
+      body.theme-light .navbar-logo-left.e4-home-origin-header .e4-site-brand-cluster{background:#e7ba56!important;}\
+      body.theme-light .navbar-logo-left.e4-home-origin-header .e4-nav-primary,body.theme-light .navbar-logo-left.e4-home-origin-header .e4-nav-contact,body.theme-light .navbar-logo-left.e4-home-origin-header .e4-nav-toggle{color:#f7f3ea!important;text-shadow:0 1px 0 rgba(0,0,0,.42);}\
       @media screen and (min-width:992px){.navbar-logo-left.e4-home-origin-header .w-nav-button,.navbar-logo-left.e4-home-origin-header .menu-button{display:none!important;}}\
       @media screen and (max-width:991px){.navbar-logo-left.e4-home-origin-header,.navbar-logo-left.e4-home-origin-header .navbar-logo-left-container,.navbar-logo-left.e4-home-origin-header .navbar-container{height:auto!important;min-height:0!important;}.navbar-logo-left.e4-home-origin-header .navbar-wrapper{display:flex!important;flex-wrap:wrap;min-height:0!important;}.navbar-logo-left.e4-home-origin-header .e4-site-brand-cluster{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:1.05rem!important;width:100%!important;min-height:4.5rem!important;padding:0 1.15rem!important;}.navbar-logo-left.e4-home-origin-header .e4-site-brand-cluster #theme-toggle-button{display:none!important;}.navbar-logo-left.e4-home-origin-header .e4-site-brand-cluster .w-nav-button,.navbar-logo-left.e4-home-origin-header .e4-site-brand-cluster .menu-button{position:static!important;display:flex!important;align-items:center!important;justify-content:center!important;order:5;flex:0 0 3rem!important;margin-left:auto!important;width:3rem!important;min-width:3rem!important;height:3rem!important;min-height:3rem!important;border:0!important;border-radius:.45rem!important;background:#171511!important;color:#f7f3ea!important;transform:none!important;}.navbar-logo-left.e4-home-origin-header .e4-site-brand-cluster .hamburger-icon{filter:brightness(0) invert(1)!important;}.navbar-logo-left.e4-home-origin-header .navbar-right-div{display:none!important;}.navbar-logo-left.e4-home-origin-header .socials-div{display:flex!important;}.navbar-logo-left.e4-home-origin-header .nav-menu-wrapper{top:4.5rem!important;}}\
       @media screen and (max-width:767px){.reference-topbar{min-height:4.6rem!important;}.reference-topbar-nav .e4-nav-search{min-width:0;max-width:none;flex:1;margin-right:0;}.reference-topbar-nav .e4-nav-search input{font-size:.61rem!important;}.reference-topbar-nav #theme-toggle-button{margin-left:.65rem;}}\
@@ -268,6 +279,24 @@
     list.appendChild(makeContactLink(true));
   }
 
+  function makeHeaderThemeToggle() {
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.id = 'theme-toggle-button';
+    button.className = 'theme-toggle-button';
+    button.setAttribute('aria-label', 'Toggle light and dark mode');
+    button.innerHTML = '<span class="theme-toggle-label">Theme</span><span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span>';
+    button.setAttribute('aria-pressed', document.body.classList.contains('theme-light') ? 'true' : 'false');
+    button.addEventListener('click', function () {
+      var useLight = !document.body.classList.contains('theme-light');
+      document.body.classList.toggle('theme-light', useLight);
+      document.body.classList.toggle('theme-dark', !useLight);
+      button.setAttribute('aria-pressed', useLight ? 'true' : 'false');
+      try { localStorage.setItem('e4-theme', useLight ? 'light' : 'dark'); } catch (error) {}
+    });
+    return button;
+  }
+
   function applyHomepageDesignToInteriorHeaders() {
     document.querySelectorAll('.navbar-logo-left').forEach(function (header) {
       if (header.classList.contains('e4-home-origin-header')) return;
@@ -277,7 +306,11 @@
       var socials = right && right.querySelector('.socials-div');
       var theme = right && right.querySelector('#theme-toggle-button');
       var menuButton = right && right.querySelector('.w-nav-button,.menu-button');
-      if (!wrapper || !brand || !right || !socials || !theme) return;
+      if (!wrapper || !brand || !right || !socials) return;
+      if (!theme) {
+        theme = makeHeaderThemeToggle();
+        right.appendChild(theme);
+      }
       var cluster = document.createElement('div');
       cluster.className = 'e4-site-brand-cluster';
       wrapper.insertBefore(cluster, brand);
@@ -323,6 +356,27 @@
     });
   }
 
+  function removeGenericHeadingPretext() {
+    var selectors = [
+      '.eyebrow', '.hero-service-kicker', '.linkedin-feed-eyebrow', '.ref-detail-kicker', '.ref-heading-accent', '.ref-overline', '.search-kicker', '.section-label', '.service-preview-kicker', '.services-flyer-kicker', '.services-flyer-section-kicker', '.e4-inquiry-kicker', '.bridge-library-kicker', '.bridge-model-index', '.team-line-subheading-div .subheading-div'
+    ];
+    document.querySelectorAll(selectors.join(',')).forEach(function (pretext) {
+      pretext.setAttribute('aria-hidden', 'true');
+      pretext.remove();
+    });
+    document.querySelectorAll('.subheading-div').forEach(function (pretext) {
+      if (pretext.textContent.trim().toLowerCase() !== 'meet the experts behind your success') return;
+      pretext.setAttribute('aria-hidden', 'true');
+      pretext.remove();
+    });
+  }
+
+  function enforceZeroKerning() {
+    document.querySelectorAll('body,body *').forEach(function (element) {
+      element.style.setProperty('letter-spacing', '0', 'important');
+    });
+  }
+
   function installNavigation() {
     var homeNav = document.querySelector('.reference-topbar-nav');
     var utilityNav = document.querySelector('.navbar-right-div');
@@ -336,6 +390,8 @@
     applyHomepageDesignToInteriorHeaders();
     installQuickContact();
     removeSectionSeparators();
+    removeGenericHeadingPretext();
+    enforceZeroKerning();
 
     document.addEventListener('click', function (event) {
       if (!event.target.closest('.e4-nav-group,.e4-mobile-nav-group')) closeDropdowns();
