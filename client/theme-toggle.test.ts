@@ -20,6 +20,10 @@ const servicesPath = path.join(clientRoot, "services", "index.html");
 const servicesPage = fs.readFileSync(servicesPath, "utf8");
 const globalNavigationPath = path.join(clientRoot, "src", "e4-global-navigation.js");
 const globalNavigation = fs.readFileSync(globalNavigationPath, "utf8");
+const contentHubPath = path.join(clientRoot, "src", "content", "main.tsx");
+const contentHub = fs.readFileSync(contentHubPath, "utf8");
+const insightsStylesPath = path.join(clientRoot, "src", "content", "insights.css");
+const insightsStyles = fs.readFileSync(insightsStylesPath, "utf8");
 
 describe("theme toggle markup", () => {
   it("keeps a desktop theme toggle and adds a mobile menu toggle on the homepage", () => {
@@ -256,6 +260,30 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('applyHomepageDesignToInteriorHeaders();');
     expect(globalNavigation).not.toContain('e4-home-unified-header');
     expect(globalNavigation).not.toContain('normalizeHomepageHeader');
+  });
+
+  it("removes the Services-only menu takeover and gives Client Success the homepage-origin navigation treatment", () => {
+    expect(servicesPage).not.toContain('id="manus-home-menu-override"');
+    expect(servicesPage).not.toContain('id="services-nav-hardening"');
+    expect(globalNavigation).toContain('function normalizeClientSuccessHeader()');
+    expect(globalNavigation).toContain("right.className = 'e4-client-success-right'");
+    expect(globalNavigation).toContain("drawer.className = 'e4-client-success-drawer'");
+    expect(globalNavigation).toContain('normalizeClientSuccessHeader();');
+  });
+
+  it("renders the public CMS destination as a branded E4 Power Insights hub", () => {
+    expect(contentHub).toContain("import './insights.css'");
+    expect(contentHub).toContain('function Header(');
+    expect(contentHub).toContain('E4 Power social channels');
+    expect(contentHub).toContain('The B.R.I.D.G.E. Model');
+    expect(contentHub).toContain('Published knowledge, opportunities, and perspective from E4 Power.');
+    expect(contentHub).toContain('/api/cms/public/content');
+    expect(insightsStyles).toContain('--brown:#110b00');
+    expect(insightsStyles).toContain('.e4-insights-header{position:sticky;top:0;');
+    expect(insightsStyles).toContain('.e4-insights-brand-cluster');
+    expect(insightsStyles).toContain('.e4-insights-card.is-brown{background:#110b00}');
+    expect(insightsStyles).toContain('letter-spacing:0!important');
+    expect(insightsStyles).toContain('@media(max-width:991px)');
   });
 
   it("enforces zero letter spacing across rendered content and removes generic heading pretext site-wide", () => {

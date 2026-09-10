@@ -84,15 +84,15 @@ describe('cms content workflow source coverage', () => {
 
   it('renders published content cards and detail views in the public content app', () => {
     expect(publicContentEntrySource).toContain('/api/cms/public/content');
-    expect(publicContentEntrySource).toContain('/content/index.html?slug=');
-    expect(publicContentEntrySource).toContain('This page only surfaces items marked as published in the staff admin workspace.');
-    expect(publicContentEntrySource).toContain('This published content item could not be found.');
+    expect(publicContentEntrySource).toContain('href({ slug: entry.slug })');
+    expect(publicContentEntrySource).toContain('Browse published white papers, newsletters, funding opportunities, and thought leadership from E4 Power.');
+    expect(publicContentEntrySource).toContain('This published item could not be found.');
   });
 
   it('supports public Insights search and clearer listing feedback', () => {
     expect(publicContentEntrySource).toContain("const search = query.get('q')?.trim().toLowerCase() || '';");
-    expect(publicContentEntrySource).toContain('Search by title, slug, or excerpt');
-    expect(publicContentEntrySource).toContain("filteredItems.length === 1 ? '' : 's'");
+    expect(publicContentEntrySource).toContain('Search by title or topic');
+    expect(publicContentEntrySource).toContain("visible.length === 1 ? '' : 's'");
     expect(publicContentEntrySource).toContain('Clear search');
     expect(publicContentEntrySource).toContain('No published entries match the current search and filter settings yet.');
   });
