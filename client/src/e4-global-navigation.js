@@ -283,6 +283,47 @@
     list.appendChild(makeContactLink(true));
   }
 
+  function installHomepageMobileNavigation(homeNav) {
+    if (!homeNav) return;
+    var styleId = 'e4-home-mobile-navigation-style';
+    if (!document.getElementById(styleId)) {
+      var style = document.createElement('style');
+      style.id = styleId;
+      style.textContent = '\
+        .e4-home-mobile-drawer{display:none!important;}\
+        @media screen and (max-width:991px){\
+          body.home-service-menu .reference-topbar-nav .e4-home-mobile-drawer{display:block!important;order:4!important;flex:1 1 100%!important;width:100%!important;margin:0!important;padding:0!important;}\
+          body.home-service-menu .reference-topbar-nav .e4-home-mobile-list{display:grid!important;gap:0!important;width:100%!important;margin:0!important;padding:0!important;list-style:none!important;}\
+          body.home-service-menu .reference-topbar-nav .e4-home-mobile-list .e4-mobile-nav-group{display:grid!important;grid-template-columns:minmax(0,1fr) 3rem!important;align-items:center!important;width:100%!important;margin:0!important;border-bottom:1px solid rgba(237,190,89,.18)!important;}\
+          body.home-service-menu .reference-topbar-nav .e4-home-mobile-list .e4-nav-primary{grid-column:1!important;min-height:3.25rem!important;padding:.95rem 0!important;color:#f7f3ea!important;font-size:.82rem!important;font-weight:800!important;line-height:1!important;text-decoration:none!important;text-transform:uppercase!important;}\
+          body.home-service-menu .reference-topbar-nav .e4-home-mobile-list .e4-nav-toggle{grid-column:2!important;width:3rem!important;height:3.25rem!important;color:#edbe59!important;}\
+          body.home-service-menu .reference-topbar-nav .e4-home-mobile-list .e4-nav-menu{position:static!important;grid-column:1 / -1!important;display:none!important;min-width:0!important;margin:0!important;padding:.12rem 0 .55rem!important;border:0!important;background:transparent!important;box-shadow:none!important;opacity:1!important;pointer-events:auto!important;transform:none!important;}\
+          body.home-service-menu .reference-topbar-nav .e4-home-mobile-list .e4-mobile-nav-group.is-open .e4-nav-menu{display:grid!important;}\
+          body.home-service-menu .reference-topbar-nav .e4-home-mobile-list .e4-nav-menu a{padding:.65rem 0 .65rem .75rem!important;color:#f7f3ea!important;font-size:.7rem!important;font-weight:800!important;line-height:1.25!important;text-decoration:none!important;text-transform:uppercase!important;}\
+          body.home-service-menu .reference-topbar-nav .e4-nav-contact{order:5!important;display:block!important;width:100%!important;min-height:3.25rem!important;padding:.95rem 0!important;color:#f7f3ea!important;font-size:.82rem!important;font-weight:800!important;line-height:1!important;text-decoration:none!important;text-transform:uppercase!important;}\
+          body.home-service-menu.theme-light .reference-topbar-nav .e4-home-mobile-list .e4-nav-primary,body.home-service-menu.theme-light .reference-topbar-nav .e4-home-mobile-list .e4-nav-menu a,body.home-service-menu.theme-light .reference-topbar-nav .e4-nav-contact{color:#1e1a16!important;}\
+          body.home-service-menu .partner-marquee-section{width:100vw!important;max-width:100vw!important;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important;padding-right:0!important;padding-left:0!important;}\
+          body.home-service-menu .partner-marquee-section>.container,body.home-service-menu .partner-marquee-section .marquee{width:100vw!important;max-width:100vw!important;margin-right:0!important;margin-left:0!important;padding-right:0!important;padding-left:0!important;}\
+        }\
+      ';
+      document.head.appendChild(style);
+    }
+    var drawer = homeNav.querySelector('.e4-home-mobile-drawer');
+    if (!drawer) {
+      drawer = document.createElement('div');
+      drawer.className = 'e4-home-mobile-drawer';
+      var contact = homeNav.querySelector('.e4-nav-contact');
+      homeNav.insertBefore(drawer, contact || null);
+    }
+    drawer.innerHTML = '';
+    var list = document.createElement('ul');
+    list.className = 'e4-home-mobile-list';
+    groups.forEach(function (group, index) {
+      list.appendChild(makeDropdown(group, true, 'home-' + index));
+    });
+    drawer.appendChild(list);
+  }
+
   function makeHeaderThemeToggle() {
     var button = document.createElement('button');
     button.type = 'button';
@@ -453,7 +494,10 @@
     var clientNav = document.querySelector('.client-success-nav-links');
     var menu = document.querySelector('.nav-menu-wrapper');
 
-    if (homeNav) installDesktopNavigation(homeNav, 'e4-home-search');
+    if (homeNav) {
+      installDesktopNavigation(homeNav, 'e4-home-search');
+      installHomepageMobileNavigation(homeNav);
+    }
     if (utilityNav) installDesktopNavigation(utilityNav, 'e4-site-search', { mobileSearch: true });
     if (clientNav) installDesktopNavigation(clientNav, 'e4-client-success-search');
     installMobileNavigation(menu);

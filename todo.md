@@ -365,3 +365,6 @@
 - [x] Rebrand the Content page to match the established E4 Power visual system without changing its published content.
 - [x] Verify the repaired Services, Client Success, and Content pages in preview and on the live custom domain before publishing.
 - [x] Eliminate the overlapping Services shared header at the affected responsive breakpoint without altering the established homepage-origin navigation design.
+- [x] Restore every shared navigation link and dropdown group in the mobile hamburger drawer across the site.
+- [x] Make the homepage continuous logo banner span the complete mobile viewport without side insets.
+- [x] Verify the repaired mobile drawer and homepage logo banner at phone width before publishing.

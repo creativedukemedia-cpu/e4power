@@ -279,6 +279,16 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('normalizeClientSuccessHeader();');
   });
 
+  it("restores the complete shared navigation hierarchy in the homepage mobile drawer and makes the partner logo strip full bleed on phones", () => {
+    expect(globalNavigation).toContain('function installHomepageMobileNavigation(homeNav)');
+    expect(globalNavigation).toContain("drawer.className = 'e4-home-mobile-drawer'");
+    expect(globalNavigation).toContain("list.className = 'e4-home-mobile-list'");
+    expect(globalNavigation).toContain("makeDropdown(group, true, 'home-' + index)");
+    expect(globalNavigation).toContain('body.home-service-menu .reference-topbar-nav .e4-home-mobile-list .e4-mobile-nav-group{display:grid!important;');
+    expect(globalNavigation).toContain('body.home-service-menu .partner-marquee-section{width:100vw!important;max-width:100vw!important;');
+    expect(globalNavigation).toContain('body.home-service-menu .partner-marquee-section>.container,body.home-service-menu .partner-marquee-section .marquee{width:100vw!important;max-width:100vw!important;');
+  });
+
   it("renders the public CMS destination as a branded E4 Power Insights hub", () => {
     expect(contentHub).toContain("import './insights.css'");
     expect(contentHub).toContain('function Header(');
