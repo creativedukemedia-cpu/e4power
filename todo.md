@@ -375,3 +375,5 @@
 - [x] Remove the redundant Educate and workshop content block from the homepage because it has its own destination page.
 - [x] Add the requested image treatment to the Tamara Henry team card without changing its published wording.
 - [x] Verify the annotation-driven homepage and team refinements at phone width before publishing.
+- [x] Replace the homepage hero body copy with a centered, full-width gold Four Es banner using the supplied Educate, Elevate, Empower, and Engage structure.
+- [x] Verify the Four Es hero banner at desktop and phone widths before publishing.

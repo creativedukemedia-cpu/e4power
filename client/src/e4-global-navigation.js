@@ -520,6 +520,37 @@
     });
   }
 
+  function installHeroFourEsBanner() {
+    var heroCopy = document.querySelector('body.home-service-menu .reference-hero-copy');
+    if (!heroCopy) return;
+    var support = heroCopy.querySelector('.reference-hero-support');
+    if (support) support.remove();
+    if (!document.getElementById('e4-hero-four-es-banner-style')) {
+      var style = document.createElement('style');
+      style.id = 'e4-hero-four-es-banner-style';
+      style.textContent = '\
+        .e4-hero-four-es-banner{position:absolute!important;top:calc(100% + 1.1rem)!important;left:50%!important;z-index:24!important;width:100vw!important;margin:0!important;padding:0!important;transform:translateX(-50%)!important;background:#e7ba56!important;color:#171511!important;box-shadow:0 .8rem 2rem rgba(0,0,0,.16)!important;}\
+        .e4-hero-four-es-list{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;align-items:stretch!important;width:min(100%,90rem)!important;margin:0 auto!important;padding:0!important;list-style:none!important;}\
+        .e4-hero-four-es-item{display:grid!important;grid-template-columns:3.35rem minmax(0,1fr)!important;align-items:center!important;gap:.8rem!important;min-height:5.9rem!important;margin:0!important;padding:1rem clamp(.9rem,2vw,2rem)!important;color:#171511!important;}\
+        .e4-hero-four-es-item:not(:last-child){box-shadow:inset -1px 0 0 rgba(23,21,17,.22)!important;}\
+        .e4-hero-four-es-icon{display:grid!important;place-items:center!important;width:3.35rem!important;height:3.35rem!important;border-radius:999px!important;background:#171511!important;color:#e7ba56!important;}\
+        .e4-hero-four-es-icon svg{width:1.75rem!important;height:1.75rem!important;fill:none!important;stroke:currentColor!important;stroke-width:1.9!important;stroke-linecap:round!important;stroke-linejoin:round!important;}\
+        .e4-hero-four-es-icon svg .e4-four-es-fill{fill:currentColor!important;stroke:none!important;}\
+        .e4-hero-four-es-label{display:block!important;margin:0!important;color:#171511!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.88rem,1.25vw,1.05rem)!important;font-weight:900!important;line-height:1.05!important;text-transform:uppercase!important;}\
+        .e4-hero-four-es-description{display:block!important;margin-top:.2rem!important;color:#171511!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.72rem,1vw,.86rem)!important;font-weight:650!important;line-height:1.25!important;}\
+        @media screen and (max-width:767px){.e4-hero-four-es-banner{top:calc(100% + .9rem)!important;}.e4-hero-four-es-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;}.e4-hero-four-es-item{grid-template-columns:2.55rem minmax(0,1fr)!important;gap:.55rem!important;min-height:4.55rem!important;padding:.7rem .75rem!important;}.e4-hero-four-es-item:nth-child(odd){box-shadow:inset -1px 0 0 rgba(23,21,17,.22),inset 0 -1px 0 rgba(23,21,17,.22)!important;}.e4-hero-four-es-item:nth-child(even){box-shadow:inset 0 -1px 0 rgba(23,21,17,.22)!important;}.e4-hero-four-es-item:nth-last-child(-n+2){box-shadow:inset -1px 0 0 rgba(23,21,17,.22)!important;}.e4-hero-four-es-item:last-child{box-shadow:none!important;}.e4-hero-four-es-icon{width:2.55rem!important;height:2.55rem!important;}.e4-hero-four-es-icon svg{width:1.35rem!important;height:1.35rem!important;}.e4-hero-four-es-label{font-size:.78rem!important;}.e4-hero-four-es-description{font-size:.64rem!important;line-height:1.2!important;}}\
+      ';
+      document.head.appendChild(style);
+    }
+    var banner = heroCopy.querySelector('.e4-hero-four-es-banner');
+    if (banner) return;
+    banner = document.createElement('aside');
+    banner.className = 'e4-hero-four-es-banner';
+    banner.setAttribute('aria-label', 'E4 Power approach');
+    banner.innerHTML = '<ul class="e4-hero-four-es-list"><li class="e4-hero-four-es-item"><span class="e4-hero-four-es-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v17H6.5A2.5 2.5 0 0 0 4 22zM20 5.5A2.5 2.5 0 0 0 17.5 3H12v17h5.5A2.5 2.5 0 0 1 20 22z"/><path d="M7.5 7.5h2M14.5 7.5h2"/></svg></span><span><strong class="e4-hero-four-es-label">Educate</strong><span class="e4-hero-four-es-description">Build Knowledge</span></span></li><li class="e4-hero-four-es-item"><span class="e4-hero-four-es-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19h16M6 17V11M11 17V7M16 17V4"/><path d="m5 8 5-4 4 2 5-4"/></svg></span><span><strong class="e4-hero-four-es-label">Elevate</strong><span class="e4-hero-four-es-description">Strengthen Systems</span></span></li><li class="e4-hero-four-es-item"><span class="e4-hero-four-es-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="3.4"/><path d="m12 12 6.3-6.3"/><path d="m17.1 5.7 2.4.7-.7 2.4"/></svg></span><span><strong class="e4-hero-four-es-label">Empower</strong><span class="e4-hero-four-es-description">Execute with Excellence</span></span></li><li class="e4-hero-four-es-item"><span class="e4-hero-four-es-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="7.2" r="2.5"/><circle cx="6.3" cy="10" r="2.1"/><circle cx="17.7" cy="10" r="2.1"/><path d="M7.2 20v-3a4.8 4.8 0 0 1 9.6 0v3M2.7 19v-2.1a3.5 3.5 0 0 1 3-3.5M21.3 19v-2.1a3.5 3.5 0 0 0-3-3.5"/></svg></span><span><strong class="e4-hero-four-es-label">Engage</strong><span class="e4-hero-four-es-description">Connect and Collaborate</span></span></li></ul>';
+    heroCopy.appendChild(banner);
+  }
+
   function enforceAnnotatedTeamActionContrast() {
     var useLightActions = document.body.classList.contains('theme-light');
     document.querySelectorAll('.team-members-div .team-member a.link-block').forEach(function (link) {
@@ -564,6 +595,7 @@
     removeSectionSeparators();
     removeGenericHeadingPretext();
     installAnnotatedHomepageRefinements();
+    installHeroFourEsBanner();
     enforceAnnotatedTeamActionContrast();
     new MutationObserver(function () {
       enforceAnnotatedTeamActionContrast();

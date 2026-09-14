@@ -307,6 +307,27 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('installAnnotatedHomepageRefinements();');
   });
 
+  it("replaces the homepage hero body copy with a responsive full-width Four Es banner", () => {
+    expect(globalNavigation).toContain('function installHeroFourEsBanner()');
+    expect(globalNavigation).toContain("var support = heroCopy.querySelector('.reference-hero-support')");
+    expect(globalNavigation).toContain('if (support) support.remove();');
+    expect(globalNavigation).toContain("banner.className = 'e4-hero-four-es-banner'");
+    expect(globalNavigation).toContain('aria-label', 'E4 Power approach');
+    expect(globalNavigation).toContain('e4-hero-four-es-list');
+    expect(globalNavigation).toContain('Educate');
+    expect(globalNavigation).toContain('Build Knowledge');
+    expect(globalNavigation).toContain('Elevate');
+    expect(globalNavigation).toContain('Strengthen Systems');
+    expect(globalNavigation).toContain('Empower');
+    expect(globalNavigation).toContain('Execute with Excellence');
+    expect(globalNavigation).toContain('Engage');
+    expect(globalNavigation).toContain('Connect and Collaborate');
+    expect(globalNavigation).toContain('.e4-hero-four-es-banner{position:absolute!important;top:calc(100% + 1.1rem)!important;left:50%!important;');
+    expect(globalNavigation).toContain('width:100vw!important;');
+    expect(globalNavigation).toContain('@media screen and (max-width:767px){.e4-hero-four-es-banner{top:calc(100% + .9rem)!important;}.e4-hero-four-es-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;}');
+    expect(globalNavigation).toContain('installHeroFourEsBanner();');
+  });
+
   it("renders the public CMS destination as a branded E4 Power Insights hub", () => {
     expect(contentHub).toContain("import './insights.css'");
     expect(contentHub).toContain('function Header(');
