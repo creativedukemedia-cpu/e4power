@@ -481,6 +481,64 @@
     });
   }
 
+  function installAnnotatedHomepageRefinements() {
+    if (!document.getElementById('e4-annotated-homepage-refinements')) {
+      var style = document.createElement('style');
+      style.id = 'e4-annotated-homepage-refinements';
+      style.textContent = '\
+        body.theme-light .team-members-div,body.theme-light .team-member{background:#fffaf2!important;color:#1e1a16!important;}\
+        body.theme-light .team-member .member-title,body.theme-light .team-member .member-bio,body.theme-light .team-member .member-bio p,body.theme-light .team-member .link-block,body.theme-light .team-member .link-block div{color:#1e1a16!important;opacity:1!important;text-shadow:none!important;}\
+        body.theme-light .team-member .role-text{color:#a67324!important;opacity:1!important;text-shadow:none!important;}\
+        body.theme-light .team-member .link-block{background:#fffaf2!important;border-color:rgba(30,26,22,.24)!important;}\
+        html body.theme-light .team-members-div .team-member a.link-block,html body.theme-light .team-members-div .team-member a.link-block>div{color:#1e1a16!important;opacity:1!important;text-shadow:none!important;}\
+        html body.theme-light .team-members-div .team-member a.link-block img{filter:brightness(0) saturate(100%)!important;opacity:1!important;}\
+        .team-member .team-picture-div img[src*="tamara-henry-portrait"]{display:block!important;width:100%!important;height:auto!important;min-height:16rem!important;object-fit:cover!important;object-position:50% 18%!important;}\
+        #empower.bridge-program-section .bridge-model-pillar p{color:#fffaf2!important;font-size:clamp(.78rem,1.3vw,.95rem)!important;font-weight:650!important;line-height:1.48!important;text-shadow:0 1px 10px rgba(0,0,0,.4)!important;}\
+        #empower.bridge-program-section .bridge-model-pillar svg,#empower.bridge-program-section .bridge-model-pillar [class*="icon"]{color:#edbe59!important;fill:currentColor!important;opacity:1!important;}\
+        @media screen and (max-width:560px){\
+          body.home-service-menu .reference-hero{min-height:35rem!important;padding:0!important;}\
+          body.home-service-menu .reference-hero-copy{top:clamp(13.5rem,59vw,15.5rem)!important;right:1.25rem!important;bottom:auto!important;left:1.25rem!important;width:auto!important;max-width:none!important;transform:none!important;text-align:center!important;}\
+          body.home-service-menu .reference-hero-title{font-size:clamp(2.45rem,13vw,3.15rem)!important;line-height:.95!important;}\
+          body.home-service-menu .reference-hero-support{margin-top:.8rem!important;font-size:.93rem!important;line-height:1.48!important;}\
+          body.home-service-menu .hero-services-panel{right:1rem!important;bottom:1rem!important;left:1rem!important;width:auto!important;max-width:none!important;margin:0!important;padding:.72rem!important;}\
+          #empower.bridge-program-section .bridge-model-pillars{gap:1.15rem!important;}\
+          #empower.bridge-program-section .bridge-model-pillar p{font-size:.86rem!important;line-height:1.52!important;}\
+        }\
+      ';
+      document.head.appendChild(style);
+    }
+    document.querySelectorAll('body.home-service-menu .bookmarks-div').forEach(function (bookmarks) {
+      bookmarks.remove();
+    });
+    document.querySelectorAll('body.home-service-menu #educate').forEach(function (educateSection) {
+      educateSection.remove();
+    });
+    document.querySelectorAll('.team-member .team-picture-div img[src*="tamara-henry-v2"]').forEach(function (portrait) {
+      portrait.src = '/manus-storage/tamara-henry-portrait_25995acc.png';
+      portrait.srcset = '/manus-storage/tamara-henry-portrait_25995acc.png 1920w';
+      portrait.alt = 'Tamara Henry, PMP';
+    });
+  }
+
+  function enforceAnnotatedTeamActionContrast() {
+    var useLightActions = document.body.classList.contains('theme-light');
+    document.querySelectorAll('.team-members-div .team-member a.link-block').forEach(function (link) {
+      if (useLightActions) {
+        link.style.setProperty('color', '#1e1a16', 'important');
+        link.querySelectorAll('*').forEach(function (child) {
+          if (child.tagName === 'IMG') child.style.setProperty('filter', 'brightness(0) saturate(100%)', 'important');
+          else child.style.setProperty('color', '#1e1a16', 'important');
+        });
+      } else {
+        link.style.removeProperty('color');
+        link.querySelectorAll('*').forEach(function (child) {
+          child.style.removeProperty('color');
+          child.style.removeProperty('filter');
+        });
+      }
+    });
+  }
+
   function enforceZeroKerning() {
     document.querySelectorAll('body,body *').forEach(function (element) {
       element.style.setProperty('letter-spacing', '0', 'important');
@@ -505,6 +563,11 @@
     installQuickContact();
     removeSectionSeparators();
     removeGenericHeadingPretext();
+    installAnnotatedHomepageRefinements();
+    enforceAnnotatedTeamActionContrast();
+    new MutationObserver(function () {
+      enforceAnnotatedTeamActionContrast();
+    }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
     enforceZeroKerning();
 
     document.addEventListener('click', function (event) {

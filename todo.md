@@ -368,3 +368,10 @@
 - [x] Restore every shared navigation link and dropdown group in the mobile hamburger drawer across the site.
 - [x] Make the homepage continuous logo banner span the complete mobile viewport without side insets.
 - [x] Verify the repaired mobile drawer and homepage logo banner at phone width before publishing.
+- [x] Restore readable light-mode contrast for the annotated team-card content on mobile.
+- [x] Refine the annotated homepage mobile hero spacing and navigation rhythm.
+- [x] Increase contrast and legibility for the annotated B.R.I.D.G.E. model supporting copy and icons on mobile.
+- [x] Remove the EN, EM, EL, and ED marker row from the homepage.
+- [x] Remove the redundant Educate and workshop content block from the homepage because it has its own destination page.
+- [x] Add the requested image treatment to the Tamara Henry team card without changing its published wording.
+- [x] Verify the annotation-driven homepage and team refinements at phone width before publishing.

@@ -289,6 +289,24 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('body.home-service-menu .partner-marquee-section>.container,body.home-service-menu .partner-marquee-section .marquee{width:100vw!important;max-width:100vw!important;');
   });
 
+  it("applies the annotated mobile contrast and homepage cleanup refinements without rewriting published content", () => {
+    expect(globalNavigation).toContain('function installAnnotatedHomepageRefinements()');
+    expect(globalNavigation).toContain('body.theme-light .team-members-div,body.theme-light .team-member{background:#fffaf2!important;color:#1e1a16!important;}');
+    expect(globalNavigation).toContain('#empower.bridge-program-section .bridge-model-pillar p{color:#fffaf2!important;');
+    expect(globalNavigation).toContain('body.home-service-menu .reference-hero{min-height:35rem!important;padding:0!important;}');
+    expect(globalNavigation).toContain('body.home-service-menu .reference-hero-copy{top:clamp(13.5rem,59vw,15.5rem)!important;right:1.25rem!important;bottom:auto!important;left:1.25rem!important;');
+    expect(globalNavigation).toContain('transform:none!important;text-align:center!important;');
+    expect(globalNavigation).toContain("document.querySelectorAll('body.home-service-menu .bookmarks-div')");
+    expect(globalNavigation).toContain("document.querySelectorAll('body.home-service-menu #educate')");
+    expect(globalNavigation).toContain("document.querySelectorAll('.team-member .team-picture-div img[src*=\"tamara-henry-v2\"]')");
+    expect(globalNavigation).toContain("portrait.src = '/manus-storage/tamara-henry-portrait_25995acc.png'");
+    expect(globalNavigation).toContain('.team-member .team-picture-div img[src*="tamara-henry-portrait"]{display:block!important;width:100%!important;');
+    expect(globalNavigation).toContain('function enforceAnnotatedTeamActionContrast()');
+    expect(globalNavigation).toContain("link.style.setProperty('color', '#1e1a16', 'important')");
+    expect(globalNavigation).toContain("attributeFilter: ['class']");
+    expect(globalNavigation).toContain('installAnnotatedHomepageRefinements();');
+  });
+
   it("renders the public CMS destination as a branded E4 Power Insights hub", () => {
     expect(contentHub).toContain("import './insights.css'");
     expect(contentHub).toContain('function Header(');
