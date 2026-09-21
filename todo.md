@@ -386,3 +386,5 @@
 - [x] Remove the B.R.I.D.G.E. introduction call to action and refine the approved image composition into a professional editorial treatment.
 - [x] Remove rectangular service-link enclosures from the homepage hero disclosure while preserving visible individual links.
 - [x] Harden shared navigation state so a Services theme change cannot expose multiple dropdown menus, then validate desktop and phone layouts.
+
+- [x] Replace dark B.R.I.D.G.E. model surfaces in homepage light mode with readable branded light treatments and validate all supporting copy and diagrams.

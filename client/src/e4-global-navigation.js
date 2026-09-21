@@ -602,6 +602,41 @@
     document.head.appendChild(style);
   }
 
+  function installBridgeLightModeSystem() {
+    if (document.getElementById('e4-bridge-light-mode-system')) return;
+    var style = document.createElement('style');
+    style.id = 'e4-bridge-light-mode-system';
+    style.textContent = '\
+      body.theme-light #empower.bridge-program-section{background:#f5f0e6!important;color:#1e1a16!important;}\
+      body.theme-light #empower.bridge-program-section::before{background:radial-gradient(circle at 18% 9%,rgba(199,150,48,.2),transparent 28%),linear-gradient(110deg,rgba(17,11,0,.055),transparent 44%)!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-model-library{position:relative!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-library-header{border-color:rgba(30,26,22,.24)!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-library-heading,body.theme-light #empower.bridge-program-section .bridge-model-title{color:#1e1a16!important;text-shadow:none!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-library-heading span,body.theme-light #empower.bridge-program-section .bridge-model-title span,body.theme-light #empower.bridge-program-section .bridge-model-subtitle{color:#8d601a!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-library-intro,body.theme-light #empower.bridge-program-section .bridge-model-context{color:#4a3e30!important;text-shadow:none!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-model-grid{gap:0!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-model-card,body.theme-light #empower.bridge-program-section .bridge-model-card:nth-child(even)::before{background:#f5f0e6!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-model-card:nth-child(even)::before{background:#e9d9b7!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-model-card{border-color:transparent!important;color:#1e1a16!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-model-card::after{background:#8d601a!important;opacity:.7!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-model-pillar p{color:#2c261f!important;text-shadow:none!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-model-pillar-icon,body.theme-light #empower.bridge-program-section .bridge-model-pillar-icon svg{color:#8d601a!important;fill:currentColor!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-network::before{border-color:rgba(141,96,26,.55)!important;box-shadow:inset 0 0 2.5rem rgba(141,96,26,.08),0 0 0 1px rgba(30,26,22,.08)!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-network::after{border-color:rgba(30,26,22,.24)!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-network-links line{stroke:rgba(45,37,25,.42)!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-network-core{border-color:#8d601a!important;background:radial-gradient(circle,#fffaf2,#e7d4a9 72%)!important;box-shadow:0 0 0 .45rem rgba(141,96,26,.12),0 0 2.5rem rgba(141,96,26,.14)!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-network-core strong{color:#1e1a16!important;text-shadow:none!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-network-node::after{border-color:rgba(30,26,22,.52)!important;background:#fffaf2!important;box-shadow:0 0 0 .2rem rgba(30,26,22,.06)!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-network-role-label{color:#1e1a16!important;text-shadow:0 1px 0 #fffaf2!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-network-node:hover .bridge-network-role-label,body.theme-light #empower.bridge-program-section .bridge-network-node.is-active .bridge-network-role-label{color:#6d4810!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-network-node:focus-visible{outline-color:#1e1a16!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-model-focus,body.theme-light #empower.bridge-program-section .bridge-model-guide{color:#5c4a31!important;text-shadow:none!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-model-expand{border-color:rgba(30,26,22,.42)!important;background:transparent!important;color:#1e1a16!important;}\
+      body.theme-light #empower.bridge-program-section .bridge-model-expand svg{stroke:#8d601a!important;}\
+    ';
+    document.head.appendChild(style);
+  }
+
   function installHeroServiceLinks() {
     var panel = document.querySelector('body.home-service-menu .hero-services-panel');
     if (!panel || panel.dataset.e4ServiceLinks === 'true') return;
@@ -688,6 +723,7 @@
 
   function installNavigation() {
     installRequestedRefinementStyles();
+    installBridgeLightModeSystem();
     normalizeClientSuccessHeader();
     var homeNav = document.querySelector('.reference-topbar-nav');
     var utilityNav = document.querySelector('.navbar-right-div');

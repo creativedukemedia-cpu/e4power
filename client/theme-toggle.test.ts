@@ -350,6 +350,17 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).not.toContain('class="e4-bridge-offering-link"');
   });
 
+  it("gives the B.R.I.D.G.E. model library an intentionally readable light-mode treatment", () => {
+    expect(globalNavigation).toContain('function installBridgeLightModeSystem()');
+    expect(globalNavigation).toContain("style.id = 'e4-bridge-light-mode-system'");
+    expect(globalNavigation).toContain('body.theme-light #empower.bridge-program-section{background:#f5f0e6!important;color:#1e1a16!important;}');
+    expect(globalNavigation).toContain('body.theme-light #empower.bridge-program-section .bridge-model-card:nth-child(even)::before{background:#e9d9b7!important;}');
+    expect(globalNavigation).toContain('body.theme-light #empower.bridge-program-section .bridge-model-pillar p{color:#2c261f!important;text-shadow:none!important;}');
+    expect(globalNavigation).toContain('body.theme-light #empower.bridge-program-section .bridge-network-core{border-color:#8d601a!important;background:radial-gradient(circle,#fffaf2,#e7d4a9 72%)!important;');
+    expect(globalNavigation).toContain('body.theme-light #empower.bridge-program-section .bridge-network-role-label{color:#1e1a16!important;text-shadow:0 1px 0 #fffaf2!important;}');
+    expect(globalNavigation).toContain('installBridgeLightModeSystem();');
+  });
+
   it("adds Home, Contact Us, and Core Services across shared navigation destinations", () => {
     expect(globalNavigation).toContain("{ title: 'Home', url: '/', keywords:");
     expect(globalNavigation).toContain("{ label: 'Core Services', url: '/services/#core-services' }");
