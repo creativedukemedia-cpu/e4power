@@ -390,3 +390,5 @@
 - [x] Replace dark B.R.I.D.G.E. model surfaces in homepage light mode with readable branded light treatments and validate all supporting copy and diagrams.
 
 - [x] Simplify the homepage B.R.I.D.G.E. introduction to one professionally framed supplied photo and validate desktop and phone layouts.
+
+- [x] Remove the redundant B.R.I.D.G.E. Model Library heading and introductory sentence so the new concept introduction leads directly into the models.

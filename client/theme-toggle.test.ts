@@ -65,10 +65,10 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain('color:#fff8ef!important');
   });
 
-  it("adds an accessible branded B.R.I.D.G.E. model library with all four supplied organizational variations", () => {
+  it("keeps an accessible B.R.I.D.G.E. model library with all four supplied organizational variations", () => {
     expect(homepage).toContain('id="bridge-model-library-styles"');
     expect(homepage).toContain('id="interactive-bridge-model-script"');
-    expect(homepage).toContain('B.R.I.D.G.E. <span>Model Library</span>');
+    expect(homepage).toContain('section.innerHTML=\'<div class="bridge-model-library"><div class="bridge-model-grid">\'');
     expect(homepage).toContain('Traditional Structure to Enhance Growth');
     expect(homepage).toContain('Transformative Growth to Enhancement');
     expect(homepage).toContain("center:'PMP'");
@@ -349,6 +349,12 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('box-shadow:none!important');
     expect(globalNavigation).not.toContain('Explore the B.R.I.D.G.E. models');
     expect(globalNavigation).not.toContain('class="e4-bridge-offering-link"');
+  });
+
+  it("removes the redundant library heading so the concept introduction leads directly into the models", () => {
+    expect(homepage).toContain("section.innerHTML='<div class=\"bridge-model-library\"><div class=\"bridge-model-grid\">'");
+    expect(homepage).not.toContain('<header class="bridge-library-header"><div><h2 class="bridge-library-heading">B.R.I.D.G.E. <span>Model Library</span></h2>');
+    expect(homepage).not.toContain('Four organizational applications that place the right specialists around the work already in motion.');
   });
 
   it("gives the B.R.I.D.G.E. model library an intentionally readable light-mode treatment", () => {
