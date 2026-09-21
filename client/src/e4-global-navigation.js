@@ -3,6 +3,7 @@
   window.__e4GlobalNavigationLoaded = true;
 
   var pages = [
+    { title: 'Home', url: '/', keywords: 'home e4 power consulting bridge services' },
     { title: 'About Us', url: '/about-us/', keywords: 'about e4 power consulting mission team partnership leadership engage' },
     { title: 'Our Team', url: '/about-us/#engage', keywords: 'team experts leadership consultants e4 power' },
     { title: 'In the News', url: '/about-us/#linkedin-feed', keywords: 'news linkedin press announcements updates' },
@@ -44,6 +45,7 @@
       label: 'Our Services',
       url: '/services/',
       children: [
+        { label: 'Core Services', url: '/services/#core-services' },
         { label: 'The B.R.I.D.G.E. Model', url: '/#empower' },
         { label: 'Workshops', url: '/services/workshops-training/' }
       ]
@@ -211,10 +213,23 @@
   function makeDesktopNavigation() {
     var nav = document.createElement('div');
     nav.className = 'e4-dropdown-navigation';
+    nav.appendChild(makeHomeLink(false));
     groups.forEach(function (group, index) {
       nav.appendChild(makeDropdown(group, false, index));
     });
     return nav;
+  }
+
+  function makeHomeLink(mobile) {
+    var link = document.createElement('a');
+    link.className = 'e4-nav-primary e4-nav-home';
+    link.href = '/';
+    link.textContent = 'Home';
+    if (!mobile) return link;
+    var item = document.createElement('li');
+    item.className = 'e4-mobile-home';
+    item.appendChild(link);
+    return item;
   }
 
   function makeContactLink(mobile) {
@@ -223,13 +238,13 @@
       var link = document.createElement('a');
       link.className = 'e4-mobile-contact';
       link.href = '/contact-us/';
-      link.textContent = 'Contact';
+      link.textContent = 'Contact Us';
       contact.appendChild(link);
       return contact;
     }
     contact.className = 'e4-nav-contact';
     contact.href = '/contact-us/';
-    contact.textContent = 'Contact';
+    contact.textContent = 'Contact Us';
     return contact;
   }
 
@@ -277,6 +292,7 @@
     var list = menu.querySelector('.nav-menu-two');
     if (!list) return;
     list.innerHTML = '';
+    list.appendChild(makeHomeLink(true));
     groups.forEach(function (group, index) {
       list.appendChild(makeDropdown(group, true, index));
     });
@@ -318,6 +334,7 @@
     drawer.innerHTML = '';
     var list = document.createElement('ul');
     list.className = 'e4-home-mobile-list';
+    list.appendChild(makeHomeLink(true));
     groups.forEach(function (group, index) {
       list.appendChild(makeDropdown(group, true, 'home-' + index));
     });
@@ -551,6 +568,81 @@
     heroCopy.appendChild(banner);
   }
 
+  function installRequestedRefinementStyles() {
+    if (document.getElementById('e4-requested-refinement-style')) return;
+    var style = document.createElement('style');
+    style.id = 'e4-requested-refinement-style';
+    style.textContent = '\
+      .e4-scroll-rail{position:fixed!important;top:0!important;bottom:0!important;left:0!important;z-index:32000!important;width:.34rem!important;background:rgba(231,186,86,.2)!important;pointer-events:none!important;}.e4-scroll-progress{display:block!important;width:100%!important;height:100%!important;background:#e7ba56!important;box-shadow:0 0 .9rem rgba(231,186,86,.72)!important;transform:scaleY(0);transform-origin:top!important;transition:transform .08s linear!important;}\
+      .e4-bridge-offering-intro{position:relative!important;isolation:isolate!important;overflow:hidden!important;padding:clamp(4.8rem,9vw,8.4rem) 0!important;background:#110b00!important;color:#fff8ef!important;}.e4-bridge-offering-intro::before{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(circle at 7% 12%,rgba(231,186,86,.22),transparent 26%),linear-gradient(118deg,rgba(255,255,255,.035),transparent 42%);pointer-events:none;}.e4-bridge-offering-grid{display:grid!important;grid-template-columns:minmax(0,.95fr) minmax(22rem,1.05fr)!important;gap:clamp(2.2rem,6vw,7rem)!important;align-items:center!important;width:min(100% - clamp(2.5rem,8vw,10rem),88rem)!important;margin:0 auto!important;}.e4-bridge-offering-copy h2{max-width:11ch!important;margin:0!important;color:#fff8ef!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(2.8rem,5.8vw,6.1rem)!important;font-weight:900!important;line-height:.88!important;text-transform:uppercase!important;}.e4-bridge-offering-copy h2 span{color:#e7ba56!important;}.e4-bridge-offering-lede{max-width:37rem!important;margin:1.5rem 0 0!important;color:#fff8ef!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(1rem,1.45vw,1.22rem)!important;font-weight:650!important;line-height:1.58!important;}.e4-bridge-offering-copy p:not(.e4-bridge-offering-lede){max-width:35rem!important;margin:1.1rem 0 0!important;color:rgba(255,248,239,.78)!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.92rem,1.2vw,1.05rem)!important;line-height:1.68!important;}.e4-bridge-offering-link{display:inline-flex!important;align-items:center!important;gap:.72rem!important;margin-top:2rem!important;padding:.82rem 0!important;border:0!important;border-bottom:2px solid #e7ba56!important;background:transparent!important;color:#fff8ef!important;font-family:Montserrat,Arial,sans-serif!important;font-size:.74rem!important;font-weight:850!important;line-height:1!important;text-decoration:none!important;text-transform:uppercase!important;transition:color .18s ease,transform .18s cubic-bezier(.23,1,.32,1)!important;}.e4-bridge-offering-link::after{content:"↘";display:inline-block!important;color:#e7ba56!important;font-size:1.15rem!important;line-height:1!important;}.e4-bridge-offering-link:hover,.e4-bridge-offering-link:focus-visible{color:#e7ba56!important;transform:translateY(-2px)!important;outline:0!important;}.e4-bridge-offering-link:focus-visible{box-shadow:0 3px 0 #fff8ef!important;}.e4-bridge-offering-photos{position:relative!important;min-height:clamp(22rem,34vw,31rem)!important;}.e4-bridge-offering-photo{position:absolute!important;display:block!important;overflow:hidden!important;margin:0!important;background:#1a140b!important;box-shadow:0 1.5rem 3.4rem rgba(0,0,0,.35)!important;}.e4-bridge-offering-photo img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;filter:grayscale(1) contrast(1.06)!important;transition:filter .22s ease,transform .36s cubic-bezier(.23,1,.32,1)!important;}.e4-bridge-offering-photo:hover img{filter:grayscale(0) contrast(1)!important;transform:scale(1.035)!important;}.e4-bridge-offering-photo--writing{inset:11% 14% 0 0!important;clip-path:polygon(0 8%,92% 0,100% 87%,8% 100%)!important;}.e4-bridge-offering-photo--collaboration{inset:0 0 19% 35%!important;clip-path:polygon(10% 0,100% 8%,89% 100%,0 88%)!important;}.e4-bridge-offering-photo--collaboration::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(231,186,86,.3),transparent 58%);pointer-events:none;}.e4-bridge-offering-photos::after{content:"E4";position:absolute!important;right:7%!important;bottom:5%!important;color:#e7ba56!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(3rem,7vw,6rem)!important;font-weight:900!important;line-height:1!important;font-style:italic!important;pointer-events:none!important;}.e4-bridge-offering-intro,.e4-bridge-offering-intro *{letter-spacing:0!important;}\
+      body.home-service-menu .hero-services-panel .hero-services-list{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:.65rem .8rem!important;margin:0!important;padding:.8rem 0 .2rem!important;color:#f6efe3!important;line-height:1.25!important;text-shadow:none!important;}body.home-service-menu .hero-services-panel .hero-services-line{display:contents!important;}body.home-service-menu .hero-services-panel .hero-services-separator{display:none!important;}body.home-service-menu .hero-services-panel a.hero-services-item{display:flex!important;align-items:center!important;min-height:3.2rem!important;padding:.62rem .65rem!important;border:1px solid rgba(231,186,86,.3)!important;background:rgba(255,255,255,.055)!important;color:#fff8ef!important;font-family:Montserrat,Arial,sans-serif!important;font-size:.7rem!important;font-weight:800!important;line-height:1.2!important;text-align:left!important;text-decoration:none!important;text-transform:uppercase!important;white-space:normal!important;transition:background-color .16s ease,color .16s ease,transform .16s cubic-bezier(.23,1,.32,1)!important;}body.home-service-menu .hero-services-panel a.hero-services-item:hover,body.home-service-menu .hero-services-panel a.hero-services-item:focus-visible{background:#e7ba56!important;color:#171511!important;outline:0!important;transform:translateY(-2px)!important;}body.home-service-menu.theme-light .hero-services-panel a.hero-services-item{border-color:rgba(30,26,22,.18)!important;background:rgba(255,255,255,.76)!important;color:#1e1a16!important;}body.home-service-menu.theme-light .hero-services-panel a.hero-services-item:hover,body.home-service-menu.theme-light .hero-services-panel a.hero-services-item:focus-visible{background:#e7ba56!important;color:#171511!important;}.services-flyer-core,.services-flyer-service-list li[id]{scroll-margin-top:7.25rem!important;}\
+      @media screen and (min-width:992px){.navbar-logo-left.e4-home-origin-header .navbar-right-div,.client-success-nav.e4-home-origin-header .e4-client-success-right{flex-wrap:nowrap!important;min-width:0!important;}.navbar-logo-left.e4-home-origin-header .e4-dropdown-navigation,.client-success-nav.e4-home-origin-header .e4-dropdown-navigation{flex:0 0 auto!important;white-space:nowrap!important;}.navbar-logo-left.e4-home-origin-header .e4-nav-search{flex:0 1 8rem!important;}.navbar-logo-left.e4-home-origin-header .e4-nav-contact{flex:0 0 auto!important;}}\
+      @media screen and (min-width:992px) and (max-width:1180px){.navbar-logo-left.e4-home-origin-header .navbar-right-div{gap:.28rem!important;}.navbar-logo-left.e4-home-origin-header .e4-nav-search{min-width:5.6rem!important;max-width:6.25rem!important;}.navbar-logo-left.e4-home-origin-header .e4-dropdown-navigation{gap:.3rem!important;}.navbar-logo-left.e4-home-origin-header .e4-nav-group{margin-left:.08rem!important;}.navbar-logo-left.e4-home-origin-header .e4-nav-home{margin-right:.12rem!important;}.navbar-logo-left.e4-home-origin-header .e4-nav-primary,.navbar-logo-left.e4-home-origin-header .e4-nav-contact{font-size:.54rem!important;}.navbar-logo-left.e4-home-origin-header .e4-nav-toggle{width:.9rem!important;}}\
+      @media screen and (max-width:767px){.e4-scroll-rail{width:.23rem!important;}.e4-bridge-offering-intro{padding:4.25rem 0!important;}.e4-bridge-offering-grid{grid-template-columns:1fr!important;gap:2.25rem!important;width:min(100% - 2.5rem,40rem)!important;}.e4-bridge-offering-copy h2{font-size:clamp(2.7rem,14vw,4.25rem)!important;}.e4-bridge-offering-lede{margin-top:1.15rem!important;font-size:1rem!important;}.e4-bridge-offering-photos{min-height:19rem!important;}.e4-bridge-offering-photo--writing{inset:12% 11% 0 0!important;}.e4-bridge-offering-photo--collaboration{inset:0 0 20% 27%!important;}.e4-bridge-offering-photos::after{right:5%!important;bottom:4%!important;}.e4-bridge-offering-link{margin-top:1.55rem!important;}.e4-bridge-offering-intro .e4-bridge-offering-copy p:not(.e4-bridge-offering-lede){font-size:.93rem!important;}.hero-container.reference-hero .hero-services-panel .hero-services-list{grid-template-columns:1fr!important;gap:.42rem!important;padding-top:.55rem!important;}.hero-container.reference-hero .hero-services-panel a.hero-services-item{min-height:2.65rem!important;justify-content:center!important;padding:.52rem .7rem!important;font-size:.66rem!important;text-align:center!important;}}\
+      @media (prefers-reduced-motion:reduce){.e4-scroll-progress,.e4-bridge-offering-photo img,.e4-bridge-offering-link,body.home-service-menu .hero-services-panel a.hero-services-item{transition:none!important;}}\
+    ';
+    document.head.appendChild(style);
+  }
+
+  function installHeroServiceLinks() {
+    var panel = document.querySelector('body.home-service-menu .hero-services-panel');
+    if (!panel || panel.dataset.e4ServiceLinks === 'true') return;
+    var destinations = {
+      'Grant Writing': '/services/#grant-writing',
+      'Grant Management': '/services/#grant-management',
+      'Project Management': '/services/#project-management',
+      'Readiness Assessments': '/services/#readiness-assessments',
+      'Financial Management': '/services/#financial-management',
+      'Speaking Engagements': '/services/#speaking-engagements',
+      'IT Solutions': '/services/#it-solutions'
+    };
+    panel.querySelectorAll('.hero-services-item').forEach(function (item) {
+      var label = item.textContent.trim();
+      var destination = destinations[label];
+      if (!destination || item.tagName === 'A') return;
+      var link = document.createElement('a');
+      link.className = 'hero-services-item';
+      link.href = destination;
+      link.textContent = label;
+      link.setAttribute('aria-label', 'View ' + label + ' in E4 Power core services');
+      item.replaceWith(link);
+    });
+    panel.dataset.e4ServiceLinks = 'true';
+  }
+
+  function installBridgeOfferingIntro() {
+    var bridgeSection = document.getElementById('empower');
+    if (!bridgeSection || document.getElementById('e4-bridge-offering-intro')) return;
+    var library = bridgeSection.querySelector('.bridge-model-library');
+    if (library) library.id = 'bridge-model-library';
+    var intro = document.createElement('section');
+    intro.id = 'e4-bridge-offering-intro';
+    intro.className = 'e4-bridge-offering-intro';
+    intro.setAttribute('aria-labelledby', 'e4-bridge-offering-heading');
+    intro.innerHTML = '<div class="e4-bridge-offering-grid"><div class="e4-bridge-offering-copy"><h2 id="e4-bridge-offering-heading">The <span>B.R.I.D.G.E.</span> Delivery Model</h2><p class="e4-bridge-offering-lede">B.R.I.D.G.E. is E4 Power’s offering for connecting the right specialists to the work already in motion.</p><p>We bring strategy, coordination, technical insight, financial stewardship, and implementation support into one accountable team around your goals.</p><a class="e4-bridge-offering-link" href="#bridge-model-library">Explore the B.R.I.D.G.E. models</a></div><div class="e4-bridge-offering-photos" aria-label="E4 Power collaboration in action"><figure class="e4-bridge-offering-photo e4-bridge-offering-photo--writing"><img src="/manus-storage/bridge-writing_88d14ca9.jpg" alt="A professional documenting work with a pen" /></figure><figure class="e4-bridge-offering-photo e4-bridge-offering-photo--collaboration"><img src="/manus-storage/bridge-collaboration_e5c858cb.webp" alt="A diverse team joining hands in collaboration" /></figure></div></div>';
+    bridgeSection.parentNode.insertBefore(intro, bridgeSection);
+  }
+
+  function installScrollProgress() {
+    if (document.getElementById('e4-scroll-rail')) return;
+    var rail = document.createElement('div');
+    rail.id = 'e4-scroll-rail';
+    rail.className = 'e4-scroll-rail';
+    rail.setAttribute('aria-hidden', 'true');
+    rail.innerHTML = '<span class="e4-scroll-progress"></span>';
+    document.body.appendChild(rail);
+    var progress = rail.querySelector('.e4-scroll-progress');
+    var update = function () {
+      var root = document.documentElement;
+      var total = Math.max(1, root.scrollHeight - window.innerHeight);
+      var value = Math.max(0, Math.min(1, window.scrollY / total));
+      progress.style.transform = 'scaleY(' + value + ')';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  }
+
   function enforceAnnotatedTeamActionContrast() {
     var useLightActions = document.body.classList.contains('theme-light');
     document.querySelectorAll('.team-members-div .team-member a.link-block').forEach(function (link) {
@@ -577,6 +669,7 @@
   }
 
   function installNavigation() {
+    installRequestedRefinementStyles();
     normalizeClientSuccessHeader();
     var homeNav = document.querySelector('.reference-topbar-nav');
     var utilityNav = document.querySelector('.navbar-right-div');
@@ -596,6 +689,9 @@
     removeGenericHeadingPretext();
     installAnnotatedHomepageRefinements();
     installHeroFourEsBanner();
+    installHeroServiceLinks();
+    installBridgeOfferingIntro();
+    installScrollProgress();
     enforceAnnotatedTeamActionContrast();
     new MutationObserver(function () {
       enforceAnnotatedTeamActionContrast();

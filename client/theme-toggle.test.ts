@@ -328,6 +328,53 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('installHeroFourEsBanner();');
   });
 
+  it("adds the requested B.R.I.D.G.E. offering introduction and left-edge scroll indicator without disturbing the model library", () => {
+    expect(globalNavigation).toContain('function installBridgeOfferingIntro()');
+    expect(globalNavigation).toContain("intro.id = 'e4-bridge-offering-intro'");
+    expect(globalNavigation).toContain('The <span>B.R.I.D.G.E.</span> Delivery Model');
+    expect(globalNavigation).toContain('B.R.I.D.G.E. is E4 Power’s offering for connecting the right specialists');
+    expect(globalNavigation).toContain('/manus-storage/bridge-writing_88d14ca9.jpg');
+    expect(globalNavigation).toContain('/manus-storage/bridge-collaboration_e5c858cb.webp');
+    expect(globalNavigation).toContain("library.id = 'bridge-model-library'");
+    expect(globalNavigation).toContain('function installScrollProgress()');
+    expect(globalNavigation).toContain("rail.id = 'e4-scroll-rail'");
+    expect(globalNavigation).toContain("progress.style.transform = 'scaleY(' + value + ')'");
+  });
+
+  it("adds Home, Contact Us, and Core Services across shared navigation destinations", () => {
+    expect(globalNavigation).toContain("{ title: 'Home', url: '/', keywords:");
+    expect(globalNavigation).toContain("{ label: 'Core Services', url: '/services/#core-services' }");
+    expect(globalNavigation).toContain("link.textContent = 'Home'");
+    expect(globalNavigation).toContain("link.textContent = 'Contact Us'");
+    expect(globalNavigation).toContain('list.appendChild(makeHomeLink(true));');
+    expect(contentHub).toContain("['Core Services', '/services/#core-services']");
+    expect(contentHub).toContain('>Home</a>');
+    expect(contentHub).toContain('>Contact Us</a>');
+  });
+
+  it("makes the hero service disclosure independently linkable and anchors the existing Services content", () => {
+    expect(globalNavigation).toContain('function installHeroServiceLinks()');
+    expect(globalNavigation).toContain("'Grant Writing': '/services/#grant-writing'");
+    expect(globalNavigation).toContain("'IT Solutions': '/services/#it-solutions'");
+    expect(globalNavigation).toContain("link.setAttribute('aria-label', 'View ' + label + ' in E4 Power core services')");
+    expect(globalNavigation).toContain('grid-template-columns:repeat(4,minmax(0,1fr))!important');
+    expect(servicesPage).toContain('class="services-flyer-core" id="core-services"');
+    expect(servicesPage).toContain('id="grant-writing"');
+    expect(servicesPage).toContain('id="grant-management"');
+    expect(servicesPage).toContain('id="project-management"');
+    expect(servicesPage).toContain('id="readiness-assessments"');
+    expect(servicesPage).toContain('id="financial-management"');
+    expect(servicesPage).toContain('id="speaking-engagements"');
+    expect(servicesPage).toContain('id="it-solutions"');
+  });
+
+  it("reserves desktop Services header space across theme transitions", () => {
+    expect(globalNavigation).toContain('function installRequestedRefinementStyles()');
+    expect(globalNavigation).toContain('.navbar-logo-left.e4-home-origin-header .navbar-right-div,.client-success-nav.e4-home-origin-header .e4-client-success-right{flex-wrap:nowrap!important;');
+    expect(globalNavigation).toContain('@media screen and (min-width:992px) and (max-width:1180px){.navbar-logo-left.e4-home-origin-header .navbar-right-div{gap:.28rem!important;');
+    expect(globalNavigation).toContain('.navbar-logo-left.e4-home-origin-header .e4-nav-search{min-width:5.6rem!important;max-width:6.25rem!important;}');
+  });
+
   it("renders the public CMS destination as a branded E4 Power Insights hub", () => {
     expect(contentHub).toContain("import './insights.css'");
     expect(contentHub).toContain('function Header(');

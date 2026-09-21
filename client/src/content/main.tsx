@@ -16,7 +16,7 @@ type CmsItem = {
 
 const groups = [
   ['About Us', '/about-us/', [['Our Team', '/about-us/#engage'], ['In the News', '/about-us/#linkedin-feed']]],
-  ['Our Services', '/services/', [['The B.R.I.D.G.E. Model', '/#empower'], ['Workshops', '/services/workshops-training/']]],
+  ['Our Services', '/services/', [['Core Services', '/services/#core-services'], ['The B.R.I.D.G.E. Model', '/#empower'], ['Workshops', '/services/workshops-training/']]],
   ['Resources', '/client-success/', [['Client Success', '/client-success/'], ['Insights', '/content/']]],
 ] as const;
 
@@ -67,6 +67,7 @@ function Header({ light, onTheme }: { light: boolean; onTheme: () => void }) {
   };
   const navigation = (mobile = false) => (
     <div className={mobile ? 'e4-insights-mobile-list' : 'e4-insights-nav-list'}>
+      <a className="e4-insights-home" href="/" onClick={() => mobile && setMobileOpen(false)}>Home</a>
       {groups.map(([label, destination, links]) => (
         <details key={label}>
           <summary>{label}<Chevron /></summary>
@@ -75,7 +76,7 @@ function Header({ light, onTheme }: { light: boolean; onTheme: () => void }) {
           </div>
         </details>
       ))}
-      <a className="e4-insights-contact" href="/contact-us/" onClick={() => mobile && setMobileOpen(false)}>Contact</a>
+      <a className="e4-insights-contact" href="/contact-us/" onClick={() => mobile && setMobileOpen(false)}>Contact Us</a>
     </div>
   );
   return <header className="e4-insights-header">

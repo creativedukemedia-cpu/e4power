@@ -377,3 +377,8 @@
 - [x] Verify the annotation-driven homepage and team refinements at phone width before publishing.
 - [x] Replace the homepage hero body copy with a centered, full-width gold Four Es banner using the supplied Educate, Elevate, Empower, and Engage structure.
 - [x] Verify the Four Es hero banner at desktop and phone widths before publishing.
+
+- [x] Add a branded B.R.I.D.G.E. concept introduction ahead of the homepage model library using the supplied collaboration imagery.
+- [x] Add an accessible left-edge scroll progress indicator that reflects page position without obscuring content.
+- [x] Add Home, Contact Us, and Core Services navigation destinations and make every hero service-selector item link to its matching on-page service content.
+- [x] Prevent the Services header navigation from reflowing into a dropdown after theme changes, then validate desktop and phone behavior.
