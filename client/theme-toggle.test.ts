@@ -334,17 +334,18 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('The <span>B.R.I.D.G.E.</span> Delivery Model');
     expect(globalNavigation).toContain('B.R.I.D.G.E. is E4 Power’s offering for connecting the right specialists');
     expect(globalNavigation).toContain('/manus-storage/bridge-writing_88d14ca9.jpg');
-    expect(globalNavigation).toContain('/manus-storage/bridge-collaboration_e5c858cb.webp');
+    expect(globalNavigation).not.toContain('/manus-storage/bridge-collaboration_e5c858cb.webp');
     expect(globalNavigation).toContain("library.id = 'bridge-model-library'");
     expect(globalNavigation).toContain('function installScrollProgress()');
     expect(globalNavigation).toContain("rail.id = 'e4-scroll-rail'");
     expect(globalNavigation).toContain("progress.style.transform = 'scaleY(' + value + ')'");
   });
 
-  it("uses an enclosure-free editorial B.R.I.D.G.E. image composition without an extra model call to action", () => {
-    expect(globalNavigation).toContain('grid-template-rows:minmax(5rem,.38fr) minmax(13rem,.62fr)!important');
-    expect(globalNavigation).toContain('grid-column:1!important;grid-row:1 / -1!important');
-    expect(globalNavigation).toContain('grid-column:2!important;grid-row:2!important;align-self:end!important');
+  it("uses one enclosure-free editorial B.R.I.D.G.E. photo without an extra model call to action", () => {
+    expect(globalNavigation).toContain('position:relative!important;align-self:stretch!important;min-height:clamp(22rem,34vw,31rem)!important;overflow:hidden!important;background:#1a140b!important;');
+    expect(globalNavigation).toContain('.e4-bridge-offering-photos::after{content:"";position:absolute!important;top:0!important;right:0!important;bottom:0!important;width:.35rem!important;background:#e7ba56!important;');
+    expect(globalNavigation).toContain('object-position:50% 50%!important');
+    expect(globalNavigation).not.toContain('e4-bridge-offering-photo--collaboration');
     expect(globalNavigation).toContain('box-shadow:none!important');
     expect(globalNavigation).not.toContain('Explore the B.R.I.D.G.E. models');
     expect(globalNavigation).not.toContain('class="e4-bridge-offering-link"');

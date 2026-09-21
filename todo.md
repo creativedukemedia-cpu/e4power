@@ -388,3 +388,5 @@
 - [x] Harden shared navigation state so a Services theme change cannot expose multiple dropdown menus, then validate desktop and phone layouts.
 
 - [x] Replace dark B.R.I.D.G.E. model surfaces in homepage light mode with readable branded light treatments and validate all supporting copy and diagrams.
+
+- [x] Simplify the homepage B.R.I.D.G.E. introduction to one professionally framed supplied photo and validate desktop and phone layouts.
