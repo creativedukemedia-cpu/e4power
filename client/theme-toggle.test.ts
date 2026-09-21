@@ -341,6 +341,15 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain("progress.style.transform = 'scaleY(' + value + ')'");
   });
 
+  it("uses an enclosure-free editorial B.R.I.D.G.E. image composition without an extra model call to action", () => {
+    expect(globalNavigation).toContain('grid-template-rows:minmax(5rem,.38fr) minmax(13rem,.62fr)!important');
+    expect(globalNavigation).toContain('grid-column:1!important;grid-row:1 / -1!important');
+    expect(globalNavigation).toContain('grid-column:2!important;grid-row:2!important;align-self:end!important');
+    expect(globalNavigation).toContain('box-shadow:none!important');
+    expect(globalNavigation).not.toContain('Explore the B.R.I.D.G.E. models');
+    expect(globalNavigation).not.toContain('class="e4-bridge-offering-link"');
+  });
+
   it("adds Home, Contact Us, and Core Services across shared navigation destinations", () => {
     expect(globalNavigation).toContain("{ title: 'Home', url: '/', keywords:");
     expect(globalNavigation).toContain("{ label: 'Core Services', url: '/services/#core-services' }");
@@ -368,11 +377,27 @@ describe("theme toggle markup", () => {
     expect(servicesPage).toContain('id="it-solutions"');
   });
 
+  it("keeps the linked hero service categories typographic rather than enclosed", () => {
+    expect(globalNavigation).toContain('a.hero-services-item{display:flex!important;align-items:center!important;gap:.45rem!important;min-height:0!important;padding:.28rem 0!important;border:0!important;background:transparent!important;box-shadow:none!important;');
+    expect(globalNavigation).toContain('a.hero-services-item::before{content:"";display:block!important;flex:0 0 .34rem!important;');
+    expect(globalNavigation).toContain('text-decoration:underline!important;text-decoration-thickness:1px!important');
+  });
+
   it("reserves desktop Services header space across theme transitions", () => {
     expect(globalNavigation).toContain('function installRequestedRefinementStyles()');
     expect(globalNavigation).toContain('.navbar-logo-left.e4-home-origin-header .navbar-right-div,.client-success-nav.e4-home-origin-header .e4-client-success-right{flex-wrap:nowrap!important;');
     expect(globalNavigation).toContain('@media screen and (min-width:992px) and (max-width:1180px){.navbar-logo-left.e4-home-origin-header .navbar-right-div{gap:.28rem!important;');
     expect(globalNavigation).toContain('.navbar-logo-left.e4-home-origin-header .e4-nav-search{min-width:5.6rem!important;max-width:6.25rem!important;}');
+  });
+
+  it("limits desktop navigation dropdowns to explicit toggle state after a theme change", () => {
+    expect(globalNavigation).toContain('function installThemeDropdownGuard()');
+    expect(globalNavigation).toContain('window.requestAnimationFrame(closeForThemeChange);');
+    expect(globalNavigation).toContain("toggle.setAttribute('aria-expanded', 'false')");
+    expect(globalNavigation).toContain('@media screen and (min-width:992px){.e4-nav-group:not(.is-open) .e4-nav-menu{display:none!important;visibility:hidden!important;}');
+    expect(globalNavigation).toContain('.e4-nav-group.is-open .e4-nav-menu{opacity:1;pointer-events:auto;transform:translateY(0);}');
+    expect(globalNavigation).not.toContain('.e4-nav-group:hover .e4-nav-menu');
+    expect(globalNavigation).toContain('installThemeDropdownGuard();');
   });
 
   it("renders the public CMS destination as a branded E4 Power Insights hub", () => {

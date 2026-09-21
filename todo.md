@@ -382,3 +382,7 @@
 - [x] Add an accessible left-edge scroll progress indicator that reflects page position without obscuring content.
 - [x] Add Home, Contact Us, and Core Services navigation destinations and make every hero service-selector item link to its matching on-page service content.
 - [x] Prevent the Services header navigation from reflowing into a dropdown after theme changes, then validate desktop and phone behavior.
+
+- [x] Remove the B.R.I.D.G.E. introduction call to action and refine the approved image composition into a professional editorial treatment.
+- [x] Remove rectangular service-link enclosures from the homepage hero disclosure while preserving visible individual links.
+- [x] Harden shared navigation state so a Services theme change cannot expose multiple dropdown menus, then validate desktop and phone layouts.
