@@ -354,9 +354,25 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('function installScrollProgress()');
     expect(globalNavigation).toContain("rail.id = 'e4-scroll-rail'");
     expect(globalNavigation).toContain('width:.72rem!important;background:rgba(231,186,86,.42)!important;');
-    expect(globalNavigation).toContain('.e4-scroll-rail::after{content:"";position:absolute!important;top:.82rem!important;');
+    expect(globalNavigation).toContain('.e4-scroll-handle{position:absolute!important;z-index:1!important;top:0!important;');
     expect(globalNavigation).toContain('@media screen and (max-width:767px){.e4-scroll-rail{width:.5rem!important;}');
     expect(globalNavigation).toContain("progress.style.transform = 'scaleY(' + value + ')'");
+  });
+
+  it("makes the left scroll rail a draggable and keyboard-accessible page scrubber", () => {
+    expect(globalNavigation).toContain("rail.setAttribute('role', 'slider')");
+    expect(globalNavigation).toContain("rail.setAttribute('aria-label', 'Page position')");
+    expect(globalNavigation).toContain("rail.setAttribute('tabindex', '0')");
+    expect(globalNavigation).toContain('Drag to scroll the page');
+    expect(globalNavigation).toContain('var scrollToPointer = function (clientY)');
+    expect(globalNavigation).toContain("rail.addEventListener('pointerdown'");
+    expect(globalNavigation).toContain("rail.addEventListener('pointermove'");
+    expect(globalNavigation).toContain("rail.addEventListener('pointerup', finishDrag)");
+    expect(globalNavigation).toContain("rail.addEventListener('keydown'");
+    expect(globalNavigation).toContain("event.key === 'Home'");
+    expect(globalNavigation).toContain("event.key === 'End'");
+    expect(globalNavigation).toContain('cursor:grab!important;pointer-events:auto!important;touch-action:none!important;');
+    expect(globalNavigation).toContain('handle.style.top = (value * 100) + \'%\';');
   });
 
   it("makes the desktop grant-statistics strip span the full viewport", () => {

@@ -396,3 +396,5 @@
 - [x] Restore visible team imagery wherever the Team section or Team page card images fail to render, preserving approved portrait assets.
 - [x] Make the homepage grant-statistics bar full viewport width on desktop without breaking phone layout.
 - [x] Strengthen the left-edge scroll indicator so it remains clearly visible during page scroll on desktop and phone.
+
+- [x] Make the visible left-edge scroll rail an interactive, draggable, keyboard-accessible page scrubber on desktop and phone.
