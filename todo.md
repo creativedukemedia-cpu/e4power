@@ -398,3 +398,5 @@
 - [x] Strengthen the left-edge scroll indicator so it remains clearly visible during page scroll on desktop and phone.
 
 - [x] Make the visible left-edge scroll rail an interactive, draggable, keyboard-accessible page scrubber on desktop and phone.
+
+- [x] Add clear top and bottom directional arrows to the interactive left scroll rail with accessible incremental scrolling.

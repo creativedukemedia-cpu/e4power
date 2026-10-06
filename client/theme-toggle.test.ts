@@ -375,6 +375,19 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('handle.style.top = (value * 100) + \'%\';');
   });
 
+  it("adds clear top and bottom arrow controls to the interactive scroll rail", () => {
+    expect(globalNavigation).toContain("upArrow.className = 'e4-scroll-arrow e4-scroll-arrow--up'");
+    expect(globalNavigation).toContain("downArrow.className = 'e4-scroll-arrow e4-scroll-arrow--down'");
+    expect(globalNavigation).toContain("upArrow.setAttribute('aria-label', 'Scroll page up')");
+    expect(globalNavigation).toContain("downArrow.setAttribute('aria-label', 'Scroll page down')");
+    expect(globalNavigation).toContain('var nudgePage = function (direction)');
+    expect(globalNavigation).toContain("upArrow.addEventListener('click', function () { nudgePage(-1); })");
+    expect(globalNavigation).toContain("downArrow.addEventListener('click', function () { nudgePage(1); })");
+    expect(globalNavigation).toContain('.e4-scroll-arrow--up{top:clamp(5.2rem,11vh,6.7rem)!important;}');
+    expect(globalNavigation).toContain('.e4-scroll-arrow--down{bottom:1rem!important;}');
+    expect(globalNavigation).toContain('@media screen and (max-width:767px){.e4-scroll-rail{width:.5rem!important;}.e4-scroll-handle{width:.78rem!important;height:.78rem!important;border-width:1.5px!important;}.e4-scroll-arrow{left:.1rem!important;width:1.3rem!important;height:1.3rem!important;}');
+  });
+
   it("makes the desktop grant-statistics strip span the full viewport", () => {
     expect(globalNavigation).toContain('@media screen and (min-width:992px){.container-hero{width:100vw!important;max-width:none!important;margin-left:calc(50% - 50vw)!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;}');
     expect(globalNavigation).toContain('.container-hero>.hero-block{width:auto!important;min-width:0!important;}');
