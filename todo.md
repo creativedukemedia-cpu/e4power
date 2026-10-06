@@ -392,3 +392,7 @@
 - [x] Simplify the homepage B.R.I.D.G.E. introduction to one professionally framed supplied photo and validate desktop and phone layouts.
 
 - [x] Remove the redundant B.R.I.D.G.E. Model Library heading and introductory sentence so the new concept introduction leads directly into the models.
+
+- [x] Restore visible team imagery wherever the Team section or Team page card images fail to render, preserving approved portrait assets.
+- [x] Make the homepage grant-statistics bar full viewport width on desktop without breaking phone layout.
+- [x] Strengthen the left-edge scroll indicator so it remains clearly visible during page scroll on desktop and phone.

@@ -6,6 +6,8 @@ import { describe, expect, it } from "vitest";
 const clientRoot = path.dirname(fileURLToPath(import.meta.url));
 const homepagePath = path.join(clientRoot, "index.html");
 const homepage = fs.readFileSync(homepagePath, "utf8");
+const teamPath = path.join(clientRoot, "team", "index.html");
+const teamPage = fs.readFileSync(teamPath, "utf8");
 const educatePath = path.join(clientRoot, "educate", "index.html");
 const educatePage = fs.readFileSync(educatePath, "utf8");
 const teamMemberPath = path.join(clientRoot, "team-members", "kandy-rose", "index.html");
@@ -307,6 +309,19 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('installAnnotatedHomepageRefinements();');
   });
 
+  it("uses managed storage assets for every Team card portrait", () => {
+    expect(teamPage).not.toContain('68bf5fd6d57e00320e8d437f');
+    expect(teamPage).toContain('/manus-storage/larico-j--treadwell--ph-d_0b6cee7e.webp');
+    expect(teamPage).toContain('/manus-storage/garry-brown--jr--ph-d---j-d_7a46bfb9.webp');
+    expect(teamPage).toContain('/manus-storage/kandy-rose--m-b-a_7061343e.webp');
+    expect(teamPage).toContain('/manus-storage/kelvin-kirby--ph-d_e8b8e901.png');
+    expect(teamPage).toContain('/manus-storage/avi-bregman--ph-d_54fa1b67.png');
+    expect(teamPage).toContain('/manus-storage/harold-lee--ph-d_619e1652.png');
+    expect(teamPage).toContain('/manus-storage/tamara-henry-portrait_25995acc.png');
+    expect(teamPage).toContain('/manus-storage/steve-robinson_bf78db15.png');
+    expect(teamPage).toContain('/manus-storage/diana-simmons--acc_2b3e7e9a.png');
+  });
+
   it("replaces the homepage hero body copy with a responsive full-width Four Es banner", () => {
     expect(globalNavigation).toContain('function installHeroFourEsBanner()');
     expect(globalNavigation).toContain("var support = heroCopy.querySelector('.reference-hero-support')");
@@ -338,7 +353,15 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain("library.id = 'bridge-model-library'");
     expect(globalNavigation).toContain('function installScrollProgress()');
     expect(globalNavigation).toContain("rail.id = 'e4-scroll-rail'");
+    expect(globalNavigation).toContain('width:.72rem!important;background:rgba(231,186,86,.42)!important;');
+    expect(globalNavigation).toContain('.e4-scroll-rail::after{content:"";position:absolute!important;top:.82rem!important;');
+    expect(globalNavigation).toContain('@media screen and (max-width:767px){.e4-scroll-rail{width:.5rem!important;}');
     expect(globalNavigation).toContain("progress.style.transform = 'scaleY(' + value + ')'");
+  });
+
+  it("makes the desktop grant-statistics strip span the full viewport", () => {
+    expect(globalNavigation).toContain('@media screen and (min-width:992px){.container-hero{width:100vw!important;max-width:none!important;margin-left:calc(50% - 50vw)!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;}');
+    expect(globalNavigation).toContain('.container-hero>.hero-block{width:auto!important;min-width:0!important;}');
   });
 
   it("uses one enclosure-free editorial B.R.I.D.G.E. photo without an extra model call to action", () => {
