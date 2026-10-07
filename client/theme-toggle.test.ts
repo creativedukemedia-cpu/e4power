@@ -383,9 +383,9 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('var nudgePage = function (direction)');
     expect(globalNavigation).toContain("upArrow.addEventListener('click', function () { nudgePage(-1); })");
     expect(globalNavigation).toContain("downArrow.addEventListener('click', function () { nudgePage(1); })");
-    expect(globalNavigation).toContain('.e4-scroll-arrow--up{top:clamp(5.2rem,11vh,6.7rem)!important;}');
-    expect(globalNavigation).toContain('.e4-scroll-arrow--down{bottom:1rem!important;}');
-    expect(globalNavigation).toContain('@media screen and (max-width:767px){.e4-scroll-rail{width:.5rem!important;}.e4-scroll-handle{width:.78rem!important;height:.78rem!important;border-width:1.5px!important;}.e4-scroll-arrow{left:.1rem!important;width:1.3rem!important;height:1.3rem!important;}');
+    expect(globalNavigation).toContain('.e4-scroll-arrow--up{top:0!important;}');
+    expect(globalNavigation).toContain('.e4-scroll-arrow--down{bottom:0!important;}');
+    expect(globalNavigation).toContain('@media screen and (max-width:767px){.e4-scroll-rail{width:.5rem!important;}.e4-scroll-handle{width:.78rem!important;height:.78rem!important;border-width:1.5px!important;}.e4-scroll-arrow{left:.1rem!important;width:1.3rem!important;height:1.3rem!important;}.e4-scroll-arrow--up{top:0!important;}.e4-scroll-arrow--down{bottom:0!important;}');
   });
 
   it("makes the desktop grant-statistics strip span the full viewport", () => {

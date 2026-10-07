@@ -400,3 +400,5 @@
 - [x] Make the visible left-edge scroll rail an interactive, draggable, keyboard-accessible page scrubber on desktop and phone.
 
 - [x] Add clear top and bottom directional arrows to the interactive left scroll rail with accessible incremental scrolling.
+
+- [x] Align the interactive scroll rail up arrow flush to the viewport top and down arrow flush to the viewport bottom, then revalidate both controls.
