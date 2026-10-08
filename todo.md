@@ -402,3 +402,5 @@
 - [x] Add clear top and bottom directional arrows to the interactive left scroll rail with accessible incremental scrolling.
 
 - [x] Align the interactive scroll rail up arrow flush to the viewport top and down arrow flush to the viewport bottom, then revalidate both controls.
+
+- [x] Center the top and bottom scroll-arrow controls on the left scroll rail while preserving edge alignment and interaction behavior.

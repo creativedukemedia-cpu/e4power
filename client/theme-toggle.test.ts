@@ -355,7 +355,7 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain("rail.id = 'e4-scroll-rail'");
     expect(globalNavigation).toContain('width:.72rem!important;background:rgba(231,186,86,.42)!important;');
     expect(globalNavigation).toContain('.e4-scroll-handle{position:absolute!important;z-index:1!important;top:0!important;');
-    expect(globalNavigation).toContain('@media screen and (max-width:767px){.e4-scroll-rail{width:.5rem!important;}');
+    expect(globalNavigation).toContain('@media screen and (max-width:767px){.e4-scroll-rail{left:.4rem!important;width:.5rem!important;}');
     expect(globalNavigation).toContain("progress.style.transform = 'scaleY(' + value + ')'");
   });
 
@@ -383,9 +383,11 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('var nudgePage = function (direction)');
     expect(globalNavigation).toContain("upArrow.addEventListener('click', function () { nudgePage(-1); })");
     expect(globalNavigation).toContain("downArrow.addEventListener('click', function () { nudgePage(1); })");
+    expect(globalNavigation).toContain('left:.5rem!important;z-index:32000!important;width:.72rem!important;');
+    expect(globalNavigation).toContain('left:calc(.5rem + .36rem - .775rem)!important;display:grid!important;');
     expect(globalNavigation).toContain('.e4-scroll-arrow--up{top:0!important;}');
     expect(globalNavigation).toContain('.e4-scroll-arrow--down{bottom:0!important;}');
-    expect(globalNavigation).toContain('@media screen and (max-width:767px){.e4-scroll-rail{width:.5rem!important;}.e4-scroll-handle{width:.78rem!important;height:.78rem!important;border-width:1.5px!important;}.e4-scroll-arrow{left:.1rem!important;width:1.3rem!important;height:1.3rem!important;}.e4-scroll-arrow--up{top:0!important;}.e4-scroll-arrow--down{bottom:0!important;}');
+    expect(globalNavigation).toContain('@media screen and (max-width:767px){.e4-scroll-rail{left:.4rem!important;width:.5rem!important;}.e4-scroll-handle{width:.78rem!important;height:.78rem!important;border-width:1.5px!important;}.e4-scroll-arrow{left:0!important;width:1.3rem!important;height:1.3rem!important;}.e4-scroll-arrow--up{top:0!important;}.e4-scroll-arrow--down{bottom:0!important;}');
   });
 
   it("makes the desktop grant-statistics strip span the full viewport", () => {
