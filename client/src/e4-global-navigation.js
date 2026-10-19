@@ -676,6 +676,144 @@
     bridgeSection.parentNode.insertBefore(intro, bridgeSection);
   }
 
+  function installBridgeEditorialModels() {
+    var bridgeSection = document.getElementById('empower');
+    if (!bridgeSection || bridgeSection.dataset.e4BridgeEditorial === 'true') return;
+    bridgeSection.dataset.e4BridgeEditorial = 'true';
+    bridgeSection.classList.remove('bridge-program-section');
+    bridgeSection.classList.add('e4-bridge-editorial-section');
+
+    if (!document.getElementById('e4-bridge-editorial-styles')) {
+      var style = document.createElement('style');
+      style.id = 'e4-bridge-editorial-styles';
+      style.textContent = `
+        #empower.e4-bridge-editorial-section{position:relative!important;overflow:hidden!important;background:#160c05!important;color:#fff8ef!important;}
+        #empower.e4-bridge-editorial-section::before{content:""!important;position:absolute!important;inset:0!important;pointer-events:none!important;background:radial-gradient(circle at 100% 4%,rgba(231,186,86,.17),transparent 27%),radial-gradient(circle at 2% 34%,rgba(141,96,26,.18),transparent 30%)!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-editorial-shell{position:relative!important;width:min(100% - clamp(2.5rem,8vw,10rem),92rem)!important;margin:0 auto!important;padding:clamp(4.5rem,8vw,8.5rem) 0!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-application{position:relative!important;isolation:isolate!important;margin:0!important;padding:0!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-application:not(:first-child){margin-top:clamp(5rem,9vw,9rem)!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-application::before{content:""!important;display:block!important;width:clamp(3.5rem,6vw,5.75rem)!important;height:.34rem!important;margin:0 0 clamp(1.35rem,2.4vw,2rem)!important;background:#e7ba56!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-application-header{display:grid!important;grid-template-columns:clamp(3.3rem,7vw,5.7rem) minmax(0,1fr) minmax(16rem,25rem)!important;gap:clamp(1.25rem,3vw,3.25rem)!important;align-items:center!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-application-number{display:grid!important;place-items:center!important;width:clamp(3.3rem,7vw,5.7rem)!important;aspect-ratio:1!important;margin:0!important;background:#e7ba56!important;color:#160c05!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(1.25rem,2.6vw,2rem)!important;font-weight:900!important;line-height:1!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-application-heading{margin:0!important;color:#fff8ef!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(2rem,4vw,4.4rem)!important;font-weight:900!important;letter-spacing:0!important;line-height:.93!important;text-transform:uppercase!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-application-subtitle{margin:.7rem 0 0!important;color:#e7ba56!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.92rem,1.4vw,1.18rem)!important;font-weight:800!important;letter-spacing:0!important;line-height:1.25!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-application-summary{max-width:48rem!important;margin:1rem 0 0!important;color:rgba(255,248,239,.82)!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.9rem,1.2vw,1.04rem)!important;font-weight:550!important;letter-spacing:0!important;line-height:1.58!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-application-photo{position:relative!important;align-self:stretch!important;min-height:13.5rem!important;margin:0!important;overflow:hidden!important;background:#33200c!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-application-photo::after{content:""!important;position:absolute!important;inset:0!important;background:linear-gradient(120deg,rgba(22,12,5,.36),rgba(231,186,86,.12))!important;pointer-events:none!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-application-photo img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;filter:grayscale(.28) contrast(1.05)!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-application-content{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:clamp(1.25rem,3vw,3rem)!important;margin-top:clamp(2rem,4vw,3.75rem)!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-ledger{min-width:0!important;padding:clamp(1.3rem,2.5vw,2rem)!important;background:linear-gradient(135deg,rgba(255,248,239,.06),rgba(255,248,239,.015))!important;box-shadow:inset .28rem 0 0 #e7ba56!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-ledger--outcome{box-shadow:inset .28rem 0 0 #8d601a!important;background:linear-gradient(135deg,rgba(231,186,86,.14),rgba(255,248,239,.025))!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-ledger h4,#empower.e4-bridge-editorial-section .e4-bridge-workflow h4,#empower.e4-bridge-editorial-section .e4-bridge-rolebar h4{margin:0!important;color:#fff8ef!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.9rem,1.15vw,1.08rem)!important;font-weight:900!important;letter-spacing:0!important;line-height:1.1!important;text-transform:uppercase!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-ledger ul{display:grid!important;gap:.72rem!important;margin:1.2rem 0 0!important;padding:0!important;list-style:none!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-ledger li{position:relative!important;margin:0!important;padding-left:1rem!important;color:rgba(255,248,239,.8)!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.78rem,1.05vw,.92rem)!important;font-weight:550!important;letter-spacing:0!important;line-height:1.45!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-ledger li::before{content:""!important;position:absolute!important;top:.45rem!important;left:0!important;width:.38rem!important;height:.38rem!important;background:#e7ba56!important;transform:rotate(45deg)!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-workflow{position:relative!important;margin-top:clamp(2rem,4vw,3.75rem)!important;padding:clamp(1.35rem,2.6vw,2.15rem) 0 0!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-workflow h4{color:#e7ba56!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-workflow-list{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:clamp(.6rem,1.5vw,1.2rem)!important;margin:1.35rem 0 0!important;padding:0!important;list-style:none!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-workflow-list li{position:relative!important;min-width:0!important;margin:0!important;padding-top:.8rem!important;box-shadow:inset 0 .22rem 0 rgba(231,186,86,.76)!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-stage-letter{display:block!important;margin:0!important;color:#e7ba56!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(1.55rem,3vw,2.65rem)!important;font-weight:900!important;letter-spacing:0!important;line-height:.86!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-stage-title{display:block!important;margin-top:.58rem!important;color:#fff8ef!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.69rem,.9vw,.81rem)!important;font-weight:900!important;letter-spacing:0!important;line-height:1.15!important;text-transform:uppercase!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-stage-detail{display:block!important;margin-top:.48rem!important;color:rgba(255,248,239,.7)!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.67rem,.8vw,.75rem)!important;font-weight:550!important;letter-spacing:0!important;line-height:1.4!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-rolebar{margin-top:clamp(2.1rem,4vw,3.75rem)!important;padding:clamp(1.35rem,2.5vw,2rem) 0 0!important;box-shadow:inset 0 .28rem 0 #8d601a!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-rolebar h4{color:#e7ba56!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-rolelist{display:flex!important;flex-wrap:wrap!important;gap:.78rem clamp(1rem,2.2vw,2.1rem)!important;margin:1.2rem 0 0!important;padding:0!important;list-style:none!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-rolelist li{display:flex!important;align-items:center!important;gap:.48rem!important;margin:0!important;color:rgba(255,248,239,.82)!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.68rem,.9vw,.8rem)!important;font-weight:800!important;letter-spacing:0!important;line-height:1.25!important;text-transform:uppercase!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-rolelist li::before{content:""!important;display:block!important;flex:0 0 .58rem!important;width:.58rem!important;height:.58rem!important;border-radius:999px!important;background:#e7ba56!important;box-shadow:0 0 0 .2rem rgba(231,186,86,.13)!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-application:nth-child(even) .e4-bridge-application-photo{order:-1!important;}
+        body.theme-light #empower.e4-bridge-editorial-section{background:#f7f0e5!important;color:#1e1a16!important;}
+        body.theme-light #empower.e4-bridge-editorial-section::before{background:radial-gradient(circle at 100% 4%,rgba(199,150,48,.22),transparent 27%),radial-gradient(circle at 2% 34%,rgba(141,96,26,.12),transparent 30%)!important;}
+        body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-application-heading,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-ledger h4,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-workflow h4,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-rolebar h4,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-stage-title{color:#1e1a16!important;}
+        body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-application-summary,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-ledger li,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-stage-detail,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-rolelist li{color:#3e3428!important;}
+        body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-ledger{background:rgba(255,255,255,.53)!important;box-shadow:inset .28rem 0 0 #8d601a!important;}
+        body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-ledger--outcome{background:rgba(231,186,86,.18)!important;box-shadow:inset .28rem 0 0 #e7ba56!important;}
+        body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-workflow-list li{box-shadow:inset 0 .22rem 0 #8d601a!important;}
+        @media (prefers-reduced-motion:no-preference){#empower.e4-bridge-editorial-section .e4-bridge-application-photo img{transition:transform .38s cubic-bezier(.23,1,.32,1),filter .28s ease!important;}#empower.e4-bridge-editorial-section .e4-bridge-application:hover .e4-bridge-application-photo img{transform:scale(1.035)!important;filter:grayscale(0) contrast(1)!important;}}
+        @media screen and (max-width:900px){#empower.e4-bridge-editorial-section .e4-bridge-application-header{grid-template-columns:clamp(3.2rem,9vw,4.6rem) minmax(0,1fr)!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-photo{grid-column:1 / -1!important;min-height:16rem!important;max-width:34rem!important;width:100%!important;margin-top:.6rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-application:nth-child(even) .e4-bridge-application-photo{order:initial!important;}}
+        @media screen and (max-width:680px){#empower.e4-bridge-editorial-section .e4-bridge-editorial-shell{width:min(100% - 2.4rem,42rem)!important;padding:4.2rem 0!important;}#empower.e4-bridge-editorial-section .e4-bridge-application:not(:first-child){margin-top:4.8rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-header{display:block!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-number{width:3.25rem!important;margin-bottom:1rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-heading{font-size:clamp(2rem,10.7vw,3rem)!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-photo{min-height:13rem!important;margin-top:1.35rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-content{grid-template-columns:1fr!important;gap:1rem!important;margin-top:1.75rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-ledger{padding:1.25rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-workflow{margin-top:2rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-workflow-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:1.1rem .8rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-rolebar{margin-top:2rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-rolelist{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:.9rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-rolelist li{align-items:flex-start!important;font-size:.67rem!important;}}
+        @media (prefers-reduced-motion:reduce){#empower.e4-bridge-editorial-section .e4-bridge-application-photo img{transition:none!important;}}
+      `;
+      document.head.appendChild(style);
+    }
+
+    var stages = [
+      ['B', 'Build Capacity'],
+      ['R', 'Research & Resources'],
+      ['I', 'Innovation & Impact'],
+      ['D', 'Develop Partnerships'],
+      ['G', 'Grow Funding & Programs'],
+      ['E', 'Execute for Excellence']
+    ];
+    var models = [
+      {
+        number: '01',
+        title: 'University Leadership Alignment',
+        subtitle: 'From Fragmented Efforts to a Unified Strategy',
+        summary: 'E4 helps university leaders align people, priorities, and resources to accelerate research growth.',
+        photo: '/manus-storage/bridge-leadership_57fd222d.jpg',
+        photoAlt: 'University leadership team in a planning meeting',
+        challenge: ['Leaders are balancing multiple urgent responsibilities.', 'Competing priorities and mission drift.', 'Staffing shortages and funding constraints.', 'Inconsistent communication across departments.'],
+        outcome: ['Unified leadership and clear priorities.', 'More effective collaboration.', 'Increased research capacity and funding growth.', 'Sustainable systems and long-term success.'],
+        workflow: ['Assess current structure, needs, and goals.', 'Identify opportunities and align with institutional priorities.', 'Develop a strategic plan for coordinated research growth.', 'Engage internal and external stakeholders.', 'Expand research pipeline and resources.', 'Implement, monitor, and drive continuous improvement.'],
+        roleLabel: 'Key University Roles',
+        roles: ['VP Research', 'Assistant VP Research', 'Deans', 'Professors', 'Financial', 'Secretary', 'Assistants']
+      },
+      {
+        number: '02',
+        title: 'Expert-on-Demand Support',
+        subtitle: 'Specialized Expertise When You Need It',
+        summary: 'E4 provides flexible, scalable support with experienced professionals to fill critical skill gaps and accelerate impact.',
+        photo: '/manus-storage/bridge-expert-support_aa128829.jpg',
+        photoAlt: 'Professional consultant working on a laptop',
+        challenge: ['Need specialized expertise without full-time hires.', 'Limited internal capacity.', 'Rapidly changing funding and technical requirements.', 'Need immediate support for strategic initiatives.'],
+        outcome: ['Immediate access to specialized expertise.', 'Flexible, scalable support.', 'Faster impact and stronger proposals.', 'Enhanced internal capacity and sustainability.'],
+        workflow: ['Assess skill gaps and priorities.', 'Identify the right expertise and funding needs.', 'Apply specialized knowledge to advance key initiatives.', 'Integrate E4 experts with your team.', 'Strengthen proposals, programs, and funding pipelines.', 'Deliver results and build long-term internal capacity.'],
+        roleLabel: 'E4 Experts Who Support You',
+        roles: ['Grant/Content Developer', 'Subject Matter Expert', 'IP Strategist', 'PMP', 'Analyst', 'Security Officer']
+      },
+      {
+        number: '03',
+        title: 'Research Initiative Execution',
+        subtitle: 'From Ideas to Funded, High-Impact Programs',
+        summary: 'E4 provides end-to-end support to develop, manage, and execute competitive research initiatives.',
+        photo: '/manus-storage/bridge-research-execution_c7525fb0.jpg',
+        photoAlt: 'Research team collaborating on an initiative',
+        challenge: ['Need support with proposal development and compliance.', 'Complex reporting and financial requirements.', 'Coordination across multiple stakeholders.', 'Limited technical resources.'],
+        outcome: ['High-quality, competitive submissions.', 'Improved compliance and financial management.', 'Enhanced research visibility and impact.', 'Stronger, sustainable research programs.'],
+        workflow: ['Assess research priorities and infrastructure.', 'Identify funding opportunities and align with funder priorities.', 'Develop competitive proposals and strategies.', 'Engage internal and external partners.', 'Strengthen submission quality and expand research programs.', 'Manage compliance, finances, reporting, and project implementation.'],
+        roleLabel: 'Core Support Areas',
+        roles: ['Subject Matter Expert', 'Proposal Development & Writing', 'Project Reporting', 'Compliance Monitoring', 'Financial Management', 'Advertisement/Coordination']
+      },
+      {
+        number: '04',
+        title: 'Innovation, IP & Sustainability',
+        subtitle: 'Turning Research into Real-World Impact',
+        summary: 'E4 strengthens IP strategy, technology transfer, compliance, and partnerships to build sustainable research ecosystems.',
+        photo: '/manus-storage/bridge-innovation_5942c827.jpg',
+        photoAlt: 'Technology professional working at a computer',
+        challenge: ['Need support with IP strategy and commercialization.', 'Complex compliance and governance requirements.', 'Limited internal technology transfer resources.', 'Need sustainable models for long-term impact.'],
+        outcome: ['Strengthened discovery-to-impact pathways.', 'Enhanced IP strategy and technology transfer.', 'Improved compliance and governance.', 'Increased innovation and long-term impact.'],
+        workflow: ['Assess innovation and IP needs.', 'Identify funding, partners, and market opportunities.', 'Develop IP strategy and commercialization pathways.', 'Connect with industry, government, and innovation partners.', 'Expand innovation pipelines and sustainable funding.', 'Implement, monitor, and scale for long-term impact.'],
+        roleLabel: 'Specialized Expertise',
+        roles: ['Compliance Manager', 'VC Specialist', 'Content Expert (Advertisement/Coordination)', 'Certified Patent Agent', 'Chief Technology Officer', 'Subject Matter Expert']
+      }
+    ];
+    var renderList = function (items) {
+      return items.map(function (item) { return '<li>' + item + '</li>'; }).join('');
+    };
+    var renderWorkflow = function (items) {
+      return items.map(function (detail, index) {
+        return '<li><span class="e4-bridge-stage-letter" aria-hidden="true">' + stages[index][0] + '</span><strong class="e4-bridge-stage-title">' + stages[index][1] + '</strong><span class="e4-bridge-stage-detail">' + detail + '</span></li>';
+      }).join('');
+    };
+    var renderRoles = function (roles) {
+      return roles.map(function (role) { return '<li>' + role + '</li>'; }).join('');
+    };
+    bridgeSection.innerHTML = '<div class="e4-bridge-editorial-shell">' + models.map(function (model) {
+      return '<article class="e4-bridge-application"><header class="e4-bridge-application-header"><span class="e4-bridge-application-number" aria-label="Model ' + model.number + '">' + model.number + '</span><div><h3 class="e4-bridge-application-heading">' + model.title + '</h3><p class="e4-bridge-application-subtitle">' + model.subtitle + '</p><p class="e4-bridge-application-summary">' + model.summary + '</p></div><figure class="e4-bridge-application-photo"><img src="' + model.photo + '" alt="' + model.photoAlt + '" loading="lazy" /></figure></header><div class="e4-bridge-application-content"><section class="e4-bridge-ledger" aria-label="Challenge"><h4>The Challenge</h4><ul>' + renderList(model.challenge) + '</ul></section><section class="e4-bridge-ledger e4-bridge-ledger--outcome" aria-label="Outcome"><h4>The Outcome</h4><ul>' + renderList(model.outcome) + '</ul></section></div><section class="e4-bridge-workflow" aria-label="E4 Power B.R.I.D.G.E. workflow"><h4>The E4 Power B.R.I.D.G.E. Workflow</h4><ol class="e4-bridge-workflow-list">' + renderWorkflow(model.workflow) + '</ol></section><section class="e4-bridge-rolebar" aria-label="' + model.roleLabel + '"><h4>' + model.roleLabel + '</h4><ul class="e4-bridge-rolelist">' + renderRoles(model.roles) + '</ul></section></article>';
+    }).join('') + '</div>';
+  }
+
   function installScrollProgress() {
     if (document.getElementById('e4-scroll-rail')) return;
     var rail = document.createElement('div');
@@ -823,6 +961,7 @@
     installHeroFourEsBanner();
     installHeroServiceLinks();
     installBridgeOfferingIntro();
+    installBridgeEditorialModels();
     installScrollProgress();
     enforceAnnotatedTeamActionContrast();
     new MutationObserver(function () {

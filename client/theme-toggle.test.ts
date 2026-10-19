@@ -343,14 +343,26 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('installHeroFourEsBanner();');
   });
 
-  it("adds the requested B.R.I.D.G.E. offering introduction and left-edge scroll indicator without disturbing the model library", () => {
+  it("adds the requested B.R.I.D.G.E. offering introduction and replaces the legacy model library with editorial applications", () => {
     expect(globalNavigation).toContain('function installBridgeOfferingIntro()');
     expect(globalNavigation).toContain("intro.id = 'e4-bridge-offering-intro'");
     expect(globalNavigation).toContain('The <span>B.R.I.D.G.E.</span> Delivery Model');
     expect(globalNavigation).toContain('B.R.I.D.G.E. is E4 Power’s offering for connecting the right specialists');
     expect(globalNavigation).toContain('/manus-storage/bridge-writing_88d14ca9.jpg');
     expect(globalNavigation).not.toContain('/manus-storage/bridge-collaboration_e5c858cb.webp');
-    expect(globalNavigation).toContain("library.id = 'bridge-model-library'");
+    expect(globalNavigation).toContain('function installBridgeEditorialModels()');
+    expect(globalNavigation).toContain("bridgeSection.classList.remove('bridge-program-section')");
+    expect(globalNavigation).toContain("bridgeSection.classList.add('e4-bridge-editorial-section')");
+    expect(globalNavigation).toContain('University Leadership Alignment');
+    expect(globalNavigation).toContain('Expert-on-Demand Support');
+    expect(globalNavigation).toContain('Research Initiative Execution');
+    expect(globalNavigation).toContain('Innovation, IP & Sustainability');
+    expect(globalNavigation).toContain('The E4 Power B.R.I.D.G.E. Workflow');
+    expect(globalNavigation).toContain('/manus-storage/bridge-leadership_57fd222d.jpg');
+    expect(globalNavigation).toContain('/manus-storage/bridge-expert-support_aa128829.jpg');
+    expect(globalNavigation).toContain('/manus-storage/bridge-research-execution_c7525fb0.jpg');
+    expect(globalNavigation).toContain('/manus-storage/bridge-innovation_5942c827.jpg');
+    expect(globalNavigation).toContain('installBridgeEditorialModels();');
     expect(globalNavigation).toContain('function installScrollProgress()');
     expect(globalNavigation).toContain("rail.id = 'e4-scroll-rail'");
     expect(globalNavigation).toContain('width:.72rem!important;background:rgba(231,186,86,.42)!important;');
@@ -420,6 +432,24 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('body.theme-light #empower.bridge-program-section .bridge-network-core{border-color:#8d601a!important;background:radial-gradient(circle,#fffaf2,#e7d4a9 72%)!important;');
     expect(globalNavigation).toContain('body.theme-light #empower.bridge-program-section .bridge-network-role-label{color:#1e1a16!important;text-shadow:0 1px 0 #fffaf2!important;}');
     expect(globalNavigation).toContain('installBridgeLightModeSystem();');
+  });
+
+  it("uses the supplied B.R.I.D.G.E. framework as an editorial four-application experience", () => {
+    expect(globalNavigation).toContain('#empower.e4-bridge-editorial-section{position:relative!important;overflow:hidden!important;background:#160c05!important;');
+    expect(globalNavigation).toContain('.e4-bridge-application-header{display:grid!important;grid-template-columns:clamp(3.3rem,7vw,5.7rem) minmax(0,1fr) minmax(16rem,25rem)!important;');
+    expect(globalNavigation).toContain('.e4-bridge-application-content{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;');
+    expect(globalNavigation).toContain('.e4-bridge-workflow-list{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;');
+    expect(globalNavigation).toContain("['B', 'Build Capacity']");
+    expect(globalNavigation).toContain("['R', 'Research & Resources']");
+    expect(globalNavigation).toContain("['I', 'Innovation & Impact']");
+    expect(globalNavigation).toContain("['D', 'Develop Partnerships']");
+    expect(globalNavigation).toContain("['G', 'Grow Funding & Programs']");
+    expect(globalNavigation).toContain("['E', 'Execute for Excellence']");
+    expect(globalNavigation).toContain("'Grant/Content Developer'");
+    expect(globalNavigation).toContain("'Advertisement/Coordination'");
+    expect(globalNavigation).toContain("'Content Expert (Advertisement/Coordination)'");
+    expect(globalNavigation).toContain("body.theme-light #empower.e4-bridge-editorial-section{background:#f7f0e5!important;color:#1e1a16!important;}");
+    expect(globalNavigation).toContain('@media screen and (max-width:680px){#empower.e4-bridge-editorial-section .e4-bridge-editorial-shell{width:min(100% - 2.4rem,42rem)!important;padding:4.2rem 0!important;}');
   });
 
   it("adds Home, Contact Us, and Core Services across shared navigation destinations", () => {
