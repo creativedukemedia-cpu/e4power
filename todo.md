@@ -409,3 +409,7 @@
 - [x] Add restrained licensed editorial photography to the B.R.I.D.G.E. model sections and integrate it with the dark gold E4 visual system.
 - [x] Retain an accessible six-stage B.R.I.D.G.E. workflow and role strip for each application with responsive mobile presentation.
 - [x] Validate desktop and phone layouts, light and dark themes, interaction behavior, tests, type checks, and production build without publishing this redesign.
+
+- [x] Replace the inconsistent and potentially watermarked B.R.I.D.G.E. model photographs with a coherent watermark-free editorial collection.
+- [x] Normalize all B.R.I.D.G.E. model image frames to a consistent aspect ratio and placement across desktop and phone layouts.
+- [x] Revalidate B.R.I.D.G.E. imagery and responsive presentation without publishing the changes.

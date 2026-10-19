@@ -358,10 +358,11 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('Research Initiative Execution');
     expect(globalNavigation).toContain('Innovation, IP & Sustainability');
     expect(globalNavigation).toContain('The E4 Power B.R.I.D.G.E. Workflow');
-    expect(globalNavigation).toContain('/manus-storage/bridge-leadership_57fd222d.jpg');
-    expect(globalNavigation).toContain('/manus-storage/bridge-expert-support_aa128829.jpg');
-    expect(globalNavigation).toContain('/manus-storage/bridge-research-execution_c7525fb0.jpg');
-    expect(globalNavigation).toContain('/manus-storage/bridge-innovation_5942c827.jpg');
+    expect(globalNavigation).toContain('/manus-storage/bridge-model-01_1d4d08e2.jpg');
+    expect(globalNavigation).toContain('/manus-storage/bridge-model-02_44c88f12.jpg');
+    expect(globalNavigation).toContain('/manus-storage/bridge-model-03_91b2fcbb.jpg');
+    expect(globalNavigation).toContain('/manus-storage/bridge-model-04_8c0820cd.jpg');
+    expect(globalNavigation).not.toContain('.e4-bridge-application:nth-child(even) .e4-bridge-application-photo');
     expect(globalNavigation).toContain('installBridgeEditorialModels();');
     expect(globalNavigation).toContain('function installScrollProgress()');
     expect(globalNavigation).toContain("rail.id = 'e4-scroll-rail'");
@@ -437,6 +438,7 @@ describe("theme toggle markup", () => {
   it("uses the supplied B.R.I.D.G.E. framework as an editorial four-application experience", () => {
     expect(globalNavigation).toContain('#empower.e4-bridge-editorial-section{position:relative!important;overflow:hidden!important;background:#160c05!important;');
     expect(globalNavigation).toContain('.e4-bridge-application-header{display:grid!important;grid-template-columns:clamp(3.3rem,7vw,5.7rem) minmax(0,1fr) minmax(16rem,25rem)!important;');
+    expect(globalNavigation).toContain('.e4-bridge-application-photo{position:relative!important;align-self:start!important;width:100%!important;aspect-ratio:3 / 2!important;min-height:0!important;');
     expect(globalNavigation).toContain('.e4-bridge-application-content{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;');
     expect(globalNavigation).toContain('.e4-bridge-workflow-list{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;');
     expect(globalNavigation).toContain("['B', 'Build Capacity']");

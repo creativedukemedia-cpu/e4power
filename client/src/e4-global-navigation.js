@@ -698,7 +698,7 @@
         #empower.e4-bridge-editorial-section .e4-bridge-application-heading{margin:0!important;color:#fff8ef!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(2rem,4vw,4.4rem)!important;font-weight:900!important;letter-spacing:0!important;line-height:.93!important;text-transform:uppercase!important;}
         #empower.e4-bridge-editorial-section .e4-bridge-application-subtitle{margin:.7rem 0 0!important;color:#e7ba56!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.92rem,1.4vw,1.18rem)!important;font-weight:800!important;letter-spacing:0!important;line-height:1.25!important;}
         #empower.e4-bridge-editorial-section .e4-bridge-application-summary{max-width:48rem!important;margin:1rem 0 0!important;color:rgba(255,248,239,.82)!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.9rem,1.2vw,1.04rem)!important;font-weight:550!important;letter-spacing:0!important;line-height:1.58!important;}
-        #empower.e4-bridge-editorial-section .e4-bridge-application-photo{position:relative!important;align-self:stretch!important;min-height:13.5rem!important;margin:0!important;overflow:hidden!important;background:#33200c!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-application-photo{position:relative!important;align-self:start!important;width:100%!important;aspect-ratio:3 / 2!important;min-height:0!important;margin:0!important;overflow:hidden!important;background:#33200c!important;}
         #empower.e4-bridge-editorial-section .e4-bridge-application-photo::after{content:""!important;position:absolute!important;inset:0!important;background:linear-gradient(120deg,rgba(22,12,5,.36),rgba(231,186,86,.12))!important;pointer-events:none!important;}
         #empower.e4-bridge-editorial-section .e4-bridge-application-photo img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;filter:grayscale(.28) contrast(1.05)!important;}
         #empower.e4-bridge-editorial-section .e4-bridge-application-content{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:clamp(1.25rem,3vw,3rem)!important;margin-top:clamp(2rem,4vw,3.75rem)!important;}
@@ -720,7 +720,6 @@
         #empower.e4-bridge-editorial-section .e4-bridge-rolelist{display:flex!important;flex-wrap:wrap!important;gap:.78rem clamp(1rem,2.2vw,2.1rem)!important;margin:1.2rem 0 0!important;padding:0!important;list-style:none!important;}
         #empower.e4-bridge-editorial-section .e4-bridge-rolelist li{display:flex!important;align-items:center!important;gap:.48rem!important;margin:0!important;color:rgba(255,248,239,.82)!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.68rem,.9vw,.8rem)!important;font-weight:800!important;letter-spacing:0!important;line-height:1.25!important;text-transform:uppercase!important;}
         #empower.e4-bridge-editorial-section .e4-bridge-rolelist li::before{content:""!important;display:block!important;flex:0 0 .58rem!important;width:.58rem!important;height:.58rem!important;border-radius:999px!important;background:#e7ba56!important;box-shadow:0 0 0 .2rem rgba(231,186,86,.13)!important;}
-        #empower.e4-bridge-editorial-section .e4-bridge-application:nth-child(even) .e4-bridge-application-photo{order:-1!important;}
         body.theme-light #empower.e4-bridge-editorial-section{background:#f7f0e5!important;color:#1e1a16!important;}
         body.theme-light #empower.e4-bridge-editorial-section::before{background:radial-gradient(circle at 100% 4%,rgba(199,150,48,.22),transparent 27%),radial-gradient(circle at 2% 34%,rgba(141,96,26,.12),transparent 30%)!important;}
         body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-application-heading,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-ledger h4,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-workflow h4,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-rolebar h4,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-stage-title{color:#1e1a16!important;}
@@ -729,8 +728,8 @@
         body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-ledger--outcome{background:rgba(231,186,86,.18)!important;box-shadow:inset .28rem 0 0 #e7ba56!important;}
         body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-workflow-list li{box-shadow:inset 0 .22rem 0 #8d601a!important;}
         @media (prefers-reduced-motion:no-preference){#empower.e4-bridge-editorial-section .e4-bridge-application-photo img{transition:transform .38s cubic-bezier(.23,1,.32,1),filter .28s ease!important;}#empower.e4-bridge-editorial-section .e4-bridge-application:hover .e4-bridge-application-photo img{transform:scale(1.035)!important;filter:grayscale(0) contrast(1)!important;}}
-        @media screen and (max-width:900px){#empower.e4-bridge-editorial-section .e4-bridge-application-header{grid-template-columns:clamp(3.2rem,9vw,4.6rem) minmax(0,1fr)!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-photo{grid-column:1 / -1!important;min-height:16rem!important;max-width:34rem!important;width:100%!important;margin-top:.6rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-application:nth-child(even) .e4-bridge-application-photo{order:initial!important;}}
-        @media screen and (max-width:680px){#empower.e4-bridge-editorial-section .e4-bridge-editorial-shell{width:min(100% - 2.4rem,42rem)!important;padding:4.2rem 0!important;}#empower.e4-bridge-editorial-section .e4-bridge-application:not(:first-child){margin-top:4.8rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-header{display:block!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-number{width:3.25rem!important;margin-bottom:1rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-heading{font-size:clamp(2rem,10.7vw,3rem)!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-photo{min-height:13rem!important;margin-top:1.35rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-content{grid-template-columns:1fr!important;gap:1rem!important;margin-top:1.75rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-ledger{padding:1.25rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-workflow{margin-top:2rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-workflow-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:1.1rem .8rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-rolebar{margin-top:2rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-rolelist{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:.9rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-rolelist li{align-items:flex-start!important;font-size:.67rem!important;}}
+        @media screen and (max-width:900px){#empower.e4-bridge-editorial-section .e4-bridge-application-header{grid-template-columns:clamp(3.2rem,9vw,4.6rem) minmax(0,1fr)!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-photo{grid-column:1 / -1!important;max-width:none!important;margin-top:.6rem!important;}}
+        @media screen and (max-width:680px){#empower.e4-bridge-editorial-section .e4-bridge-editorial-shell{width:min(100% - 2.4rem,42rem)!important;padding:4.2rem 0!important;}#empower.e4-bridge-editorial-section .e4-bridge-application:not(:first-child){margin-top:4.8rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-header{display:block!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-number{width:3.25rem!important;margin-bottom:1rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-heading{font-size:clamp(2rem,10.7vw,3rem)!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-photo{margin-top:1.35rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-content{grid-template-columns:1fr!important;gap:1rem!important;margin-top:1.75rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-ledger{padding:1.25rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-workflow{margin-top:2rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-workflow-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:1.1rem .8rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-rolebar{margin-top:2rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-rolelist{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:.9rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-rolelist li{align-items:flex-start!important;font-size:.67rem!important;}}
         @media (prefers-reduced-motion:reduce){#empower.e4-bridge-editorial-section .e4-bridge-application-photo img{transition:none!important;}}
       `;
       document.head.appendChild(style);
@@ -750,8 +749,8 @@
         title: 'University Leadership Alignment',
         subtitle: 'From Fragmented Efforts to a Unified Strategy',
         summary: 'E4 helps university leaders align people, priorities, and resources to accelerate research growth.',
-        photo: '/manus-storage/bridge-leadership_57fd222d.jpg',
-        photoAlt: 'University leadership team in a planning meeting',
+        photo: '/manus-storage/bridge-model-01_1d4d08e2.jpg',
+        photoAlt: 'University leadership team aligning priorities at a worktable',
         challenge: ['Leaders are balancing multiple urgent responsibilities.', 'Competing priorities and mission drift.', 'Staffing shortages and funding constraints.', 'Inconsistent communication across departments.'],
         outcome: ['Unified leadership and clear priorities.', 'More effective collaboration.', 'Increased research capacity and funding growth.', 'Sustainable systems and long-term success.'],
         workflow: ['Assess current structure, needs, and goals.', 'Identify opportunities and align with institutional priorities.', 'Develop a strategic plan for coordinated research growth.', 'Engage internal and external stakeholders.', 'Expand research pipeline and resources.', 'Implement, monitor, and drive continuous improvement.'],
@@ -763,8 +762,8 @@
         title: 'Expert-on-Demand Support',
         subtitle: 'Specialized Expertise When You Need It',
         summary: 'E4 provides flexible, scalable support with experienced professionals to fill critical skill gaps and accelerate impact.',
-        photo: '/manus-storage/bridge-expert-support_aa128829.jpg',
-        photoAlt: 'Professional consultant working on a laptop',
+        photo: '/manus-storage/bridge-model-02_44c88f12.jpg',
+        photoAlt: 'Expert consultant collaborating over a laptop',
         challenge: ['Need specialized expertise without full-time hires.', 'Limited internal capacity.', 'Rapidly changing funding and technical requirements.', 'Need immediate support for strategic initiatives.'],
         outcome: ['Immediate access to specialized expertise.', 'Flexible, scalable support.', 'Faster impact and stronger proposals.', 'Enhanced internal capacity and sustainability.'],
         workflow: ['Assess skill gaps and priorities.', 'Identify the right expertise and funding needs.', 'Apply specialized knowledge to advance key initiatives.', 'Integrate E4 experts with your team.', 'Strengthen proposals, programs, and funding pipelines.', 'Deliver results and build long-term internal capacity.'],
@@ -776,8 +775,8 @@
         title: 'Research Initiative Execution',
         subtitle: 'From Ideas to Funded, High-Impact Programs',
         summary: 'E4 provides end-to-end support to develop, manage, and execute competitive research initiatives.',
-        photo: '/manus-storage/bridge-research-execution_c7525fb0.jpg',
-        photoAlt: 'Research team collaborating on an initiative',
+        photo: '/manus-storage/bridge-model-03_91b2fcbb.jpg',
+        photoAlt: 'Research initiative team reviewing a proposal',
         challenge: ['Need support with proposal development and compliance.', 'Complex reporting and financial requirements.', 'Coordination across multiple stakeholders.', 'Limited technical resources.'],
         outcome: ['High-quality, competitive submissions.', 'Improved compliance and financial management.', 'Enhanced research visibility and impact.', 'Stronger, sustainable research programs.'],
         workflow: ['Assess research priorities and infrastructure.', 'Identify funding opportunities and align with funder priorities.', 'Develop competitive proposals and strategies.', 'Engage internal and external partners.', 'Strengthen submission quality and expand research programs.', 'Manage compliance, finances, reporting, and project implementation.'],
@@ -789,8 +788,8 @@
         title: 'Innovation, IP & Sustainability',
         subtitle: 'Turning Research into Real-World Impact',
         summary: 'E4 strengthens IP strategy, technology transfer, compliance, and partnerships to build sustainable research ecosystems.',
-        photo: '/manus-storage/bridge-innovation_5942c827.jpg',
-        photoAlt: 'Technology professional working at a computer',
+        photo: '/manus-storage/bridge-model-04_8c0820cd.jpg',
+        photoAlt: 'Innovation leaders reviewing an abstract research visualization',
         challenge: ['Need support with IP strategy and commercialization.', 'Complex compliance and governance requirements.', 'Limited internal technology transfer resources.', 'Need sustainable models for long-term impact.'],
         outcome: ['Strengthened discovery-to-impact pathways.', 'Enhanced IP strategy and technology transfer.', 'Improved compliance and governance.', 'Increased innovation and long-term impact.'],
         workflow: ['Assess innovation and IP needs.', 'Identify funding, partners, and market opportunities.', 'Develop IP strategy and commercialization pathways.', 'Connect with industry, government, and innovation partners.', 'Expand innovation pipelines and sustainable funding.', 'Implement, monitor, and scale for long-term impact.'],
