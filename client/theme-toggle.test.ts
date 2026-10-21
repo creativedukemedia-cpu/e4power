@@ -348,6 +348,10 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain("intro.id = 'e4-bridge-offering-intro'");
     expect(globalNavigation).toContain('The <span>B.R.I.D.G.E.</span> Delivery Model');
     expect(globalNavigation).toContain('B.R.I.D.G.E. is E4 Power’s offering for connecting the right specialists');
+    expect(globalNavigation).toContain('class="e4-bridge-acronym"');
+    expect(globalNavigation).toContain('Build Capacity');
+    expect(globalNavigation).toContain('Research &amp; Resources');
+    expect(globalNavigation).toContain('Execute for Excellence');
     expect(globalNavigation).toContain('/manus-storage/bridge-writing_88d14ca9.jpg');
     expect(globalNavigation).not.toContain('/manus-storage/bridge-collaboration_e5c858cb.webp');
     expect(globalNavigation).toContain('function installBridgeEditorialModels()');
@@ -357,7 +361,9 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('Expert-on-Demand Support');
     expect(globalNavigation).toContain('Research Initiative Execution');
     expect(globalNavigation).toContain('Innovation, IP & Sustainability');
-    expect(globalNavigation).toContain('The E4 Power B.R.I.D.G.E. Workflow');
+    expect(globalNavigation).toContain('Before the B.R.I.D.G.E.');
+    expect(globalNavigation).toContain('The B.R.I.D.G.E. Bridge');
+    expect(globalNavigation).toContain('After the B.R.I.D.G.E.');
     expect(globalNavigation).toContain('/manus-storage/bridge-model-01_1d4d08e2.jpg');
     expect(globalNavigation).toContain('/manus-storage/bridge-model-02_44c88f12.jpg');
     expect(globalNavigation).toContain('/manus-storage/bridge-model-03_91b2fcbb.jpg');
@@ -439,8 +445,11 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('#empower.e4-bridge-editorial-section{position:relative!important;overflow:hidden!important;background:#160c05!important;');
     expect(globalNavigation).toContain('.e4-bridge-application-header{display:grid!important;grid-template-columns:clamp(3.3rem,7vw,5.7rem) minmax(0,1fr) minmax(16rem,25rem)!important;');
     expect(globalNavigation).toContain('.e4-bridge-application-photo{position:relative!important;align-self:start!important;width:100%!important;aspect-ratio:3 / 2!important;min-height:0!important;');
-    expect(globalNavigation).toContain('.e4-bridge-application-content{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;');
-    expect(globalNavigation).toContain('.e4-bridge-workflow-list{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;');
+    expect(globalNavigation).toContain('.e4-bridge-transformation{display:grid!important;grid-template-columns:minmax(12rem,.82fr) minmax(0,1.65fr) minmax(12rem,.82fr)!important;');
+    expect(globalNavigation).toContain('.e4-bridge-workflow-list{position:relative!important;display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;');
+    expect(globalNavigation).toContain('.e4-bridge-stage-letter{display:grid!important;place-items:center!important;');
+    expect(globalNavigation).toContain('border-radius:999px!important;');
+    expect(globalNavigation).toContain('.e4-bridge-workflow-list li:nth-child(6) .e4-bridge-stage-letter{background:#d9785f!important;}');
     expect(globalNavigation).toContain("['B', 'Build Capacity']");
     expect(globalNavigation).toContain("['R', 'Research & Resources']");
     expect(globalNavigation).toContain("['I', 'Innovation & Impact']");
@@ -452,6 +461,15 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain("'Content Expert (Advertisement/Coordination)'");
     expect(globalNavigation).toContain("body.theme-light #empower.e4-bridge-editorial-section{background:#f7f0e5!important;color:#1e1a16!important;}");
     expect(globalNavigation).toContain('@media screen and (max-width:680px){#empower.e4-bridge-editorial-section .e4-bridge-editorial-shell{width:min(100% - 2.4rem,42rem)!important;padding:4.2rem 0!important;}');
+  });
+
+  it("refreshes every Team portrait from its verified managed source", () => {
+    expect(globalNavigation).toContain('function installTeamPortraitResilience()');
+    expect(globalNavigation).toContain("source + '?v=e4-team-20261020'");
+    expect(globalNavigation).toContain("portrait.dataset.e4PortraitReady = 'true'");
+    expect(globalNavigation).toContain("portrait.loading = 'eager'");
+    expect(globalNavigation).toContain("portrait.srcset = versionedSource + ' 1920w'");
+    expect(globalNavigation).toContain('installTeamPortraitResilience();');
   });
 
   it("adds Home, Contact Us, and Core Services across shared navigation destinations", () => {

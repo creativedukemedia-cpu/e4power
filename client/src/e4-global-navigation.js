@@ -672,7 +672,13 @@
     intro.id = 'e4-bridge-offering-intro';
     intro.className = 'e4-bridge-offering-intro';
     intro.setAttribute('aria-labelledby', 'e4-bridge-offering-heading');
-    intro.innerHTML = '<div class="e4-bridge-offering-grid"><div class="e4-bridge-offering-copy"><h2 id="e4-bridge-offering-heading">The <span>B.R.I.D.G.E.</span> Delivery Model</h2><p class="e4-bridge-offering-lede">B.R.I.D.G.E. is E4 Power’s offering for connecting the right specialists to the work already in motion.</p><p>We bring strategy, coordination, technical insight, financial stewardship, and implementation support into one accountable team around your goals.</p></div><div class="e4-bridge-offering-photos" aria-label="E4 Power collaboration in action"><figure class="e4-bridge-offering-photo e4-bridge-offering-photo--writing"><img src="/manus-storage/bridge-writing_88d14ca9.jpg" alt="A professional documenting work with a pen" /></figure></div></div>';
+    intro.innerHTML = '<div class="e4-bridge-offering-grid"><div class="e4-bridge-offering-copy"><h2 id="e4-bridge-offering-heading">The <span>B.R.I.D.G.E.</span> Delivery Model</h2><p class="e4-bridge-offering-lede">B.R.I.D.G.E. is E4 Power’s offering for connecting the right specialists to the work already in motion.</p><p>We bring strategy, coordination, technical insight, financial stewardship, and implementation support into one accountable team around your goals.</p><ul class="e4-bridge-acronym" aria-label="B.R.I.D.G.E. means Build Capacity, Research and Resources, Innovation and Impact, Develop Partnerships, Grow Funding and Programs, and Execute for Excellence"><li><b>B</b><span>Build Capacity</span></li><li><b>R</b><span>Research &amp; Resources</span></li><li><b>I</b><span>Innovation &amp; Impact</span></li><li><b>D</b><span>Develop Partnerships</span></li><li><b>G</b><span>Grow Funding &amp; Programs</span></li><li><b>E</b><span>Execute for Excellence</span></li></ul></div><div class="e4-bridge-offering-photos" aria-label="E4 Power collaboration in action"><figure class="e4-bridge-offering-photo e4-bridge-offering-photo--writing"><img src="/manus-storage/bridge-writing_88d14ca9.jpg" alt="A professional documenting work with a pen" /></figure></div></div>';
+    if (!document.getElementById('e4-bridge-acronym-style')) {
+      var acronymStyle = document.createElement('style');
+      acronymStyle.id = 'e4-bridge-acronym-style';
+      acronymStyle.textContent = '.e4-bridge-acronym{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:.78rem 1rem!important;margin:2rem 0 0!important;padding:0!important;list-style:none!important;}.e4-bridge-acronym li{display:grid!important;grid-template-columns:2rem minmax(0,1fr)!important;align-items:center!important;gap:.6rem!important;margin:0!important;color:#fff8ef!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.67rem,.92vw,.79rem)!important;font-weight:800!important;line-height:1.15!important;text-transform:uppercase!important;}.e4-bridge-acronym b{display:grid!important;place-items:center!important;width:2rem!important;height:2rem!important;border-radius:999px!important;color:#160c05!important;font-size:1rem!important;font-weight:900!important;line-height:1!important;}.e4-bridge-acronym li:nth-child(1) b{background:#e7ba56!important;}.e4-bridge-acronym li:nth-child(2) b{background:#c68d44!important;}.e4-bridge-acronym li:nth-child(3) b{background:#6cb4c3!important;}.e4-bridge-acronym li:nth-child(4) b{background:#a38ac1!important;}.e4-bridge-acronym li:nth-child(5) b{background:#91ae64!important;}.e4-bridge-acronym li:nth-child(6) b{background:#d9785f!important;}@media screen and (max-width:680px){.e4-bridge-acronym{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:.85rem!important;}.e4-bridge-acronym li{grid-template-columns:1.9rem minmax(0,1fr)!important;font-size:.64rem!important;}.e4-bridge-acronym b{width:1.9rem!important;height:1.9rem!important;font-size:.9rem!important;}}';
+      document.head.appendChild(acronymStyle);
+    }
     bridgeSection.parentNode.insertBefore(intro, bridgeSection);
   }
 
@@ -701,18 +707,27 @@
         #empower.e4-bridge-editorial-section .e4-bridge-application-photo{position:relative!important;align-self:start!important;width:100%!important;aspect-ratio:3 / 2!important;min-height:0!important;margin:0!important;overflow:hidden!important;background:#33200c!important;}
         #empower.e4-bridge-editorial-section .e4-bridge-application-photo::after{content:""!important;position:absolute!important;inset:0!important;background:linear-gradient(120deg,rgba(22,12,5,.36),rgba(231,186,86,.12))!important;pointer-events:none!important;}
         #empower.e4-bridge-editorial-section .e4-bridge-application-photo img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;filter:grayscale(.28) contrast(1.05)!important;}
-        #empower.e4-bridge-editorial-section .e4-bridge-application-content{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:clamp(1.25rem,3vw,3rem)!important;margin-top:clamp(2rem,4vw,3.75rem)!important;}
-        #empower.e4-bridge-editorial-section .e4-bridge-ledger{min-width:0!important;padding:clamp(1.3rem,2.5vw,2rem)!important;background:linear-gradient(135deg,rgba(255,248,239,.06),rgba(255,248,239,.015))!important;box-shadow:inset .28rem 0 0 #e7ba56!important;}
-        #empower.e4-bridge-editorial-section .e4-bridge-ledger--outcome{box-shadow:inset .28rem 0 0 #8d601a!important;background:linear-gradient(135deg,rgba(231,186,86,.14),rgba(255,248,239,.025))!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-transformation{display:grid!important;grid-template-columns:minmax(12rem,.82fr) minmax(0,1.65fr) minmax(12rem,.82fr)!important;gap:clamp(1rem,2.5vw,2.75rem)!important;align-items:center!important;margin-top:clamp(2rem,4vw,3.75rem)!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-ledger{position:relative!important;min-width:0!important;padding:0 0 0 1.15rem!important;background:transparent!important;box-shadow:inset .24rem 0 0 #d9785f!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-ledger--outcome{box-shadow:inset .24rem 0 0 #91ae64!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-state-label{display:block!important;margin:0 0 .55rem!important;color:#d9785f!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.64rem,.78vw,.72rem)!important;font-weight:900!important;letter-spacing:0!important;line-height:1.1!important;text-transform:uppercase!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-ledger--outcome .e4-bridge-state-label{color:#91ae64!important;}
         #empower.e4-bridge-editorial-section .e4-bridge-ledger h4,#empower.e4-bridge-editorial-section .e4-bridge-workflow h4,#empower.e4-bridge-editorial-section .e4-bridge-rolebar h4{margin:0!important;color:#fff8ef!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.9rem,1.15vw,1.08rem)!important;font-weight:900!important;letter-spacing:0!important;line-height:1.1!important;text-transform:uppercase!important;}
         #empower.e4-bridge-editorial-section .e4-bridge-ledger ul{display:grid!important;gap:.72rem!important;margin:1.2rem 0 0!important;padding:0!important;list-style:none!important;}
         #empower.e4-bridge-editorial-section .e4-bridge-ledger li{position:relative!important;margin:0!important;padding-left:1rem!important;color:rgba(255,248,239,.8)!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.78rem,1.05vw,.92rem)!important;font-weight:550!important;letter-spacing:0!important;line-height:1.45!important;}
         #empower.e4-bridge-editorial-section .e4-bridge-ledger li::before{content:""!important;position:absolute!important;top:.45rem!important;left:0!important;width:.38rem!important;height:.38rem!important;background:#e7ba56!important;transform:rotate(45deg)!important;}
-        #empower.e4-bridge-editorial-section .e4-bridge-workflow{position:relative!important;margin-top:clamp(2rem,4vw,3.75rem)!important;padding:clamp(1.35rem,2.6vw,2.15rem) 0 0!important;}
-        #empower.e4-bridge-editorial-section .e4-bridge-workflow h4{color:#e7ba56!important;}
-        #empower.e4-bridge-editorial-section .e4-bridge-workflow-list{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:clamp(.6rem,1.5vw,1.2rem)!important;margin:1.35rem 0 0!important;padding:0!important;list-style:none!important;}
-        #empower.e4-bridge-editorial-section .e4-bridge-workflow-list li{position:relative!important;min-width:0!important;margin:0!important;padding-top:.8rem!important;box-shadow:inset 0 .22rem 0 rgba(231,186,86,.76)!important;}
-        #empower.e4-bridge-editorial-section .e4-bridge-stage-letter{display:block!important;margin:0!important;color:#e7ba56!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(1.55rem,3vw,2.65rem)!important;font-weight:900!important;letter-spacing:0!important;line-height:.86!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-workflow{position:relative!important;min-width:0!important;margin:0!important;padding:clamp(1.3rem,2.1vw,1.75rem) 0!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-workflow h4{color:#e7ba56!important;text-align:center!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-workflow-list{position:relative!important;display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:clamp(.28rem,.9vw,.72rem)!important;margin:1.35rem 0 0!important;padding:0!important;list-style:none!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-workflow-list::before{content:""!important;position:absolute!important;z-index:0!important;top:1.8rem!important;left:5%!important;right:5%!important;height:2px!important;background:linear-gradient(90deg,#e7ba56,#6cb4c3,#a38ac1,#91ae64,#d9785f)!important;opacity:.72!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-workflow-list li{position:relative!important;z-index:1!important;min-width:0!important;margin:0!important;padding:0!important;box-shadow:none!important;text-align:center!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-stage-letter{display:grid!important;place-items:center!important;width:clamp(2.55rem,4.1vw,3.6rem)!important;aspect-ratio:1!important;margin:0 auto!important;border-radius:999px!important;color:#160c05!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(1.25rem,2.35vw,2rem)!important;font-weight:900!important;letter-spacing:0!important;line-height:1!important;box-shadow:0 0 0 .26rem #160c05!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-workflow-list li:nth-child(1) .e4-bridge-stage-letter{background:#e7ba56!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-workflow-list li:nth-child(2) .e4-bridge-stage-letter{background:#c68d44!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-workflow-list li:nth-child(3) .e4-bridge-stage-letter{background:#6cb4c3!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-workflow-list li:nth-child(4) .e4-bridge-stage-letter{background:#a38ac1!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-workflow-list li:nth-child(5) .e4-bridge-stage-letter{background:#91ae64!important;}
+        #empower.e4-bridge-editorial-section .e4-bridge-workflow-list li:nth-child(6) .e4-bridge-stage-letter{background:#d9785f!important;}
         #empower.e4-bridge-editorial-section .e4-bridge-stage-title{display:block!important;margin-top:.58rem!important;color:#fff8ef!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.69rem,.9vw,.81rem)!important;font-weight:900!important;letter-spacing:0!important;line-height:1.15!important;text-transform:uppercase!important;}
         #empower.e4-bridge-editorial-section .e4-bridge-stage-detail{display:block!important;margin-top:.48rem!important;color:rgba(255,248,239,.7)!important;font-family:Montserrat,Arial,sans-serif!important;font-size:clamp(.67rem,.8vw,.75rem)!important;font-weight:550!important;letter-spacing:0!important;line-height:1.4!important;}
         #empower.e4-bridge-editorial-section .e4-bridge-rolebar{margin-top:clamp(2.1rem,4vw,3.75rem)!important;padding:clamp(1.35rem,2.5vw,2rem) 0 0!important;box-shadow:inset 0 .28rem 0 #8d601a!important;}
@@ -724,12 +739,15 @@
         body.theme-light #empower.e4-bridge-editorial-section::before{background:radial-gradient(circle at 100% 4%,rgba(199,150,48,.22),transparent 27%),radial-gradient(circle at 2% 34%,rgba(141,96,26,.12),transparent 30%)!important;}
         body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-application-heading,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-ledger h4,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-workflow h4,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-rolebar h4,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-stage-title{color:#1e1a16!important;}
         body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-application-summary,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-ledger li,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-stage-detail,body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-rolelist li{color:#3e3428!important;}
-        body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-ledger{background:rgba(255,255,255,.53)!important;box-shadow:inset .28rem 0 0 #8d601a!important;}
-        body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-ledger--outcome{background:rgba(231,186,86,.18)!important;box-shadow:inset .28rem 0 0 #e7ba56!important;}
-        body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-workflow-list li{box-shadow:inset 0 .22rem 0 #8d601a!important;}
+        body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-ledger{background:transparent!important;box-shadow:inset .24rem 0 0 #d9785f!important;}
+        body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-ledger--outcome{background:transparent!important;box-shadow:inset .24rem 0 0 #91ae64!important;}
+        body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-workflow-list::before{opacity:.9!important;}
+        body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-stage-letter{box-shadow:0 0 0 .26rem #f7f0e5!important;}
         @media (prefers-reduced-motion:no-preference){#empower.e4-bridge-editorial-section .e4-bridge-application-photo img{transition:transform .38s cubic-bezier(.23,1,.32,1),filter .28s ease!important;}#empower.e4-bridge-editorial-section .e4-bridge-application:hover .e4-bridge-application-photo img{transform:scale(1.035)!important;filter:grayscale(0) contrast(1)!important;}}
         @media screen and (max-width:900px){#empower.e4-bridge-editorial-section .e4-bridge-application-header{grid-template-columns:clamp(3.2rem,9vw,4.6rem) minmax(0,1fr)!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-photo{grid-column:1 / -1!important;max-width:none!important;margin-top:.6rem!important;}}
+        @media screen and (max-width:900px){#empower.e4-bridge-editorial-section .e4-bridge-transformation{grid-template-columns:1fr!important;gap:1.75rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-workflow{padding:1.6rem 0!important;}}
         @media screen and (max-width:680px){#empower.e4-bridge-editorial-section .e4-bridge-editorial-shell{width:min(100% - 2.4rem,42rem)!important;padding:4.2rem 0!important;}#empower.e4-bridge-editorial-section .e4-bridge-application:not(:first-child){margin-top:4.8rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-header{display:block!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-number{width:3.25rem!important;margin-bottom:1rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-heading{font-size:clamp(2rem,10.7vw,3rem)!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-photo{margin-top:1.35rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-application-content{grid-template-columns:1fr!important;gap:1rem!important;margin-top:1.75rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-ledger{padding:1.25rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-workflow{margin-top:2rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-workflow-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:1.1rem .8rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-rolebar{margin-top:2rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-rolelist{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:.9rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-rolelist li{align-items:flex-start!important;font-size:.67rem!important;}}
+        @media screen and (max-width:680px){#empower.e4-bridge-editorial-section .e4-bridge-transformation{gap:1.5rem!important;margin-top:1.75rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-ledger{padding:0 0 0 1.05rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-workflow{margin:0!important;padding:1.2rem 0!important;}#empower.e4-bridge-editorial-section .e4-bridge-workflow-list{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:1.25rem .55rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-workflow-list::before{display:none!important;}#empower.e4-bridge-editorial-section .e4-bridge-stage-letter{width:2.45rem!important;font-size:1.2rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-stage-title{font-size:.61rem!important;}#empower.e4-bridge-editorial-section .e4-bridge-stage-detail{font-size:.61rem!important;}}
         @media (prefers-reduced-motion:reduce){#empower.e4-bridge-editorial-section .e4-bridge-application-photo img{transition:none!important;}}
       `;
       document.head.appendChild(style);
@@ -809,7 +827,7 @@
       return roles.map(function (role) { return '<li>' + role + '</li>'; }).join('');
     };
     bridgeSection.innerHTML = '<div class="e4-bridge-editorial-shell">' + models.map(function (model) {
-      return '<article class="e4-bridge-application"><header class="e4-bridge-application-header"><span class="e4-bridge-application-number" aria-label="Model ' + model.number + '">' + model.number + '</span><div><h3 class="e4-bridge-application-heading">' + model.title + '</h3><p class="e4-bridge-application-subtitle">' + model.subtitle + '</p><p class="e4-bridge-application-summary">' + model.summary + '</p></div><figure class="e4-bridge-application-photo"><img src="' + model.photo + '" alt="' + model.photoAlt + '" loading="lazy" /></figure></header><div class="e4-bridge-application-content"><section class="e4-bridge-ledger" aria-label="Challenge"><h4>The Challenge</h4><ul>' + renderList(model.challenge) + '</ul></section><section class="e4-bridge-ledger e4-bridge-ledger--outcome" aria-label="Outcome"><h4>The Outcome</h4><ul>' + renderList(model.outcome) + '</ul></section></div><section class="e4-bridge-workflow" aria-label="E4 Power B.R.I.D.G.E. workflow"><h4>The E4 Power B.R.I.D.G.E. Workflow</h4><ol class="e4-bridge-workflow-list">' + renderWorkflow(model.workflow) + '</ol></section><section class="e4-bridge-rolebar" aria-label="' + model.roleLabel + '"><h4>' + model.roleLabel + '</h4><ul class="e4-bridge-rolelist">' + renderRoles(model.roles) + '</ul></section></article>';
+      return '<article class="e4-bridge-application"><header class="e4-bridge-application-header"><span class="e4-bridge-application-number" aria-label="Model ' + model.number + '">' + model.number + '</span><div><h3 class="e4-bridge-application-heading">' + model.title + '</h3><p class="e4-bridge-application-subtitle">' + model.subtitle + '</p><p class="e4-bridge-application-summary">' + model.summary + '</p></div><figure class="e4-bridge-application-photo"><img src="' + model.photo + '" alt="' + model.photoAlt + '" loading="lazy" /></figure></header><div class="e4-bridge-transformation"><section class="e4-bridge-ledger e4-bridge-ledger--challenge" aria-label="Challenge before the B.R.I.D.G.E. model"><span class="e4-bridge-state-label">Before the B.R.I.D.G.E.</span><h4>Challenge</h4><ul>' + renderList(model.challenge) + '</ul></section><section class="e4-bridge-workflow" aria-label="B.R.I.D.G.E. bridge from challenge to outcome"><h4>The B.R.I.D.G.E. Bridge</h4><ol class="e4-bridge-workflow-list">' + renderWorkflow(model.workflow) + '</ol></section><section class="e4-bridge-ledger e4-bridge-ledger--outcome" aria-label="Outcome after the B.R.I.D.G.E. model"><span class="e4-bridge-state-label">After the B.R.I.D.G.E.</span><h4>Outcome</h4><ul>' + renderList(model.outcome) + '</ul></section></div><section class="e4-bridge-rolebar" aria-label="' + model.roleLabel + '"><h4>' + model.roleLabel + '</h4><ul class="e4-bridge-rolelist">' + renderRoles(model.roles) + '</ul></section></article>';
     }).join('') + '</div>';
   }
 
@@ -929,6 +947,35 @@
     });
   }
 
+  function installTeamPortraitResilience() {
+    var portraits = {
+      'LaRico J. Treadwell, Ph.D.': '/manus-storage/larico-j--treadwell--ph-d_0b6cee7e.webp',
+      'Garry Brown, Jr, Ph.D.; J.D.': '/manus-storage/garry-brown--jr--ph-d---j-d_7a46bfb9.webp',
+      'Kandy Rose, M.B.A.': '/manus-storage/kandy-rose--m-b-a_7061343e.webp',
+      'Kelvin Kirby, PH.D.': '/manus-storage/kelvin-kirby--ph-d_e8b8e901.png',
+      'Avi Bregman, PH.D.': '/manus-storage/avi-bregman--ph-d_54fa1b67.png',
+      'Harold Lee, PH.D.': '/manus-storage/harold-lee--ph-d_619e1652.png',
+      'Tamara Henry, PMP': '/manus-storage/tamara-henry-portrait_25995acc.png',
+      'Steve Robinson': '/manus-storage/steve-robinson_bf78db15.png',
+      'Diana Simmons, ACC': '/manus-storage/diana-simmons--acc_2b3e7e9a.png'
+    };
+    document.querySelectorAll('.team-picture-div img').forEach(function (portrait, index) {
+      var source = portraits[portrait.alt];
+      if (!source || portrait.dataset.e4PortraitReady === 'true') return;
+      var versionedSource = source + '?v=e4-team-20261020';
+      portrait.dataset.e4PortraitReady = 'true';
+      portrait.loading = 'eager';
+      portrait.decoding = 'async';
+      if (index < 3) portrait.fetchPriority = 'high';
+      portrait.src = versionedSource;
+      portrait.srcset = versionedSource + ' 1920w';
+      portrait.style.setProperty('display', 'block', 'important');
+      portrait.style.setProperty('width', '100%', 'important');
+      portrait.style.setProperty('height', '100%', 'important');
+      portrait.style.setProperty('object-fit', 'cover', 'important');
+    });
+  }
+
   function enforceZeroKerning() {
     document.querySelectorAll('body,body *').forEach(function (element) {
       element.style.setProperty('letter-spacing', '0', 'important');
@@ -962,6 +1009,7 @@
     installBridgeOfferingIntro();
     installBridgeEditorialModels();
     installScrollProgress();
+    installTeamPortraitResilience();
     enforceAnnotatedTeamActionContrast();
     new MutationObserver(function () {
       enforceAnnotatedTeamActionContrast();

@@ -413,3 +413,9 @@
 - [x] Replace the inconsistent and potentially watermarked B.R.I.D.G.E. model photographs with a coherent watermark-free editorial collection.
 - [x] Normalize all B.R.I.D.G.E. model image frames to a consistent aspect ratio and placement across desktop and phone layouts.
 - [x] Revalidate B.R.I.D.G.E. imagery and responsive presentation without publishing the changes.
+
+- [x] Add a readable B.R.I.D.G.E. acronym breakdown to the homepage B.R.I.D.G.E. introduction.
+- [x] Reframe each B.R.I.D.G.E. application as a visible Challenge, Bridge, Outcome progression with the B.R.I.D.G.E. workflow centered between states.
+- [x] Render each B.R.I.D.G.E. workflow letter as a distinct colored circular marker while preserving mobile accessibility and readability.
+- [x] Diagnose and repair Team page member-image loading with managed, verified image assets.
+- [x] Validate homepage and Team desktop and phone layouts, both homepage themes, tests, type checks, and production build without publishing.
