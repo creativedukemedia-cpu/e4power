@@ -443,8 +443,10 @@ describe("theme toggle markup", () => {
 
   it("uses the supplied B.R.I.D.G.E. framework as an editorial four-application experience", () => {
     expect(globalNavigation).toContain('#empower.e4-bridge-editorial-section{position:relative!important;overflow:hidden!important;background:#160c05!important;');
-    expect(globalNavigation).toContain('.e4-bridge-application-header{display:grid!important;grid-template-columns:clamp(3.3rem,7vw,5.7rem) minmax(0,1fr) minmax(16rem,25rem)!important;');
-    expect(globalNavigation).toContain('.e4-bridge-application-photo{position:relative!important;align-self:start!important;width:100%!important;aspect-ratio:3 / 2!important;min-height:0!important;');
+    expect(globalNavigation).toContain('.e4-bridge-application-header{position:relative!important;display:flex!important;min-height:clamp(20rem,34vw,30rem)!important;');
+    expect(globalNavigation).toContain('.e4-bridge-application-header::after{content:""!important;position:absolute!important;z-index:1!important;inset:0!important;background:linear-gradient(90deg,rgba(12,8,4,.9)');
+    expect(globalNavigation).toContain('.e4-bridge-application-photo{position:absolute!important;z-index:0!important;inset:0!important;width:100%!important;height:100%!important;');
+    expect(globalNavigation).toContain('.e4-bridge-application-header>div{position:relative!important;z-index:2!important;');
     expect(globalNavigation).toContain('.e4-bridge-transformation{display:grid!important;grid-template-columns:minmax(12rem,.82fr) minmax(0,1.65fr) minmax(12rem,.82fr)!important;');
     expect(globalNavigation).toContain('.e4-bridge-workflow-list{position:relative!important;display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;');
     expect(globalNavigation).toContain('.e4-bridge-stage-letter{display:grid!important;place-items:center!important;');
@@ -460,6 +462,8 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain("'Advertisement/Coordination'");
     expect(globalNavigation).toContain("'Content Expert (Advertisement/Coordination)'");
     expect(globalNavigation).toContain("body.theme-light #empower.e4-bridge-editorial-section{background:#f7f0e5!important;color:#1e1a16!important;}");
+    expect(globalNavigation).toContain('body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-application-header .e4-bridge-application-heading{color:#fff8ef!important;}');
+    expect(globalNavigation).toContain('body.theme-light #empower.e4-bridge-editorial-section .e4-bridge-application-header .e4-bridge-application-summary{color:rgba(255,248,239,.86)!important;}');
     expect(globalNavigation).toContain('@media screen and (max-width:680px){#empower.e4-bridge-editorial-section .e4-bridge-editorial-shell{width:min(100% - 2.4rem,42rem)!important;padding:4.2rem 0!important;}');
   });
 

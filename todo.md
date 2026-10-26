@@ -419,3 +419,6 @@
 - [x] Render each B.R.I.D.G.E. workflow letter as a distinct colored circular marker while preserving mobile accessibility and readability.
 - [x] Diagnose and repair Team page member-image loading with managed, verified image assets.
 - [x] Validate homepage and Team desktop and phone layouts, both homepage themes, tests, type checks, and production build without publishing.
+- [x] Refine each B.R.I.D.G.E. application into a visually clear left Challenge, centered Bridge, and right Outcome composition while preserving content and responsive behavior.
+- [x] Make each B.R.I.D.G.E. application header a full-width image band with a dark readability overlay and overlaid title information.
+- [x] Validate the revised B.R.I.D.G.E. layout at desktop and phone widths, in both themes, with tests, type checks, and a production build. Do not publish.
