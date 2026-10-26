@@ -1,6 +1,6 @@
 import '../index.css';
 import './insights.css';
-import { StrictMode, useEffect, useMemo, useState, type FormEvent } from 'react';
+import { StrictMode, useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import { createRoot } from 'react-dom/client';
 
 type CmsItem = {
@@ -56,6 +56,34 @@ function SearchIcon() {
 
 function Chevron() {
   return <svg aria-hidden="true" viewBox="0 0 12 12"><path d="m2 4 4 4 4-4" /></svg>;
+}
+
+function PageLoader() {
+  const [active, setActive] = useState(true);
+  const loaderRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const dismiss = window.setTimeout(() => setActive(false), 220);
+    const showForNavigation = (event: MouseEvent) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || !(event.target instanceof Element)) return;
+      const link = event.target.closest('a[href]') as HTMLAnchorElement | null;
+      if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
+      const destination = new URL(link.href, window.location.href);
+      if (destination.origin !== window.location.origin || (destination.pathname === window.location.pathname && destination.search === window.location.search)) return;
+      loaderRef.current?.classList.add('is-active');
+      loaderRef.current?.setAttribute('aria-hidden', 'false');
+      setActive(true);
+    };
+    document.addEventListener('click', showForNavigation, true);
+    return () => {
+      window.clearTimeout(dismiss);
+      document.removeEventListener('click', showForNavigation, true);
+    };
+  }, []);
+
+  return <div ref={loaderRef} className={`e4-insights-loader ${active ? 'is-active' : ''}`} role="status" aria-live="polite" aria-label="Loading E4 Power" aria-hidden={!active}>
+    <div className="e4-insights-loader-inner"><span className="e4-insights-loader-mark"><img src="https://cdn.prod.website-files.com/68ba0532388ab756f96c84d5/68bcc54da8714105bb252c7f_e4_logo_white.svg" alt="" /></span><span className="e4-insights-loader-label">Loading</span><span className="e4-insights-loader-track" aria-hidden="true" /></div>
+  </div>;
 }
 
 function Header({ light, onTheme }: { light: boolean; onTheme: () => void }) {
@@ -148,6 +176,7 @@ function ContentHubApp() {
   const status = (message: string, problem = false) => <p className={`e4-insights-status ${problem ? 'is-error' : ''}`}>{message}</p>;
 
   return <div className={`e4-insights ${light ? 'is-light' : ''}`}>
+    <PageLoader />
     <Header light={light} onTheme={() => setLight((value) => !value)} />
     <main>
       <section className="e4-insights-hero"><div className="e4-insights-width"><p className="e4-insights-hero-label">E4 Power</p><h1>Insights</h1><p>Published knowledge, opportunities, and perspective from E4 Power.</p></div></section>

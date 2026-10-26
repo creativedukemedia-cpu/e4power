@@ -422,3 +422,7 @@
 - [x] Refine each B.R.I.D.G.E. application into a visually clear left Challenge, centered Bridge, and right Outcome composition while preserving content and responsive behavior.
 - [x] Make each B.R.I.D.G.E. application header a full-width image band with a dark readability overlay and overlaid title information.
 - [x] Validate the revised B.R.I.D.G.E. layout at desktop and phone widths, in both themes, with tests, type checks, and a production build. Do not publish.
+
+- [x] Add a consistent, accessible E4-branded page loading animation across static marketing pages and the Insights experience.
+- [x] Respect reduced-motion preferences and provide navigation feedback without delaying normal page interaction.
+- [x] Validate loading behavior, desktop and phone presentation, regression tests, type checks, and production build without publishing.

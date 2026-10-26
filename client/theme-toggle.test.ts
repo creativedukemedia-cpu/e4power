@@ -53,6 +53,23 @@ describe("theme toggle markup", () => {
     expect(homepage).toContain("buttons.forEach(function(button){button.addEventListener('click'");
   });
 
+  it("provides a consistent accessible E4 loading treatment for static pages and Insights", () => {
+    expect(globalNavigation).toContain('function installPageLoadingAnimation()');
+    expect(globalNavigation).toContain("loader.id = 'e4-page-loader'");
+    expect(globalNavigation).toContain("loader.setAttribute('aria-label', 'Loading E4 Power')");
+    expect(globalNavigation).toContain('e4-page-loader-sweep');
+    expect(globalNavigation).toContain("installPageLoadingAnimation();");
+    expect(globalNavigation).toContain("destination.pathname === window.location.pathname && destination.search === window.location.search");
+    expect(globalNavigation).toContain('@media (prefers-reduced-motion:reduce)');
+    expect(contentHub).toContain('function PageLoader()');
+    expect(contentHub).toContain('<PageLoader />');
+    expect(contentHub).toContain("aria-label=\"Loading E4 Power\"");
+    expect(contentHub).toContain("loaderRef.current?.classList.add('is-active')");
+    expect(contentHub).toContain("destination.pathname === window.location.pathname && destination.search === window.location.search");
+    expect(insightsStyles).toContain('.e4-insights-loader{position:fixed;z-index:32050;');
+    expect(insightsStyles).toContain('@media(prefers-reduced-motion:reduce)');
+  });
+
   it("keeps the mobile Our Services disclosure readable in dark mode", () => {
     expect(homepage).toContain('body.home-service-menu:not(.theme-light) .hero-services-panel');
     expect(homepage).toContain('background:rgba(8,7,6,.94)');
