@@ -1006,9 +1006,13 @@
       'Diana Simmons, ACC': '/manus-storage/diana-simmons--acc_2b3e7e9a.png'
     };
     document.querySelectorAll('.team-picture-div img').forEach(function (portrait, index) {
-      var source = portraits[portrait.alt];
+      var card = portrait.closest('.team-member');
+      var title = card && card.querySelector('.member-title');
+      var name = portrait.alt.trim() || (title ? title.textContent.trim() : '');
+      var source = portraits[name];
       if (!source || portrait.dataset.e4PortraitReady === 'true') return;
       var versionedSource = source + '?v=e4-team-20261020';
+      portrait.alt = name;
       portrait.dataset.e4PortraitReady = 'true';
       portrait.loading = 'eager';
       portrait.decoding = 'async';

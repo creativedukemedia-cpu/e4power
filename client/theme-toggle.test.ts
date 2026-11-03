@@ -493,6 +493,23 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('installTeamPortraitResilience();');
   });
 
+  it("keeps About Us team cards visible after inline-style normalization", () => {
+    expect(aboutUsPage).toContain('#engage .team-member,#engage .heading,#engage .small-logo,#engage .button-block .submit-button{opacity:1!important;transform:none!important;}');
+    expect(aboutUsPage).not.toContain('#engage [style*="opacity:0"]');
+    const engage = aboutUsPage.split('<section class="section dark-gray" id="engage">')[1].split('</section>')[0];
+    expect(engage).not.toMatch(/opacity:\s*0\b/);
+    const images = [...engage.matchAll(/<div class="team-picture-div">(<img\b[^>]*>)/g)].map((match) => match[1]);
+    expect(images).toHaveLength(12);
+    for (const image of images) {
+      expect(image).toMatch(/alt="[^"]+"/);
+      expect(image).toMatch(/src="\/manus-storage\/[^"\s]+"/);
+      expect(image).toMatch(/srcset="\/manus-storage\/[^"\s]+ 1920w"/);
+    }
+    expect(aboutUsPage).not.toContain('68bf5fd6d57e00320e8d437f');
+    expect(globalNavigation).toContain("portrait.alt.trim() || (title ? title.textContent.trim() : '')");
+    expect(globalNavigation).toContain('portrait.alt = name;');
+  });
+
   it("adds Home, Contact Us, and Core Services across shared navigation destinations", () => {
     expect(globalNavigation).toContain("{ title: 'Home', url: '/', keywords:");
     expect(globalNavigation).toContain("{ label: 'Core Services', url: '/services/#core-services' }");

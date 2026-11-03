@@ -426,3 +426,6 @@
 - [x] Add a consistent, accessible E4-branded page loading animation across static marketing pages and the Insights experience.
 - [x] Respect reduced-motion preferences and provide navigation feedback without delaying normal page interaction.
 - [x] Validate loading behavior, desktop and phone presentation, regression tests, type checks, and production build without publishing.
+
+- [x] Diagnose and repair desktop team portraits on About Us including /about-us/index.html using approved existing images and preserving layout.
+- [x] Validate the repaired About Us portraits at desktop and phone widths, run regression tests, type checks and build, and save a checkpoint.
