@@ -446,3 +446,5 @@ The user cancelled duplication and approved reversible edits to staging only. Ke
 - [x] Correct “thier” to “their” on Client Success, preserve all other copy and save a verified checkpoint without publishing.
 
 - [x] Fix the shared loader’s missing/displaced logo and oversized white circle, isolate it from page styling, and verify navigation, dismissal, reduced motion and responsive presentation without publishing.
+
+- [x] Normalize menu spacing, sizing and responsive behavior on Services, Workshops Training, Client Success, Insights and Contact Us using the homepage-origin header as the standard. Validate dropdowns, keyboard controls, theme toggles and mobile links without publishing or touching the old live project.

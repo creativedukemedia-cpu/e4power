@@ -1,5 +1,6 @@
 import '../index.css';
 import './insights.css';
+import '../e4-menu-layout.css';
 import { mountLoaderVisual } from '../e4-loader-visual.js';
 import { StrictMode, useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -100,41 +101,96 @@ function PageLoader() {
 
 function Header({ light, onTheme }: { light: boolean; onTheme: () => void }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [search, setSearch] = useState('');
+  const headerRef = useRef<HTMLElement>(null);
+  const mobileToggleRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const closeOutside = (event: PointerEvent) => {
+      if (event.target instanceof Node && !headerRef.current?.contains(event.target)) {
+        setOpenMenu(null);
+        setMobileOpen(false);
+      }
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      if (openMenu) {
+        event.preventDefault();
+        headerRef.current?.querySelector<HTMLButtonElement>(`button[aria-controls="${openMenu}"]`)?.focus();
+        setOpenMenu(null);
+      } else if (mobileOpen) {
+        event.preventDefault();
+        setMobileOpen(false);
+        mobileToggleRef.current?.focus();
+      }
+    };
+    document.addEventListener('pointerdown', closeOutside);
+    document.addEventListener('keydown', closeOnEscape);
+    return () => {
+      document.removeEventListener('pointerdown', closeOutside);
+      document.removeEventListener('keydown', closeOnEscape);
+    };
+  }, [mobileOpen, openMenu]);
+
+  useEffect(() => { setOpenMenu(null); }, [light]);
+  useEffect(() => { if (!mobileOpen) setOpenMenu(null); }, [mobileOpen]);
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 992px)');
+    const resetMenus = () => {
+      setMobileOpen(false);
+      setOpenMenu(null);
+    };
+    desktop.addEventListener('change', resetMenus);
+    return () => desktop.removeEventListener('change', resetMenus);
+  }, []);
+
+  const closeNavigation = (mobile: boolean) => {
+    setOpenMenu(null);
+    if (mobile) setMobileOpen(false);
+  };
+  const changeTheme = () => {
+    setOpenMenu(null);
+    onTheme();
+  };
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     window.location.assign(`/search/${search.trim() ? `?q=${encodeURIComponent(search.trim())}` : ''}`);
   };
   const navigation = (mobile = false) => (
     <div className={mobile ? 'e4-insights-mobile-list' : 'e4-insights-nav-list'}>
-      <a className="e4-insights-home" href="/" onClick={() => mobile && setMobileOpen(false)}>Home</a>
-      {groups.map(([label, destination, links]) => (
-        <details key={label}>
-          <summary>{label}<Chevron /></summary>
-          <div className="e4-insights-dropdown">
-            {links.map(([name, url]) => <a key={name} href={url} onClick={() => mobile && setMobileOpen(false)}>{name}</a>)}
+      <a className="e4-insights-home" href="/" onClick={() => closeNavigation(mobile)}>Home</a>
+      {groups.map(([label, destination, links]) => {
+        const menuId = `e4-insights-${mobile ? 'mobile' : 'desktop'}-${label.toLowerCase().replace(/\s+/g, '-')}-dropdown`;
+        const isOpen = openMenu === menuId;
+        return <div className={`e4-insights-nav-group ${isOpen ? 'is-open' : ''}`} key={label}>
+          <a className="e4-insights-nav-primary" href={destination} onClick={() => closeNavigation(mobile)}>{label}</a>
+          <button className="e4-insights-nav-toggle" type="button" aria-label={`${isOpen ? 'Close' : 'Open'} ${label} menu`} aria-expanded={isOpen} aria-controls={menuId} onClick={() => setOpenMenu((current) => current === menuId ? null : menuId)}><Chevron /></button>
+          <div className="e4-insights-dropdown" id={menuId} hidden={!isOpen} inert={!isOpen}>
+            {links.map(([name, url]) => <a key={name} href={url} onClick={() => closeNavigation(mobile)}>{name}</a>)}
           </div>
-        </details>
-      ))}
-      <a className="e4-insights-contact" href="/contact-us/" onClick={() => mobile && setMobileOpen(false)}>Contact Us</a>
+        </div>;
+      })}
+      <a className="e4-insights-contact" href="/contact-us/" onClick={() => closeNavigation(mobile)}>Contact Us</a>
     </div>
   );
-  return <header className="e4-insights-header">
+  return <header className="e4-insights-header e4-menu-standard" ref={headerRef}>
     <div className="e4-insights-brand-cluster">
       <a className="e4-insights-brand" href="/" aria-label="E4 Power home"><img alt="E4 Power" src="https://cdn.prod.website-files.com/68ba0532388ab756f96c84d5/68bcc54da8714105bb252c7f_e4_logo_white.svg" /></a>
       <div className="e4-insights-socials" aria-label="E4 Power social channels">
         {socials.map(([name, url, icon]) => <a key={name} href={url} target="_blank" rel="noreferrer" aria-label={name}><img alt="" src={icon} /></a>)}
       </div>
-      <button className="e4-insights-theme" type="button" onClick={onTheme} aria-label="Toggle light and dark mode" aria-pressed={light}><span>Theme</span><span className="e4-insights-theme-track"><span /></span></button>
-      <button className="e4-insights-menu" type="button" aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={mobileOpen} onClick={() => setMobileOpen((open) => !open)}><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button>
+      <button className="e4-insights-theme" type="button" onClick={changeTheme} aria-label="Toggle light and dark mode" aria-pressed={light}><span>Theme</span><span className="e4-insights-theme-track"><span /></span></button>
+      <button className="e4-insights-menu" type="button" ref={mobileToggleRef} aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={mobileOpen} aria-controls="e4-insights-mobile-drawer" onClick={() => { setOpenMenu(null); setMobileOpen((open) => !open); }}><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button>
     </div>
     <div className="e4-insights-desktop-nav">
       <form className="e4-insights-nav-search" role="search" onSubmit={submit}><label className="e4-insights-sr" htmlFor="e4-insights-search">Search E4 Power</label><SearchIcon /><input id="e4-insights-search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search" /></form>
       <nav aria-label="Primary navigation">{navigation()}</nav>
     </div>
-    <nav className={`e4-insights-mobile-nav ${mobileOpen ? 'is-open' : ''}`} aria-label="Mobile navigation">
+    <nav className={`e4-insights-mobile-nav ${mobileOpen ? 'is-open' : ''}`} id="e4-insights-mobile-drawer" aria-label="Mobile navigation" hidden={!mobileOpen} inert={!mobileOpen}>
       <form className="e4-insights-nav-search" role="search" onSubmit={submit}><label className="e4-insights-sr" htmlFor="e4-insights-mobile-search">Search E4 Power</label><SearchIcon /><input id="e4-insights-mobile-search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search" /></form>
       {navigation(true)}
+      <button className="e4-insights-theme e4-mobile-theme-control" type="button" onClick={changeTheme} aria-label="Toggle light and dark mode" aria-pressed={light}><span>Theme</span><span className="e4-insights-theme-track"><span /></span></button>
     </nav>
   </header>;
 }
@@ -148,12 +204,16 @@ function ContentHubApp() {
   const [item, setItem] = useState<CmsItem | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [light, setLight] = useState(() => localStorage.getItem('e4-theme') === 'light');
+  const [light, setLight] = useState(() => {
+    try { return localStorage.getItem('e4-theme') === 'light'; }
+    catch { return false; }
+  });
 
   useEffect(() => {
     document.body.classList.toggle('theme-light', light);
     document.body.classList.toggle('theme-dark', !light);
-    localStorage.setItem('e4-theme', light ? 'light' : 'dark');
+    try { localStorage.setItem('e4-theme', light ? 'light' : 'dark'); }
+    catch { /* Theme still works when storage is unavailable. */ }
   }, [light]);
 
   useEffect(() => {

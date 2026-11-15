@@ -6,6 +6,8 @@ export function mountLoaderVisual(host) {
   root.innerHTML = `
     <style>
       :host{font-family:Montserrat,Arial,sans-serif;font-size:16px;line-height:1.5;color:#fff8ef;letter-spacing:0;}
+      :host([aria-hidden="true"]){opacity:0!important;visibility:hidden!important;pointer-events:none!important;}
+      :host(.is-active){visibility:visible!important;}
       *,*::before,*::after{box-sizing:border-box;letter-spacing:0;}
       .inner{display:grid;justify-items:center;gap:18px;width:160px;max-width:calc(100vw - 32px);margin:0;padding:0;}
       .mark{position:relative;display:grid;place-items:center;width:76px;height:76px;border:1px solid rgba(231,186,86,.2);border-radius:50%;background:transparent;}

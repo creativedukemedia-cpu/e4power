@@ -27,6 +27,7 @@ const contentHub = fs.readFileSync(contentHubPath, "utf8");
 const insightsStylesPath = path.join(clientRoot, "src", "content", "insights.css");
 const insightsStyles = fs.readFileSync(insightsStylesPath, "utf8");
 const loaderVisual = fs.readFileSync(path.join(clientRoot, "src", "e4-loader-visual.js"), "utf8");
+const menuLayout = fs.readFileSync(path.join(clientRoot, "src", "e4-menu-layout.css"), "utf8");
 
 describe("theme toggle markup", () => {
   it("keeps a desktop theme toggle and adds a mobile menu toggle on the homepage", () => {
@@ -292,6 +293,35 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('applyHomepageDesignToInteriorHeaders();');
     expect(globalNavigation).not.toContain('e4-home-unified-header');
     expect(globalNavigation).not.toContain('normalizeHomepageHeader');
+  });
+
+  it("normalizes interior and Insights menu geometry without altering the homepage hero", () => {
+    expect(globalNavigation).toContain("import './e4-menu-layout.css'");
+    expect(contentHub).toContain("import '../e4-menu-layout.css'");
+    expect(globalNavigation).toContain('standardizeInteriorMenus();');
+    expect(globalNavigation).toContain("header.classList.add('e4-menu-standard')");
+    expect(contentHub).toContain('e4-insights-header e4-menu-standard');
+    expect(menuLayout).toContain('--e4-menu-brand-width:424px');
+    expect(menuLayout).toContain('--e4-menu-brand-width:352px');
+    expect(menuLayout).toContain('justify-content:center!important');
+    expect(menuLayout).toContain('font-size:12px!important');
+    expect(menuLayout).toContain('max-height:calc(100dvh - 72px)');
+    expect(menuLayout).toContain('letter-spacing:0!important');
+  });
+
+  it("keeps equivalent destination links, mobile theme access and disclosure keyboard behavior on all menu types", () => {
+    expect(globalNavigation).toContain('list.appendChild(makeHomeLink(true));');
+    expect(globalNavigation).toContain("mobileTheme.classList.add('e4-mobile-theme-control')");
+    expect(globalNavigation).toContain('function installInteriorMobileDrawer(header, drawer)');
+    expect(globalNavigation).toContain("button.setAttribute('aria-controls', drawer.id)");
+    expect(menuLayout).toContain('.navbar-logo-left:not(.e4-mobile-menu-open) .nav-menu-wrapper{display:none!important;}');
+    expect(globalNavigation).toContain("wrapper.addEventListener('keydown'");
+    expect(globalNavigation).toContain("wrapper.addEventListener('focusout'");
+    expect(contentHub).toContain('e4-insights-nav-primary');
+    expect(contentHub).toContain('e4-insights-nav-toggle');
+    expect(contentHub).toContain('e4-mobile-theme-control');
+    expect(contentHub).toContain('aria-controls="e4-insights-mobile-drawer"');
+    expect(contentHub).not.toContain('<details key={label}>');
   });
 
   it("removes the Services-only menu takeover and gives Client Success the homepage-origin navigation treatment", () => {

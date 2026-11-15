@@ -21,6 +21,7 @@ describe('isolated E4 loader visual', () => {
     expect(root.innerHTML).toContain('viewBox="0 0 916 874"');
     expect(root.innerHTML).toContain('Loading');
     expect(root.innerHTML).toContain('prefers-reduced-motion:reduce');
+    expect(root.innerHTML).toContain(':host([aria-hidden="true"]){opacity:0!important;visibility:hidden!important;pointer-events:none!important;}');
     expect(root.innerHTML).not.toContain('<img');
     expect(root.innerHTML).not.toContain('/manus-storage/');
   });

@@ -1,5 +1,6 @@
 import { installLaunchReadiness } from './e4-launch-readiness.js';
 import { mountLoaderVisual } from './e4-loader-visual.js';
+import './e4-menu-layout.css';
 
 (function () {
   if (window.__e4GlobalNavigationLoaded) return;
@@ -212,7 +213,11 @@ import { mountLoaderVisual } from './e4-loader-visual.js';
       if (group === except) return;
       group.classList.remove('is-open');
       var toggle = group.querySelector('.e4-nav-toggle');
-      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'false');
+        var primary = group.querySelector('.e4-nav-primary');
+        if (primary) toggle.setAttribute('aria-label', 'Open ' + primary.textContent.trim() + ' menu');
+      }
     });
   }
 
@@ -263,12 +268,24 @@ import { mountLoaderVisual } from './e4-loader-visual.js';
       closeDropdowns(wrapper);
       wrapper.classList.toggle('is-open', opening);
       toggle.setAttribute('aria-expanded', opening ? 'true' : 'false');
+      toggle.setAttribute('aria-label', (opening ? 'Close ' : 'Open ') + group.label + ' menu');
     });
-    toggle.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') {
+    wrapper.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && wrapper.classList.contains('is-open')) {
+        event.preventDefault();
+        event.stopPropagation();
         closeDropdowns();
         toggle.focus();
       }
+    });
+    wrapper.addEventListener('focusout', function () {
+      window.setTimeout(function () {
+        if (!wrapper.contains(document.activeElement)) {
+          wrapper.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Open ' + group.label + ' menu');
+        }
+      }, 0);
     });
     wrapper.appendChild(primary);
     wrapper.appendChild(toggle);
@@ -493,11 +510,14 @@ import { mountLoaderVisual } from './e4-loader-visual.js';
     toggle.setAttribute('aria-expanded', 'false');
     toggle.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>';
     var drawer = document.createElement('nav');
+    drawer.id = 'e4-client-success-mobile-drawer';
     drawer.className = 'e4-client-success-drawer';
     drawer.setAttribute('aria-label', 'Mobile navigation');
+    toggle.setAttribute('aria-controls', drawer.id);
     drawer.appendChild(searchForm('e4-client-success-mobile-search'));
     var list = document.createElement('ul');
     list.className = 'e4-client-success-mobile-list';
+    list.appendChild(makeHomeLink(true));
     groups.forEach(function (group, index) { list.appendChild(makeDropdown(group, true, index)); });
     list.appendChild(makeContactLink(true));
     drawer.appendChild(list);
@@ -506,6 +526,20 @@ import { mountLoaderVisual } from './e4-loader-visual.js';
       drawer.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      if (!open) closeDropdowns();
+    });
+    header.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && drawer.classList.contains('is-open')) {
+        event.preventDefault();
+        toggle.click();
+        toggle.focus();
+      }
+    });
+    document.addEventListener('pointerdown', function (event) {
+      if (!header.contains(event.target) && drawer.classList.contains('is-open')) toggle.click();
+    });
+    window.matchMedia('(min-width: 992px)').addEventListener('change', function () {
+      if (drawer.classList.contains('is-open')) toggle.click();
     });
     header.innerHTML = '';
     header.classList.add('e4-home-origin-header');
@@ -513,6 +547,97 @@ import { mountLoaderVisual } from './e4-loader-visual.js';
     header.appendChild(right);
     header.appendChild(toggle);
     header.appendChild(drawer);
+  }
+
+  function installInteriorMobileDrawer(header, drawer) {
+    var button = header.querySelector('.menu-button,.w-nav-button');
+    if (!button || !drawer) return;
+    drawer.id = 'e4-interior-mobile-drawer';
+    if (button.tagName !== 'BUTTON') {
+      button.setAttribute('role', 'button');
+      button.setAttribute('tabindex', '0');
+    }
+    button.setAttribute('aria-controls', drawer.id);
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-label', 'Open navigation menu');
+    var setOpen = function (open) {
+      header.classList.toggle('e4-mobile-menu-open', open);
+      button.setAttribute('aria-controls', drawer.id);
+      button.setAttribute('aria-expanded', open ? 'true' : 'false');
+      button.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      if (!open) closeDropdowns();
+    };
+    var isMenuButton = function (event) {
+      return event.target instanceof Element && event.target.closest('.menu-button,.w-nav-button') === button;
+    };
+    var suppressClickUntil = 0;
+    var lastTouchPointerAt = 0;
+    ['pointerdown', 'mousedown', 'touchstart'].forEach(function (type) {
+      header.addEventListener(type, function (event) {
+        if (!isMenuButton(event)) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        if (event.pointerType === 'touch' || (type === 'touchstart' && Date.now() - lastTouchPointerAt > 100)) {
+          setOpen(!header.classList.contains('e4-mobile-menu-open'));
+          suppressClickUntil = Date.now() + 500;
+          if (event.pointerType === 'touch') lastTouchPointerAt = Date.now();
+        }
+      }, { capture: true, passive: false });
+    });
+    header.addEventListener('click', function (event) {
+      if (!isMenuButton(event)) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      if (Date.now() < suppressClickUntil) return;
+      setOpen(!header.classList.contains('e4-mobile-menu-open'));
+    }, true);
+    header.addEventListener('keydown', function (event) {
+      if (!isMenuButton(event)) return;
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        setOpen(!header.classList.contains('e4-mobile-menu-open'));
+      }
+    }, true);
+    header.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && header.classList.contains('e4-mobile-menu-open')) {
+        event.preventDefault();
+        setOpen(false);
+        button.focus();
+      }
+    });
+    document.addEventListener('pointerdown', function (event) {
+      if (!header.contains(event.target)) setOpen(false);
+    });
+    window.matchMedia('(min-width: 992px)').addEventListener('change', function () { setOpen(false); });
+  }
+
+  function standardizeInteriorMenus() {
+    document.querySelectorAll('.navbar-logo-left.e4-home-origin-header,.client-success-nav.e4-home-origin-header').forEach(function (header) {
+      header.classList.add('e4-menu-standard');
+      var drawer = header.querySelector('.nav-menu-wrapper,.e4-client-success-drawer');
+      if (header.classList.contains('navbar-logo-left')) installInteriorMobileDrawer(header, drawer);
+      var legacyOverlay = document.getElementById('manus-home-menu-overlay');
+      if (legacyOverlay) legacyOverlay.remove();
+      var desktopTheme = header.querySelector('#theme-toggle-button');
+      if (!drawer || !desktopTheme) return;
+      var mobileTheme = drawer.querySelector('.theme-toggle-button');
+      if (!mobileTheme) {
+        mobileTheme = desktopTheme.cloneNode(true);
+        mobileTheme.id = 'e4-mobile-theme-control';
+        mobileTheme.addEventListener('click', function () { desktopTheme.click(); });
+        drawer.appendChild(mobileTheme);
+      }
+      mobileTheme.classList.add('e4-mobile-theme-control');
+      drawer.appendChild(mobileTheme);
+      var syncTheme = function () {
+        var pressed = document.body.classList.contains('theme-light') ? 'true' : 'false';
+        mobileTheme.setAttribute('aria-pressed', pressed);
+        desktopTheme.setAttribute('aria-pressed', pressed);
+      };
+      syncTheme();
+      new MutationObserver(syncTheme).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    });
   }
 
   function installQuickContact() {
@@ -1121,5 +1246,6 @@ import { mountLoaderVisual } from './e4-loader-visual.js';
   installPageLoadingAnimation();
   installNavigation();
   installLaunchReadiness();
+  standardizeInteriorMenus();
   renderResults();
 })();
