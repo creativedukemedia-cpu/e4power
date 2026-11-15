@@ -1,0 +1,6 @@
+.e4-cms-workspace,.e4-cms-workspace *{letter-spacing:0!important;}
+.e4-cms-workspace label{min-width:0;}
+.e4-cms-workspace input,.e4-cms-workspace textarea,.e4-cms-workspace select{min-width:0;max-width:100%;width:100%;box-sizing:border-box;color:#faf7ef;color-scheme:dark;}
+.e4-cms-workspace input:focus-visible,.e4-cms-workspace textarea:focus-visible,.e4-cms-workspace select:focus-visible,.e4-cms-workspace button:focus-visible,.e4-cms-workspace a:focus-visible{outline:2px solid #e7ba56;outline-offset:3px;}
+.e4-cms-workspace [role="alert"]{overflow-wrap:anywhere;}
+.e4-cms-workspace [aria-labelledby="inquiry-inbox-title"]{letter-spacing:0;color:#faf7ef;}

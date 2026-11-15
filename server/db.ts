@@ -182,3 +182,23 @@ export async function createContactInquiry(inquiry: InsertContactInquiry) {
   const rows = await db.select().from(contactInquiries).where(eq(contactInquiries.id, id)).limit(1);
   return rows[0];
 }
+
+export async function listContactInquiries(limit = 50, offset = 0) {
+  const db = await getDb();
+  if (!db) throw new Error('Database unavailable');
+  return db.select().from(contactInquiries).orderBy(desc(contactInquiries.createdAt), desc(contactInquiries.id)).limit(limit).offset(offset);
+}
+
+export async function getContactInquiryById(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error('Database unavailable');
+  const rows = await db.select().from(contactInquiries).where(eq(contactInquiries.id, id)).limit(1);
+  return rows[0];
+}
+
+export async function updateContactInquiryStatus(id: number, status: 'new' | 'reviewed') {
+  const db = await getDb();
+  if (!db) throw new Error('Database unavailable');
+  await db.update(contactInquiries).set({ status }).where(eq(contactInquiries.id, id));
+  return getContactInquiryById(id);
+}

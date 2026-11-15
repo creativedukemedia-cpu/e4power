@@ -32,6 +32,17 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 async function startServer() {
   const app = express();
   const server = createServer(app);
+  app.use('/api/contact-inquiries', express.json({ limit: '20kb' }));
+  app.use('/api/contact-inquiries', express.urlencoded({ limit: '20kb', extended: false }));
+  app.use('/api/cms', express.json({ limit: '512kb' }));
+  app.use('/api/cms', express.urlencoded({ limit: '20kb', extended: false }));
+  app.use((error: { status?: number }, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    if ((req.path === '/api/contact-inquiries' || req.path.startsWith('/api/cms/')) && (error.status === 413 || error.status === 400)) {
+      res.status(error.status).json({ error: 'Please submit valid form data within the allowed length limits.' });
+      return;
+    }
+    next(error);
+  });
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));

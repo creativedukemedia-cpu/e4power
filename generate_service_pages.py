@@ -574,31 +574,6 @@ custom_css = '''
 '''
 
 
-def placeholder_svg(label):
-    safe = html.escape(label.upper())
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="{safe}">
-    <rect width="900" height="1200" fill="#d8d8d8"/>
-    <rect width="900" height="1200" fill="url(#g)"/>
-    <rect x="78" y="84" width="744" height="344" rx="18" fill="#202020" opacity="0.92"/>
-    <rect x="78" y="472" width="744" height="548" rx="18" fill="#f5f5f5" opacity="0.9"/>
-    <rect x="128" y="146" width="210" height="210" rx="20" fill="#3b3b3b" opacity="0.72"/>
-    <rect x="374" y="146" width="378" height="34" rx="10" fill="#5a5a5a" opacity="0.7"/>
-    <rect x="374" y="214" width="294" height="26" rx="10" fill="#707070" opacity="0.58"/>
-    <rect x="374" y="268" width="332" height="26" rx="10" fill="#707070" opacity="0.58"/>
-    <rect x="374" y="322" width="238" height="26" rx="10" fill="#707070" opacity="0.58"/>
-    <rect x="146" y="548" width="608" height="320" rx="18" fill="#b1b1b1" opacity="0.72"/>
-    <rect x="146" y="916" width="480" height="32" rx="10" fill="#949494" opacity="0.7"/>
-    <text x="146" y="1090" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="700" letter-spacing="6" fill="#1f1f1f">{safe}</text>
-    <defs>
-      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#ececec"/>
-        <stop offset="55%" stop-color="#cfcfcf"/>
-        <stop offset="100%" stop-color="#adadad"/>
-      </linearGradient>
-    </defs>
-    </svg>'''
-    return 'data:image/svg+xml;charset=UTF-8,' + urllib.parse.quote(svg)
-
 
 def render_points(points):
     return ''.join(f'<li>{ICON}<span>{html.escape(point)}</span></li>' for point in points)
@@ -607,12 +582,13 @@ def render_points(points):
 def render_cards(cards):
     items = []
     for card in cards:
-        media = card.get('image') or placeholder_svg(card.get('placeholder', card['title']))
+        media = card.get('image')
+        media_html = f'<div class="ref-card-media" style="background-image:url(\'{media}\')"></div>' if media else ''
         label = f'<div class="ref-card-label">{html.escape(card["label"])}</div>' if card.get('label') else ''
         note = f'<p class="ref-card-note">{html.escape(card["note"])}</p>' if card.get('note') else ''
         article = (
             f'<article class="ref-card">'
-            f'<div class="ref-card-media" style="background-image:url(\'{media}\')"></div>'
+            f'{media_html}'
             f'<div class="ref-card-titleband">{html.escape(card["title"])}</div>'
             f'{label}{note}<ul class="ref-point-list">{render_points(card["points"])}</ul>'
             f'</article>'
@@ -877,7 +853,7 @@ services = [
         'slug': 'workshops-training',
         'title': 'Workshops & Training',
         'catalog_summary': 'Workshops & Training should show how one learning offer can touch the full E4 framework instead of sitting only inside Educate.',
-        'detail_summary': 'This service page presents Workshops & Training as a cross-pillar capability, with each card translating the same service into a different institutional outcome.',
+        'detail_summary': '',
         'closing_copy': 'Workshops & Training is most effective when organizations need shared language, stronger internal readiness, and a practical bridge from learning into action.',
         'related_links': [('Services Hub', '/services/'), ('Educate', '/educate/'), ('Contact Us', '/contact-us')],
         'pillars': {
@@ -891,7 +867,7 @@ services = [
         'slug': 'technology-ai-literacy',
         'title': 'Technology & AI Literacy',
         'catalog_summary': 'Technology & AI Literacy should be shown as one service with four different applications across the E4 pillars.',
-        'detail_summary': 'This page shows how Technology & AI Literacy can educate teams, empower leaders, elevate operations, and engage institutions in a responsible adoption conversation.',
+        'detail_summary': '',
         'closing_copy': 'Technology & AI Literacy is the right starting point when organizations need confidence, context, and a human-centered approach before moving into deeper digital implementation.',
         'related_links': [('Services Hub', '/services/'), ('Empower', '/empower/'), ('Contact Us', '/contact-us')],
         'pillars': {
@@ -998,7 +974,7 @@ services = [
         'slug': 'it-app-development',
         'title': 'IT Solutions',
         'catalog_summary': 'IT Solutions should be presented exactly as a named service block with all four pillar cards beneath it, so visitors can see how one digital service supports the full E4 model.',
-        'detail_summary': 'This page frames IT Solutions as a service that teaches teams, strengthens competitiveness, improves execution, and creates stronger partnership pathways through custom digital infrastructure.',
+        'detail_summary': '',
         'closing_copy': 'IT Solutions is strongest when E4 Power needs to turn advisory thinking into practical systems, whether that means education, workflow enablement, or full digital delivery.',
         'related_links': [('Services Hub', '/services/'), ('Empower', '/empower/'), ('Contact Us', '/contact-us')],
         'pillars': {
@@ -1151,7 +1127,7 @@ services = [
         'slug': 'institutional-discovery',
         'title': 'Institutional Discovery',
         'catalog_summary': 'Institutional Discovery should be shown as a named service with four pillar cards so its role as an entry point is visible across the whole E4 model.',
-        'detail_summary': 'This page frames Institutional Discovery as the service that listens first, diagnoses context, and then translates insight across education, strategy, execution, and partnership design.',
+        'detail_summary': '',
         'closing_copy': 'Institutional Discovery is valuable because it gives organizations a lower-pressure starting point that still leads to concrete insight and stronger next-step clarity.',
         'related_links': [('Services Hub', '/services/'), ('Engage', '/engage/'), ('Contact Us', '/contact-us')],
         'pillars': {
@@ -1165,7 +1141,7 @@ services = [
         'slug': 'advisory-alignment',
         'title': 'Advisory Alignment',
         'catalog_summary': 'Advisory Alignment should be structured as one service group with Educate, Empower, Elevate, and Engage cards under it.',
-        'detail_summary': 'This page shows Advisory Alignment as a service that supports shared understanding, strategic clarity, stronger execution planning, and healthier working relationships.',
+        'detail_summary': '',
         'closing_copy': 'Advisory Alignment helps E4 Power move from possibility into a more coherent working model by matching the right people to the right next steps.',
         'related_links': [('Services Hub', '/services/'), ('Engage', '/engage/'), ('Contact Us', '/contact-us')],
         'pillars': {

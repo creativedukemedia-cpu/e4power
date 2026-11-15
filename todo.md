@@ -429,3 +429,16 @@
 
 - [x] Diagnose and repair desktop team portraits on About Us including /about-us/index.html using approved existing images and preserving layout.
 - [x] Validate the repaired About Us portraits at desktop and phone widths, run regression tests, type checks and build, and save a checkpoint.
+
+## Approved staging-only prelaunch fixes on 15 November 2026
+
+The user cancelled duplication and approved reversible edits to staging only. Keep the old e4power Website live project untouched. Do not publish or move any domains.
+
+- [x] Repair mobile overflow and preserve the current E4 Power layouts, typography and zero letter spacing.
+- [x] Remove obsolete failing hero image requests, make the loading animation fail-safe and keep team portraits visible.
+- [x] Replace draft-page commentary and placeholder graphics using existing approved copy and assets only.
+- [x] Repair existing biography links without inventing missing biographies, and correct dead footer/contact social links.
+- [x] Add crawler files, canonical metadata and real not-found handling while preserving all existing page routes.
+- [x] Add a secure staff inquiry inbox and harden inquiry/CMS validation and same-origin protections without changing old-site data.
+- [x] Confirm business contact and newsletter delivery configuration with the user, or clearly flag anything still unconfigured.
+- [x] Validate all pages on desktop and phone, run regression tests, type checking and production build, then save an unpublished checkpoint.

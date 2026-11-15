@@ -1,3 +1,5 @@
+import { installLaunchReadiness } from './e4-launch-readiness.js';
+
 (function () {
   if (window.__e4GlobalNavigationLoaded) return;
   window.__e4GlobalNavigationLoaded = true;
@@ -158,16 +160,24 @@
     loader.setAttribute('aria-label', 'Loading E4 Power');
     loader.innerHTML = '<div class="e4-page-loader__inner"><span class="e4-page-loader__mark"><img src="/manus-storage/E4POWER_LOGOB12copy_0332af80.webp" alt="" /></span><span class="e4-page-loader__label">Loading</span><span class="e4-page-loader__track" aria-hidden="true"></span></div>';
     document.body.appendChild(loader);
+    var safetyTimer;
     var dismiss = function () {
+      window.clearTimeout(safetyTimer);
       window.setTimeout(function () {
         loader.classList.remove('is-active');
         loader.setAttribute('aria-hidden', 'true');
       }, 220);
     };
+    var armSafetyTimer = function () {
+      window.clearTimeout(safetyTimer);
+      safetyTimer = window.setTimeout(dismiss, 1600);
+    };
+    armSafetyTimer();
     if (document.readyState === 'complete') dismiss();
     else window.addEventListener('load', dismiss, { once: true });
+    window.addEventListener('pageshow', dismiss);
     document.addEventListener('click', function (event) {
-      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || !(event.target instanceof Element)) return;
       var link = event.target.closest('a[href]');
       if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
       var destination;
@@ -176,6 +186,7 @@
       if (destination.pathname === window.location.pathname && destination.search === window.location.search) return;
       loader.removeAttribute('aria-hidden');
       loader.classList.add('is-active');
+      armSafetyTimer();
     }, true);
   }
 
@@ -1107,5 +1118,6 @@
   addStyle();
   installPageLoadingAnimation();
   installNavigation();
+  installLaunchReadiness();
   renderResults();
 })();

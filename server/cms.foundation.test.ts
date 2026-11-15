@@ -52,9 +52,16 @@ describe("vite multi-page html resolution", () => {
     expect(resolved).toBe(path.join(tempRoot, "admin", "index.html"));
   });
 
-  it("falls back to the root index when a nested entry does not exist", () => {
+  it("does not return the homepage when a nested entry does not exist", () => {
     const resolved = resolveHtmlEntry(tempRoot, "/missing/");
-    expect(resolved).toBe(path.join(tempRoot, "index.html"));
+    expect(resolved).toBeNull();
+  });
+
+  it("supports root and trailing-slash entries without resolving malformed or traversing paths", () => {
+    expect(resolveHtmlEntry(tempRoot, "/")).toBe(path.join(tempRoot, "index.html"));
+    expect(resolveHtmlEntry(tempRoot, "/admin/")).toBe(path.join(tempRoot, "admin", "index.html"));
+    expect(resolveHtmlEntry(tempRoot, "/%invalid/")).toBeNull();
+    expect(resolveHtmlEntry(tempRoot, "/../index.html")).toBeNull();
   });
 
   it("adds cache-busting params to both known entry scripts", () => {

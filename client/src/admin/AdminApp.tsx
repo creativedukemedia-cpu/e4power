@@ -1,4 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react';
+import InquiryInbox from './InquiryInbox';
+import './readiness.css';
 
 type CmsUser = {
   id: number;
@@ -66,6 +68,7 @@ function formatContentType(value: string) {
 
 export default function AdminApp() {
   const [requiresBootstrap, setRequiresBootstrap] = useState<boolean | null>(null);
+  const [bootstrapEnabled, setBootstrapEnabled] = useState(false);
   const [user, setUser] = useState<CmsUser | null>(null);
   const [items, setItems] = useState<CmsItem[]>([]);
   const [staffUsers, setStaffUsers] = useState<CmsUser[]>([]);
@@ -118,6 +121,7 @@ export default function AdminApp() {
     ]);
     const statusJson = await statusRes.json();
     setRequiresBootstrap(Boolean(statusJson.requiresBootstrap));
+    setBootstrapEnabled(Boolean(statusJson.bootstrapEnabled));
     if (meRes.ok) {
       const meJson = await meRes.json();
       setUser(meJson.user);
@@ -224,6 +228,7 @@ export default function AdminApp() {
       name: String(form.get('name') || ''),
       email: String(form.get('email') || ''),
       password: String(form.get('password') || ''),
+      bootstrapToken: String(form.get('bootstrapToken') || ''),
     };
     const res = await fetch('/api/cms/bootstrap', {
       method: 'POST',
@@ -431,7 +436,7 @@ export default function AdminApp() {
 
   return (
     <div
-      className="min-h-screen px-4 py-10 text-stone-100"
+      className="e4-cms-workspace min-h-screen px-4 py-10 text-stone-100"
       style={{
         backgroundColor: '#090806',
         backgroundImage: 'radial-gradient(circle at top, rgba(231, 190, 103, 0.2), transparent 34%)',
@@ -777,7 +782,14 @@ export default function AdminApp() {
                 </section>
               ) : null}
             </aside>
+            {user.role === 'admin' ? <InquiryInbox key={user.id} /> : null}
           </div>
+        ) : requiresBootstrap && !bootstrapEnabled ? (
+          <section className={cardClass + ' mx-auto max-w-2xl'}>
+            <h2 className="text-2xl font-bold text-stone-50">CMS setup is restricted</h2>
+            <p className="mt-3 text-sm leading-7 text-stone-300">The site owner must enable secure initial setup before a first admin account can be created.</p>
+            <a className="mt-4 inline-block text-amber-200 underline" href="/">Return to E4 Power</a>
+          </section>
         ) : requiresBootstrap ? (
           <form className={cardClass + ' mx-auto max-w-2xl grid gap-4'} onSubmit={submitBootstrap}>
             <div>
@@ -790,6 +802,7 @@ export default function AdminApp() {
               <label className="grid gap-2 text-sm"><span>Email</span><input className="h-11 rounded-xl border border-white/10 bg-white/5 px-3 text-stone-100 outline-none" name="email" type="email" required /></label>
             </div>
             <label className="grid gap-2 text-sm"><span>Password</span><input className="h-11 rounded-xl border border-white/10 bg-white/5 px-3 text-stone-100 outline-none" name="password" type="password" minLength={10} required /></label>
+            <label className="grid gap-2 text-sm"><span>Owner setup token</span><input className="h-11 rounded-xl border border-white/10 bg-white/5 px-3 text-stone-100 outline-none" name="bootstrapToken" type="password" autoComplete="off" required /></label>
             <button disabled={busy} className="inline-flex h-12 items-center justify-center rounded-full bg-amber-400 px-6 text-sm font-bold uppercase tracking-[0.2em] text-stone-950 transition hover:bg-amber-300 disabled:opacity-60">{busy ? 'Creating…' : 'Create admin account'}</button>
           </form>
         ) : (

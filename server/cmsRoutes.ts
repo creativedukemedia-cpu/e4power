@@ -15,6 +15,9 @@ import {
   listCmsContentItems,
   listCmsUsers,
   listPublishedCmsContentItems,
+  listContactInquiries,
+  getContactInquiryById,
+  updateContactInquiryStatus,
   touchCmsUserSignIn,
   updateCmsContentItem,
   updateCmsUser,
@@ -23,6 +26,7 @@ import type { InsertCmsContentItem } from '../drizzle/schema';
 import { getSessionCookieOptions } from './_core/cookies';
 import { CMS_SESSION_COOKIE, getCmsSessionMaxAge, issueCmsSession, verifyCmsSession } from './cmsAuth';
 import { storagePut } from './storage';
+import { protectCmsMutations, isSameOriginMutation, rateLimitRequests, validBootstrapToken, validStaffFields, validCoverImage } from './cmsSecurity';
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -93,6 +97,13 @@ function normalizeInquiryText(value: unknown, maxLength: number) {
 }
 
 export function normalizeContactInquiry(body: Record<string, unknown> | null | undefined) {
+  const bounds = { name: 160, email: 320, inquiryTopic: 160, organizationType: 160, message: 5000 };
+  for (const [field, limit] of Object.entries(bounds)) {
+    const value = body?.[field];
+    if (typeof value !== 'string' || value.trim().length > limit) {
+      return { error: 'Please complete each inquiry field within the allowed length.' } as const;
+    }
+  }
   const name = normalizeInquiryText(body?.name, 160);
   const email = normalizeInquiryText(body?.email, 320).toLowerCase();
   const inquiryTopic = normalizeInquiryText(body?.inquiryTopic, 160) as keyof typeof inquiryRouting;
@@ -105,7 +116,7 @@ export function normalizeContactInquiry(body: Record<string, unknown> | null | u
   if (!/^\S+@\S+\.\S+$/.test(email)) {
     return { error: 'Please enter a valid email address.' } as const;
   }
-  if (!(inquiryTopic in inquiryRouting) || !organizationTypes.has(organizationType)) {
+  if (!Object.hasOwn(inquiryRouting, inquiryTopic) || !organizationTypes.has(organizationType)) {
     return { error: 'Please select a listed inquiry topic and organization type.' } as const;
   }
 
@@ -151,10 +162,19 @@ function sanitizeUser(user: NonNullable<Awaited<ReturnType<typeof getCmsUserFrom
   };
 }
 
-function normalizeContentPayload(body: Record<string, unknown> | null | undefined, userId: number, existingPublishedAt?: Date | null) {
+export function normalizeContentPayload(body: Record<string, unknown> | null | undefined, userId: number, existingPublishedAt?: Date | null) {
   const { title, slug, contentType, excerpt, body: contentBody, status } = body ?? {};
   if (!title || !slug || !contentType) {
     return { error: 'title, slug, and contentType are required' } as const;
+  }
+  if (typeof title !== 'string' || !title.trim() || title.trim().length > 220 || typeof slug !== 'string' || slug.trim().length > 190 || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug.trim().toLowerCase())) {
+    return { error: 'Please use a title up to 220 characters and a valid hyphenated URL slug.' } as const;
+  }
+  if (!['white-paper', 'newsletter', 'funding-opportunity', 'thought-leadership'].includes(String(contentType)) || (status !== undefined && status !== 'draft' && status !== 'published')) {
+    return { error: 'Please select a listed content type and publishing status.' } as const;
+  }
+  if ((excerpt != null && (typeof excerpt !== 'string' || excerpt.length > 5000)) || (contentBody != null && (typeof contentBody !== 'string' || contentBody.length > 100000))) {
+    return { error: 'Please keep the excerpt under 5000 characters and the body under 100000 characters.' } as const;
   }
 
   const normalizedStatus = status === 'published' ? 'published' : 'draft';
@@ -175,7 +195,14 @@ function normalizeContentPayload(body: Record<string, unknown> | null | undefine
 }
 
 export function registerCmsRoutes(app: Express) {
-  app.post('/api/contact-inquiries', async (req: Request, res: Response) => {
+  app.use('/api/cms', protectCmsMutations);
+  const limitContactRequests = rateLimitRequests(30, 60 * 1000);
+  const limitAuthentication = rateLimitRequests(15, 60 * 1000);
+  app.post('/api/contact-inquiries', limitContactRequests, async (req: Request, res: Response) => {
+    if (!isSameOriginMutation(req)) {
+      res.status(403).json({ error: 'Please submit your inquiry from the E4 Power website.' });
+      return;
+    }
     if (normalizeInquiryText(req.body?.companyWebsite, 200)) {
       res.status(201).json({ success: true });
       return;
@@ -197,7 +224,7 @@ export function registerCmsRoutes(app: Express) {
         },
       });
     } catch (error) {
-      console.error('[Contact inquiry] Failed to save inquiry', error);
+      console.error('[Contact inquiry] Failed to save inquiry');
       res.status(503).json({ error: 'We could not send your inquiry. Please try again.' });
     }
   });
@@ -227,10 +254,14 @@ export function registerCmsRoutes(app: Express) {
 
   app.get('/api/cms/bootstrap-status', async (_req: Request, res: Response) => {
     const count = await countCmsUsers();
-    res.json({ requiresBootstrap: count === 0 });
+    res.json({ requiresBootstrap: count === 0, bootstrapEnabled: count === 0 && Boolean(process.env.CMS_BOOTSTRAP_TOKEN) });
   });
 
-  app.post('/api/cms/bootstrap', async (req: Request, res: Response) => {
+  app.post('/api/cms/bootstrap', limitAuthentication, async (req: Request, res: Response) => {
+    if (!validBootstrapToken(req.body?.bootstrapToken)) {
+      res.status(403).json({ error: 'Initial CMS setup requires an owner-provided setup token.' });
+      return;
+    }
     const count = await countCmsUsers();
     if (count > 0) {
       res.status(409).json({ error: 'CMS admin account already exists' });
@@ -244,6 +275,10 @@ export function registerCmsRoutes(app: Express) {
     }
     if (String(password).length < 10) {
       res.status(400).json({ error: 'Password must be at least 10 characters long' });
+      return;
+    }
+    if (!validStaffFields(req.body)) {
+      res.status(400).json({ error: 'Please enter valid staff details and a password within 72 bytes.' });
       return;
     }
 
@@ -272,9 +307,9 @@ export function registerCmsRoutes(app: Express) {
     res.json({ user: sanitizeUser(user) });
   });
 
-  app.post('/api/cms/login', async (req: Request, res: Response) => {
+  app.post('/api/cms/login', limitAuthentication, async (req: Request, res: Response) => {
     const { email, password } = req.body ?? {};
-    if (!email || !password) {
+    if (typeof email !== 'string' || typeof password !== 'string' || !email || !password || email.length > 320 || password.length > 128) {
       res.status(400).json({ error: 'email and password are required' });
       return;
     }
@@ -328,6 +363,49 @@ export function registerCmsRoutes(app: Express) {
     res.json({ items });
   });
 
+  app.get('/api/cms/inquiries', async (req: Request, res: Response) => {
+    const user = await getCmsUserFromRequest(req);
+    if (!user || user.role !== 'admin') {
+      res.status(user ? 403 : 401).json({ error: 'Admin access required' });
+      return;
+    }
+    const offset = Number(req.query.offset || 0);
+    if (!Number.isSafeInteger(offset) || offset < 0) {
+      res.status(400).json({ error: 'Invalid inbox offset' });
+      return;
+    }
+    try {
+      const entries = await listContactInquiries(51, offset);
+      res.json({ items: entries.slice(0, 50), hasMore: entries.length > 50 });
+    } catch {
+      res.status(503).json({ error: 'Unable to load inquiries. Please try again.' });
+    }
+  });
+
+  app.patch('/api/cms/inquiries/:id', async (req: Request, res: Response) => {
+    const user = await getCmsUserFromRequest(req);
+    if (!user || user.role !== 'admin') {
+      res.status(user ? 403 : 401).json({ error: 'Admin access required' });
+      return;
+    }
+    const id = Number(req.params.id);
+    const status = req.body?.status;
+    if (!Number.isSafeInteger(id) || id < 1 || !['new', 'reviewed'].includes(status)) {
+      res.status(400).json({ error: 'Please select a valid inquiry and review status.' });
+      return;
+    }
+    try {
+      if (!await getContactInquiryById(id)) {
+        res.status(404).json({ error: 'Inquiry not found' });
+        return;
+      }
+      const item = await updateContactInquiryStatus(id, status);
+      res.json({ item });
+    } catch {
+      res.status(503).json({ error: 'Unable to update this inquiry. Please try again.' });
+    }
+  });
+
   app.get('/api/cms/users', async (req: Request, res: Response) => {
     const user = await getCmsUserFromRequest(req);
     if (!user) {
@@ -362,13 +440,17 @@ export function registerCmsRoutes(app: Express) {
       res.status(400).json({ error: 'Password must be at least 10 characters long' });
       return;
     }
+    if (!validStaffFields(req.body) || (role !== undefined && role !== 'admin' && role !== 'editor')) {
+      res.status(400).json({ error: 'Please enter valid staff details and a listed role.' });
+      return;
+    }
     const normalizedEmail = String(email).trim().toLowerCase();
     const existingUser = await getCmsUserByEmail(normalizedEmail);
     if (existingUser) {
       res.status(409).json({ error: 'A CMS staff user with that email already exists' });
       return;
     }
-    const normalizedRole = role === 'editor' ? 'editor' : 'admin';
+    const normalizedRole = role === 'admin' ? 'admin' : 'editor';
     const passwordHash = await bcrypt.hash(String(password), 12);
     const createdUser = await createCmsUser({
       email: normalizedEmail,
@@ -402,8 +484,19 @@ export function registerCmsRoutes(app: Express) {
       return;
     }
 
-    const nextRole = req.body?.role === 'editor' ? 'editor' : 'admin';
+    if (req.body?.role !== undefined && req.body.role !== 'admin' && req.body.role !== 'editor') {
+      res.status(400).json({ error: 'Please select a listed staff role.' });
+      return;
+    }
+    const nextRole = req.body?.role === undefined ? existingUser.role : req.body.role;
     const nextActive = req.body?.isActive === 0 || req.body?.isActive === '0' || req.body?.isActive === false ? 0 : 1;
+    if (existingUser.role === 'admin' && existingUser.isActive && (nextRole !== 'admin' || !nextActive)) {
+      const otherAdmins = (await listCmsUsers()).filter((entry) => entry.id !== userId && entry.role === 'admin' && entry.isActive);
+      if (!otherAdmins.length) {
+        res.status(409).json({ error: 'Keep at least one active CMS admin.' });
+        return;
+      }
+    }
     const updatedUser = await updateCmsUser(userId, { role: nextRole, isActive: nextActive });
     res.json({ user: sanitizeUser(updatedUser) });
   });
@@ -478,8 +571,8 @@ export function registerCmsRoutes(app: Express) {
       res.status(400).json({ error: 'coverImage file is required' });
       return;
     }
-    if (!file.mimetype.startsWith('image/')) {
-      res.status(400).json({ error: 'coverImage must be an image file' });
+    if (!validCoverImage(file)) {
+      res.status(400).json({ error: 'Please upload a valid PNG, JPEG, WebP or GIF image.' });
       return;
     }
 

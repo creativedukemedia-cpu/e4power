@@ -63,7 +63,13 @@ function PageLoader() {
   const loaderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const dismiss = window.setTimeout(() => setActive(false), 220);
+    let navigationTimer: number | undefined;
+    const settle = () => {
+      setActive(false);
+      loaderRef.current?.classList.remove('is-active');
+      loaderRef.current?.setAttribute('aria-hidden', 'true');
+    };
+    const dismiss = window.setTimeout(settle, 220);
     const showForNavigation = (event: MouseEvent) => {
       if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || !(event.target instanceof Element)) return;
       const link = event.target.closest('a[href]') as HTMLAnchorElement | null;
@@ -73,11 +79,17 @@ function PageLoader() {
       loaderRef.current?.classList.add('is-active');
       loaderRef.current?.setAttribute('aria-hidden', 'false');
       setActive(true);
+      window.clearTimeout(dismiss);
+      window.clearTimeout(navigationTimer);
+      navigationTimer = window.setTimeout(settle, 1800);
     };
     document.addEventListener('click', showForNavigation, true);
+    window.addEventListener('pageshow', settle);
     return () => {
       window.clearTimeout(dismiss);
+      window.clearTimeout(navigationTimer);
       document.removeEventListener('click', showForNavigation, true);
+      window.removeEventListener('pageshow', settle);
     };
   }, []);
 
@@ -196,7 +208,7 @@ function ContentHubApp() {
         <div className="e4-insights-grid">{loading ? status('Loading published content') : error ? status(error, true) : visible.length === 0 ? <div className="e4-insights-empty"><p>No published entries match the current search and filter settings yet.</p></div> : visible.map((entry, index) => <a className={`e4-insights-card ${index % 2 ? 'is-brown' : ''}`} href={href({ slug: entry.slug })} key={entry.id}>{entry.coverImageUrl ? <img src={entry.coverImageUrl} alt={entry.title} /> : <div className="e4-insights-card-mark" aria-hidden="true">E4</div>}<div><p className="e4-insights-type">{formatType(entry.contentType)}</p><h3>{entry.title}</h3><p className="e4-insights-date">Published {formatDate(entry.publishedAt)}</p>{entry.excerpt && <p className="e4-insights-card-excerpt">{entry.excerpt}</p>}<span className="e4-insights-read">Read insight ↗</span></div></a>)}</div>
       </section>}
     </main>
-    <footer className="e4-insights-footer"><img alt="E4 Power" src="https://cdn.prod.website-files.com/68ba0532388ab756f96c84d5/68bcc54da8714105bb252c7f_e4_logo_white.svg" /><p>© 2025 E4 Power</p><a href="/contact-us/">Contact E4</a></footer>
+    <footer className="e4-insights-footer"><img alt="E4 Power" src="https://cdn.prod.website-files.com/68ba0532388ab756f96c84d5/68bcc54da8714105bb252c7f_e4_logo_white.svg" /><p>© {new Date().getFullYear()} E4 Power</p><a href="/contact-us/">Contact E4</a></footer>
     <a className="e4-insights-quick" href="/contact-us/" aria-label="Start an inquiry with E4 Power">⌕ Contact E4</a>
   </div>;
 }
