@@ -442,3 +442,5 @@ The user cancelled duplication and approved reversible edits to staging only. Ke
 - [x] Add a secure staff inquiry inbox and harden inquiry/CMS validation and same-origin protections without changing old-site data.
 - [x] Confirm business contact and newsletter delivery configuration with the user, or clearly flag anything still unconfigured.
 - [x] Validate all pages on desktop and phone, run regression tests, type checking and production build, then save an unpublished checkpoint.
+
+- [x] Correct “thier” to “their” on Client Success, preserve all other copy and save a verified checkpoint without publishing.
