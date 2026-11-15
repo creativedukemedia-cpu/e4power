@@ -1,4 +1,5 @@
 import { installLaunchReadiness } from './e4-launch-readiness.js';
+import { mountLoaderVisual } from './e4-loader-visual.js';
 
 (function () {
   if (window.__e4GlobalNavigationLoaded) return;
@@ -150,7 +151,7 @@ import { installLaunchReadiness } from './e4-launch-readiness.js';
     if (document.getElementById('e4-page-loader')) return;
     var style = document.createElement('style');
     style.id = 'e4-page-loader-style';
-    style.textContent = '.e4-page-loader{position:fixed!important;z-index:32050!important;inset:0!important;display:grid!important;place-items:center!important;background:#100d09!important;opacity:0!important;pointer-events:none!important;transition:opacity .2s cubic-bezier(.23,1,.32,1)!important;}.e4-page-loader.is-active{opacity:1!important;pointer-events:auto!important;}.e4-page-loader__inner{display:grid!important;justify-items:center!important;gap:1.15rem!important;min-width:10rem!important;}.e4-page-loader__mark{display:grid!important;place-items:center!important;width:4.25rem!important;height:4.25rem!important;border:1px solid rgba(231,186,86,.8)!important;border-radius:999px!important;box-shadow:0 0 0 .42rem rgba(231,186,86,.08)!important;}.e4-page-loader__mark img{display:block!important;width:2.4rem!important;height:auto!important;filter:brightness(0) invert(1)!important;}.e4-page-loader__label{color:#fff8ef!important;font-family:Montserrat,Arial,sans-serif!important;font-size:.68rem!important;font-weight:900!important;letter-spacing:0!important;line-height:1!important;text-transform:uppercase!important;}.e4-page-loader__track{display:block!important;width:8rem!important;height:2px!important;overflow:hidden!important;background:rgba(255,248,239,.18)!important;}.e4-page-loader__track::after{content:""!important;display:block!important;width:45%!important;height:100%!important;background:#e7ba56!important;transform:translateX(-140%)!important;animation:e4-page-loader-sweep .85s cubic-bezier(.23,1,.32,1) infinite!important;}@keyframes e4-page-loader-sweep{to{transform:translateX(330%)!important;}}@media (prefers-reduced-motion:reduce){.e4-page-loader,.e4-page-loader__track::after{transition:none!important;animation:none!important;}.e4-page-loader__track::after{transform:translateX(62%)!important;}}';
+    style.textContent = '.e4-page-loader{position:fixed!important;z-index:32050!important;inset:0!important;display:grid!important;place-items:center!important;margin:0!important;padding:0!important;background:#100d09!important;opacity:0!important;pointer-events:none!important;transition:opacity .18s cubic-bezier(.23,1,.32,1)!important;}.e4-page-loader.is-active{opacity:1!important;pointer-events:auto!important;}@media (prefers-reduced-motion:reduce){.e4-page-loader{transition:none!important;}}';
     document.head.appendChild(style);
     var loader = document.createElement('div');
     loader.id = 'e4-page-loader';
@@ -158,23 +159,23 @@ import { installLaunchReadiness } from './e4-launch-readiness.js';
     loader.setAttribute('role', 'status');
     loader.setAttribute('aria-live', 'polite');
     loader.setAttribute('aria-label', 'Loading E4 Power');
-    loader.innerHTML = '<div class="e4-page-loader__inner"><span class="e4-page-loader__mark"><img src="/manus-storage/E4POWER_LOGOB12copy_0332af80.webp" alt="" /></span><span class="e4-page-loader__label">Loading</span><span class="e4-page-loader__track" aria-hidden="true"></span></div>';
+    mountLoaderVisual(loader);
     document.body.appendChild(loader);
     var safetyTimer;
+    var initialTimer;
     var dismiss = function () {
       window.clearTimeout(safetyTimer);
-      window.setTimeout(function () {
-        loader.classList.remove('is-active');
-        loader.setAttribute('aria-hidden', 'true');
-      }, 220);
+      window.clearTimeout(initialTimer);
+      loader.classList.remove('is-active');
+      loader.setAttribute('aria-hidden', 'true');
     };
     var armSafetyTimer = function () {
       window.clearTimeout(safetyTimer);
       safetyTimer = window.setTimeout(dismiss, 1600);
     };
     armSafetyTimer();
-    if (document.readyState === 'complete') dismiss();
-    else window.addEventListener('load', dismiss, { once: true });
+    if (document.readyState === 'complete') initialTimer = window.setTimeout(dismiss, 220);
+    else window.addEventListener('load', function () { initialTimer = window.setTimeout(dismiss, 220); }, { once: true });
     window.addEventListener('pageshow', dismiss);
     document.addEventListener('click', function (event) {
       if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || !(event.target instanceof Element)) return;
@@ -184,6 +185,7 @@ import { installLaunchReadiness } from './e4-launch-readiness.js';
       try { destination = new URL(link.href, window.location.href); } catch (error) { return; }
       if (destination.origin !== window.location.origin || destination.protocol !== window.location.protocol) return;
       if (destination.pathname === window.location.pathname && destination.search === window.location.search) return;
+      window.clearTimeout(initialTimer);
       loader.removeAttribute('aria-hidden');
       loader.classList.add('is-active');
       armSafetyTimer();

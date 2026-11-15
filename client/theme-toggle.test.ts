@@ -26,6 +26,7 @@ const contentHubPath = path.join(clientRoot, "src", "content", "main.tsx");
 const contentHub = fs.readFileSync(contentHubPath, "utf8");
 const insightsStylesPath = path.join(clientRoot, "src", "content", "insights.css");
 const insightsStyles = fs.readFileSync(insightsStylesPath, "utf8");
+const loaderVisual = fs.readFileSync(path.join(clientRoot, "src", "e4-loader-visual.js"), "utf8");
 
 describe("theme toggle markup", () => {
   it("keeps a desktop theme toggle and adds a mobile menu toggle on the homepage", () => {
@@ -57,7 +58,7 @@ describe("theme toggle markup", () => {
     expect(globalNavigation).toContain('function installPageLoadingAnimation()');
     expect(globalNavigation).toContain("loader.id = 'e4-page-loader'");
     expect(globalNavigation).toContain("loader.setAttribute('aria-label', 'Loading E4 Power')");
-    expect(globalNavigation).toContain('e4-page-loader-sweep');
+    expect(loaderVisual).toContain('e4-page-loader-sweep');
     expect(globalNavigation).toContain("installPageLoadingAnimation();");
     expect(globalNavigation).toContain("destination.pathname === window.location.pathname && destination.search === window.location.search");
     expect(globalNavigation).toContain('@media (prefers-reduced-motion:reduce)');
@@ -68,6 +69,18 @@ describe("theme toggle markup", () => {
     expect(contentHub).toContain("destination.pathname === window.location.pathname && destination.search === window.location.search");
     expect(insightsStyles).toContain('.e4-insights-loader{position:fixed;z-index:32050;');
     expect(insightsStyles).toContain('@media(prefers-reduced-motion:reduce)');
+  });
+
+  it("isolates the loader from legacy image hooks and uses an inline approved E4 mark on both entry points", () => {
+    expect(loaderVisual).toContain("host.attachShadow({ mode: 'open' })");
+    expect(loaderVisual).toContain('viewBox="0 0 916 874"');
+    expect(loaderVisual).not.toContain('<img');
+    expect(loaderVisual).toContain('width:76px;height:76px');
+    expect(loaderVisual).toContain('@media (prefers-reduced-motion:reduce)');
+    expect(globalNavigation).toContain('mountLoaderVisual(loader)');
+    expect(contentHub).toContain('mountLoaderVisual(loaderRef.current)');
+    expect(globalNavigation).not.toContain('e4-page-loader__mark');
+    expect(contentHub).not.toContain('e4-insights-loader-mark');
   });
 
   it("keeps the mobile Our Services disclosure readable in dark mode", () => {

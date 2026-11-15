@@ -1,5 +1,6 @@
 import '../index.css';
 import './insights.css';
+import { mountLoaderVisual } from '../e4-loader-visual.js';
 import { StrictMode, useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -63,6 +64,7 @@ function PageLoader() {
   const loaderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (loaderRef.current) mountLoaderVisual(loaderRef.current);
     let navigationTimer: number | undefined;
     const settle = () => {
       setActive(false);
@@ -93,9 +95,7 @@ function PageLoader() {
     };
   }, []);
 
-  return <div ref={loaderRef} className={`e4-insights-loader ${active ? 'is-active' : ''}`} role="status" aria-live="polite" aria-label="Loading E4 Power" aria-hidden={!active}>
-    <div className="e4-insights-loader-inner"><span className="e4-insights-loader-mark"><img src="https://cdn.prod.website-files.com/68ba0532388ab756f96c84d5/68bcc54da8714105bb252c7f_e4_logo_white.svg" alt="" /></span><span className="e4-insights-loader-label">Loading</span><span className="e4-insights-loader-track" aria-hidden="true" /></div>
-  </div>;
+  return <div ref={loaderRef} className={`e4-insights-loader ${active ? 'is-active' : ''}`} role="status" aria-live="polite" aria-label="Loading E4 Power" aria-hidden={!active} />;
 }
 
 function Header({ light, onTheme }: { light: boolean; onTheme: () => void }) {
